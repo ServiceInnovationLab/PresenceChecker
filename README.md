@@ -1,5 +1,8 @@
 # README
 
+[![Waffle.io - Issues in progress](https://badge.waffle.io/ServiceInnovationLab/PresenceChecker.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ServiceInnovationLab/PresenceChecker)
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
