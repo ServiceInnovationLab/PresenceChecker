@@ -1,2 +1,11 @@
+<% if user_signed_in? %>
+  <li>
+  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  </li>
+<% else %>
+  <li>
+  <%= link_to('Login', new_user_session_path)  %>
+  </li>
+<% end %>
 <h1>Hello World</h1>
 <%= react_component("HelloWorld", props: @hello_world_props, prerender: false) %>
