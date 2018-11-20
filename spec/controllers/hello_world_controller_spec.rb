@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe HomeController, type: :controller do
+RSpec.describe HelloWorldController, type: :controller do
   include Devise::Test::ControllerHelpers
   let(:user)          { FactoryBot.create(:user) }
 
