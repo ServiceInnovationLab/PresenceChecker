@@ -10,11 +10,11 @@ New Zealand legislation contains a somewhat complicated requirement to obtain ci
 This software is a tool to calculate and predict days where a person is eligible, helping people decipher the result of these rules in legislation, and plan.
 
 ## How to run
+This app is built to run on Linux, but also runs nicely on MacOS. Windows is not supported, so YMMV.
 
 This is a ruby on rails app. You will need:
-* a dev machine to run on. This app is built to run on Linux, but also runs nicely on MacOS. Windows is not supported, so YMMV.
 * Git clone this repo
-* Install the correct version of Ruby. We reccomend install `rbenv`, and then uing that to install the version of ruby specified in our file `.ruby-version`
+* Install the correct version of Ruby. We reccomend installing `rbenv` to manage multiple versions of ruby, and then using that to install the version of ruby specified in our file `.ruby-version`
 ```
 # Install rbenv from https://github.com/rbenv/rbenv then
 rbenv install < .ruby-version
