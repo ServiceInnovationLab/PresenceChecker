@@ -63,5 +63,6 @@ group :test do
   gem 'chromedriver-helper'
   # Coverage
   gem 'simplecov'
+  # test framework
   gem 'rspec-rails'
 end
