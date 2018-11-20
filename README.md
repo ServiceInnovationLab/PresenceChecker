@@ -5,7 +5,7 @@
 
 # Presence Checker
 
-New Zealand legislation contains a somewhat complicated requirement of presence in New Zealand, on an indefinite stay visa, for a total number of days over a time. For a person who has travelled outside NZ this can result in being eligible for a small window of time, and then ineligible again.
+New Zealand legislation contains a somewhat complicated requirement to obtain citizenship by grant. The applicants needs to be present in New Zealand, on an indefinite stay visa, for a total number of days over a time. For a person who has travelled outside NZ this can result in being eligible for a small window of time, and then ineligible again.
 
 This software is a tool to calculate and predict days where a person is eligible, helping people decipher the result of these rules in legislation, and plan.
 
