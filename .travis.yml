@@ -18,7 +18,6 @@ deploy:
   app:
     dev: presencechecker-staging
     master: presencechecker
-
   run:
   - bundle install
   - bundle exec rake db:migrate
