@@ -1,2 +1,17 @@
-<h1>Hello World</h1>
+<h1>Hello World views/hello_world/index</h1>
 <%= react_component("HelloWorld", props: @hello_world_props, prerender: false) %>
+
+<table border="1">
+  <thead>
+    <%@clients.column_names.each do |th|%>
+      <th><%=th%></th>
+    <%end%>
+  </thead>
+  <tbody>
+     <%@clients.column_names.each do |th|%>
+      <%@clients.each do |client|%>
+        <td><%=client[th]%></td>
+      <%end%>
+    <%end%>
+  </tbody>
+</table>
