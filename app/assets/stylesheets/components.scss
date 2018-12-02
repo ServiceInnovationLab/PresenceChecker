@@ -9,7 +9,7 @@ body {
 }
 
 .btn {
-  width: 150px;
+  min-width: 150px;
   color: #fff;
   font-weight: bold;
   font-size: 18px;
@@ -62,5 +62,73 @@ header.main {
   h2 {
     background: rgb(169, 220, 228);
     padding: 10px 15px;
+  }
+}
+
+/* columns */
+
+table {
+  font-size: 16px;
+}
+table th {
+  text-align: left;
+  /* padding-right: 30px; */
+  padding: 10px 30px 10px 15px;
+}
+.parent {
+  display: flex;
+  align-items: center;
+}
+
+.parent > div {
+  flex: 1;
+}
+
+.parent .right {
+  border-left: 1px solid #ccc;
+  padding-left: 40px;
+}
+
+.parent.identities {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.panel {
+  display: inline-block;
+  vertical-align: top;
+  background: rgba(167, 225, 180, 0.15);
+  width: 30%;
+  text-align: center;
+  padding-bottom: 30px;
+  header {
+    text-align: left;
+    background: rgb(167, 225, 180);
+
+    h3 {
+      padding: 10px 20px;
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  + .panel {
+    margin-left: 15px;
+  }
+}
+
+.list-stripped {
+  font-weight: bold;
+  margin: 0;
+  margin-top: 10px;
+  list-style: none;
+  padding: 0 20px;
+  text-align: left;
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
   }
 }

@@ -21,9 +21,105 @@
             <button class="btn default">Clear</button>
           </span>
         </div>
+
+
         <%# results %>
         <div class="results">
           <h2>Identity</h2>
+          <div>
+            <h3>Client ID 20078306</h3>
+            <%# known identities %>
+            <div>
+              <h2>Known Identities ^</h2>
+
+
+              <div class="parent identities">
+                <div class="left">
+                  <table>
+                  <tbody>
+                    <tr>
+                      <th scope="row"><b>ID No.</b></th>
+                      <td><b>10778658</b></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Surname</th>
+                      <td>Jordan</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">First name</th>
+                      <td>Michael</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Second name</th>
+                      <td>Jeffrey</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Third name</th>
+                      <td>Nil</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                </div>
+                <div class="right">
+
+                <table>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Country of birth</th>
+                      <td>United states of America</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">DOB</th>
+                      <td>17/Feb/1963</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nationality</th>
+                      <td>American</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Gender</th>
+                      <td>Male</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">&nbsp;</th>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="results">
+          <h2>Presence Data</h2>
+          <div>
+
+            <div class="panel">
+              <header>
+                <h3>Eligible Now</h3>
+              </header>
+              <div>
+              <p>Today's date 1 April 2018</p>
+                <button class="btn success">Change date</button>
+                </div>
+            </div>
+
+            <div class="panel">
+              <header>
+                <h3>Dates eligible to apply</h3>
+              </header>
+              <div>
+              <ul class="list-stripped">
+                <li>1 April 2018 -- 13 April 2018</li>
+                <li>5 Mat 2018 -- 13 May 2018</li>
+              </ul>
+            </div>
+
+          </div>
+          </div>
         </div>
         <%= yield %>
     </div>
