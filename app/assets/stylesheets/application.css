@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+@import './lists.scss';
+@import './components.scss';
+
+a {
+  text-decoration: none;
+}

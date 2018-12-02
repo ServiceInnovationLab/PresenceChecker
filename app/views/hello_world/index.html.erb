@@ -1,7 +1,13 @@
-<h1>Hello World views/hello_world/index</h1>
+<%# <h1>Hello World views/hello_world/index</h1> %>
 <%= react_component("HelloWorld", props: @hello_world_props, prerender: false) %>
-
-<table border="1">
+<br />
+<br />
+<br />
+<span>passport number: <input type="text" /></span>
+<br />
+<br />
+<br />
+<table border="1" style="border: 1px solid #000">
   <thead>
     <%@clients.column_names.each do |th|%>
       <th><%=th%></th>

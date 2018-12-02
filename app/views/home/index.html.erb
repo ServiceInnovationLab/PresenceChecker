@@ -1,1 +1,23 @@
-HELLO main page
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReactOnRailsWithWebpacker</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'hello-world-bundle' %>
+  </head>
+
+  <body>
+    <%= render partial: 'header' %>
+    <div class="container">
+        <div class="well">
+          <span>
+            <b>Passport no.</b>
+            <input type="text">
+          </span>
+        </div>
+        <%= yield %>
+    </div>
+
+  </body>
+</html>
