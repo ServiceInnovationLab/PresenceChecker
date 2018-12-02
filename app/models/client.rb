@@ -1,11 +1,6 @@
 class Client < ApplicationRecord
-
-  # def self.search(search)
-  #   if search
-  #     find(:identity, :conditions => ['identity LIKE ?', "%#{search}%"])
-  #   else
-  #     find(:identity)
-  #   end
-  # end
-
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%")
+    where("content LIKE ?", "%#{search}%")
+  end
 end
