@@ -9,6 +9,16 @@
 
   <body>
     <%= render partial: 'header' %>
+    <%= form_tag(clients_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+    <%= submit_tag "Search" %>
+    <% end %>
+
+    <% if @results.present? %>
+      <%= render @results %>
+    <% else %>
+      <p>There are no results containing the term(s) <%= params[:search] %>.</p>
+    <% end %>
     <div class="container">
         <header class="main">
           <h1>Presence results</h1>

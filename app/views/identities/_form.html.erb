@@ -1,0 +1,22 @@
+<%= form_with(model: identity, local: true) do |form| %>
+  <% if identity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(identity.errors.count, "error") %> prohibited this identity from being saved:</h2>
+
+      <ul>
+      <% identity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :identity %>
+    <%= form.text_field :identity %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
