@@ -3,6 +3,7 @@
   <head>
     <title>ReactOnRailsWithWebpacker</title>
     <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'hello-world-bundle' %>
   </head>
@@ -34,75 +35,14 @@
 
 
         <%# results %>
-        <div class="results">
-          <h2>Identity</h2>
-          <div>
-            <h3>Client ID 20078306</h3>
-            <%# known identities %>
-            <div>
-              <h2>Known Identities ^</h2>
+          <%= react_component("Identity", props: {id:"123456",
+          identities:[
+            {id:"88568",firstName:"John",middleName:"Foo",thirdName:"Max",lastName:"Doe",cob:"United States",dob:"17/Jan/1920",gender:"Male",nationality:"American"},
+            {id:"45490",firstName:"James",middleName:"Bar",thirdName:"",lastName:"Doe",cob:"United States",dob:"17/Jan/1920",gender:"Male",nationality:"American"}
+          ]
+          }) %>
+        <%# known identities %>
 
-
-              <div class="parent identities">
-                <div class="left">
-                  <table>
-                  <tbody>
-                    <tr>
-                      <th scope="row"><b>ID No.</b></th>
-                      <td><b>10778658</b></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Surname</th>
-                      <td>Jordan</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">First name</th>
-                      <td>Michael</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Second name</th>
-                      <td>Jeffrey</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Third name</th>
-                      <td>Nil</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                </div>
-                <div class="right">
-
-                <table>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Country of birth</th>
-                      <td>United states of America</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">DOB</th>
-                      <td>17/Feb/1963</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Nationality</th>
-                      <td>American</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Gender</th>
-                      <td>Male</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">&nbsp;</th>
-                      <td>&nbsp;</td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
         <div class="results">
           <h2>Presence Data</h2>
           <div>
