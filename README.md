@@ -19,7 +19,14 @@ This is a ruby on rails app. You will need:
 # Install rbenv from https://github.com/rbenv/rbenv then
 rbenv install < .ruby-version
 ```
-
+* Install PostgreSQL
+```
+brew install postgresql
+```
+* Start PostgreSQL on startup 
+```
+brew services start postgresql
+```
 * Bundler. Install this from gem
 ```
 gem install bundler
@@ -43,5 +50,5 @@ bundle exec rake db:seed
 ```
 * Run the app
 ```
-bundle exec rails serve
+bundle exec rails server
 ```
