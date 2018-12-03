@@ -1,7 +1,7 @@
 {
   "name": "PresenceChecker",
   "scripts": {
-    "postdeploy": "rake db:create db:migrate db:seed"
+    "postdeploy": "rake db:migrate db:seed"
   },
   "env": {
   },
