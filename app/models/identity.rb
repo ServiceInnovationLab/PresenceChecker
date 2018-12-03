@@ -1,3 +1,3 @@
 class Identity < ApplicationRecord
-  belongs_to :clients
+  belongs_to :client, optional: true
 end

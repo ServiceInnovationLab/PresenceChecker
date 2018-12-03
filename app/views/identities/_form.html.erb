@@ -12,6 +12,36 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :second_name %>
+    <%= form.text_field :second_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :third_name %>
+    <%= form.text_field :third_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.date_select :date_of_birth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country_of_birth %>
+    <%= form.text_field :country_of_birth %>
+  </div>
+
+  <div class="field">
     <%= form.label :identity %>
     <%= form.text_field :identity %>
   </div>

@@ -14,6 +14,7 @@ class ClientsTest < ApplicationSystemTestCase
     visit clients_url
     click_on "New Client"
 
+    fill_in "Identity", with: @client.identity_id
     click_on "Create Client"
 
     assert_text "Client was successfully created"
@@ -24,6 +25,7 @@ class ClientsTest < ApplicationSystemTestCase
     visit clients_url
     click_on "Edit", match: :first
 
+    fill_in "Identity", with: @client.identity_id
     click_on "Update Client"
 
     assert_text "Client was successfully updated"

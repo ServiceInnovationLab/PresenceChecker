@@ -5,11 +5,6 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     @clients = Client.all
-    if params[:search]
-      @clients = Client.joins(:identities).search(params[:search]).order("created_at DESC")
-    else
-      @clients = Client.all.order('created_at DESC')
-    end
   end
 
   # GET /clients/1
@@ -74,6 +69,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.fetch(:client, {})
+      params.require(:client).permit(:identity_id)
     end
 end
