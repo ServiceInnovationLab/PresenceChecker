@@ -26,7 +26,7 @@ body {
   background-color: #333;
   border: #333;
   &:hover {
-    background-color: rgba(#333, .8);
+    background-color: rgba(#333, 0.8);
   }
 }
 
@@ -34,11 +34,11 @@ body {
   background-color: rgb(105, 172, 225);
   border: rgb(105, 172, 225);
   &:hover {
-    background-color: rgba(105, 172, 225, .8);
+    background-color: rgba(105, 172, 225, 0.8);
   }
 }
 
-input[type=text] {
+input[type="text"] {
   border: 1px solid #ccc;
   padding: 10px 5px;
   font-weight: 18px;
@@ -57,11 +57,38 @@ header.main {
   border-bottom: 2px solid black;
 }
 
-
 .results {
+  .toggle-button {
+    font-size: 24px;
+    span {
+      padding-right: 10px;
+    }
+  }
+
   h2 {
     background: rgb(169, 220, 228);
     padding: 10px 15px;
+  }
+  h3 {
+    &.isOpen {
+    }
+  }
+  a {
+    display: inline-block;
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  &-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  &-items {
+    display: none;
+    &.isOpen {
+      display: block;
+    }
   }
 }
 
