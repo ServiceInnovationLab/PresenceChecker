@@ -10,6 +10,12 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
+    @identities = Identity.where(client_id: params[:id])
+
+    if Movement.count > 0
+      @movements = Movement.where(client_id: params[:id])
+    end
+
   end
 
   # GET /clients/new
@@ -69,6 +75,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:identity_id)
+      params.require(:client).permit(:passport_no)
     end
 end

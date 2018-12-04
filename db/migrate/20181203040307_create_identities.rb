@@ -7,7 +7,6 @@ class CreateIdentities < ActiveRecord::Migration[5.2]
       t.string :third_name
       t.date :date_of_birth
       t.string :country_of_birth
-      t.string :identity
       t.integer :client_id
 
       t.timestamps

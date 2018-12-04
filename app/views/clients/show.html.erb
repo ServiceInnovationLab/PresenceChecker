@@ -1,9 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div>
   <strong>Passport No.</strong>
   <%= @client.passport_no %>
-</p>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+  <h2>Identities</h2>
+  <%-@identities.each do |identity|%>
+    <table border="1">
+      <thead>
+
+      </thead>
+      <tbody>
+      <tr>
+      <td><%=identity.first_name%></td>
+      <td><%=identity.last_name%></td>
+      <td><%=identity.date_of_birth%></td>
+      <td><%=identity.country_of_birth%></td>
+      </tr>
+      </tbody>
+    <table>
+  <%end%>
+
+  <h2>Movements</h2>
+  <% if @movements %>
+    <%-@movements.each do |movement|%>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Departure Date</th>
+            <th>Arrival Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%=movement.departure_date%></td>
+            <td><%=movement.arrival_date%></td>
+          </tr>
+        </tbody>
+      <table>
+    <%end%>
+  <%end%>
+</div>
+
+<%#= link_to 'Edit', edit_client_path(@client) %>
+<%#= link_to 'Back', clients_path %>
