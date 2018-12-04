@@ -130,13 +130,39 @@ table th {
       font-size: 20px;
       font-weight: bold;
     }
+
+    &.has-icon {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      h3 {
+        display: inline;
+        padding-right: 10px;
+      }
+      i {
+        font-size: 20px;
+      }
+    }
   }
 
   + .panel {
     margin-left: 15px;
   }
-}
 
+  &.has-error {
+    background: rgba(255, 167, 167, 0.15);
+    header {
+      background: rgb(255, 167, 167);
+    }
+  }
+
+  &.is-wide {
+    width: 60%;
+  }
+}
+.is-within-range {
+  background-color: rgb(167, 225, 180);
+  border-radius: 30px;
+}
 .list-stripped {
   font-weight: bold;
   margin: 0;

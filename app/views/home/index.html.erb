@@ -25,70 +25,24 @@
 
 
         <%# results %>
-          <%= react_component("Identity", props: {id:"123456",
-          identities:[
-            {id:"88568",firstName:"John",middleName:"Foo",thirdName:"Max",lastName:"Doe",cob:"United States",dob:"17/Jan/1920",gender:"Male",nationality:"American"},
-            {id:"45490",firstName:"James",middleName:"Bar",thirdName:"",lastName:"Doe",cob:"United States",dob:"17/Jan/1920",gender:"Male",nationality:"American"}
+          <%= react_component("Identity", props: {
+            id:"123456",
+            identities:[
+              {id:"88568",firstName:"John",middleName:"Foo",thirdName:"Max",lastName:"Doe",cob:"United States",dob:"17/Jan/1920",gender:"Male",nationality:"American"},
+              {id:"45490",firstName:"James",middleName:"Bar",thirdName:"",lastName:"Doe",cob:"United States",dob:"17/Jan/1920",gender:"Male",nationality:"American"}
           ]
           }) %>
         <%# known identities %>
 
-        <div class="results">
-          <h2>Presence Data</h2>
-          <div>
+        <%= react_component("EligibilityDates", props: {
+          eligibleDateRanges:[
+            {start:"Dec 17 2018", end:"Jan 13 2019"},
+            {start:"Feb 17 2019", end:"April 13 2019"},
+            {start:"Jun 11 2019", end:"Jul 3 2019"},
+          ]
+        }) %>
+   
 
-            <div class="panel">
-              <header>
-                <h3>Eligible Now</h3>
-              </header>
-              <div>
-              <p>Today's date 1 April 2018</p>
-                <button class="btn success">Change date</button>
-                </div>
-            </div>
-
-            <div class="panel">
-              <header>
-                <h3>Dates eligible to apply</h3>
-              </header>
-              <div>
-              <ul class="list-stripped">
-                <li>1 April 2018 -- 13 April 2018</li>
-                <li>5 Mat 2018 -- 13 May 2018</li>
-              </ul>
-            </div>
-
-          </div>
-          </div>
-        </div>
-        <div class="results">
-          <h2>Presence Data</h2>
-          <div>
-
-            <div class="panel">
-              <header>
-                <h3>Eligible Now</h3>
-              </header>
-              <div>
-              <p>Today's date 1 April 2018</p>
-                <button class="btn success">Change date</button>
-                </div>
-            </div>
-
-            <div class="panel">
-              <header>
-                <h3>Dates eligible to apply</h3>
-              </header>
-              <div>
-              <ul class="list-stripped">
-                <li>1 April 2018 -- 13 April 2018</li>
-                <li>5 Mat 2018 -- 13 May 2018</li>
-              </ul>
-            </div>
-
-          </div>
-          </div>
-        </div>
         <%= yield %>
     </div>
 
