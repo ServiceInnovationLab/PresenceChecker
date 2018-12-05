@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Movement < ApplicationRecord
-  belongs_to :client, optional: true
+  belongs_to :identity
 end
