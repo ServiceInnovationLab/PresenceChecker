@@ -10,8 +10,10 @@ export default class EligibilityDates extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { selectedDate: new Date(), isEligible: false };
-    this.onDateChange(this.state.selectedDate);
+    this.state = {
+      selectedDate: new Date(),
+      isEligible: this.isEligible(new Date())
+    };
   }
 
   allDaysInRange = () => {
@@ -22,7 +24,7 @@ export default class EligibilityDates extends React.Component {
     return allDaysInRange.reduce((acc, val) => acc.concat(val));
   };
 
-  onDateChange = date => {
+  isEligible = date => {
     const { eligibleDateRanges } = this.props;
     let isEligible;
     for (let index = 0; index < eligibleDateRanges.length; index++) {
@@ -31,7 +33,13 @@ export default class EligibilityDates extends React.Component {
         isEligible = true;
       }
     }
-    this.setState({ selectedDate: new Date(date), isEligible: isEligible });
+    return isEligible;
+  };
+  onDateChange = date => {
+    this.setState({
+      selectedDate: new Date(date),
+      isEligible: this.isEligible(new Date(date))
+    });
   };
 
   render() {
@@ -72,9 +80,9 @@ export default class EligibilityDates extends React.Component {
             </header>
             <div>
               <ul className="list-stripped">
-                {eligibleDateRanges.map(range => {
+                {eligibleDateRanges.map((range, index) => {
                   return (
-                    <li>
+                    <li key={index}>
                       {format(range.start, "D MMMM YYYY")}
                       {` - `}
                       {format(range.end, "D MMMM YYYY")}
