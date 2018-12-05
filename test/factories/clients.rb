@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :client do
-    identity_id { 1 }
   end
 end
