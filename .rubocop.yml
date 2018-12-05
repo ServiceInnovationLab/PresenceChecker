@@ -7,7 +7,7 @@ Documentation:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 155
+  Max: 120
 
 Metrics/ModuleLength:
   Exclude:
