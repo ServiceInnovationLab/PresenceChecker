@@ -4,7 +4,7 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <ul class="list-stripped">
+    <ul class="list-stripped" style="padding-left: 0; margin-bottom: 50px;">
       <% if user_signed_in? %>
         <li>You are signed in as <%=current_user.email%></li>
         <li>
