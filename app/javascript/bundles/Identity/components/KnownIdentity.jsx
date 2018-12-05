@@ -22,7 +22,6 @@ export default class KnownIdentity extends React.Component {
     return (
       <div className="parent identities">
         <div className="left">
-        {/* {console.log('test', this.props.identities)} */}
           <table>
             <tbody>
               <tr>
