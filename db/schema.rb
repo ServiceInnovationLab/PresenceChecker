@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_025832) do
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
-    t.text "im_client_id"
+    t.text "im_client_id", null: false
     t.text "file_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
