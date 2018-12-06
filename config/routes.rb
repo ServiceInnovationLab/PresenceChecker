@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   resources :clients, only: [:index, :show]
   resources :identities
-  devise_for :users
+  devise_for :users, only: [:index, :destroy]
   resources :users
   root to: 'identities#index'
 end
