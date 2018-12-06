@@ -50,7 +50,7 @@
               daysPresent:365,
               meetsAmountOfDaysInNZ:true,
               periodsAway:[
-                {start:"2014-01-01",end:"2014-01-03"}
+                {start:"2014-01-01",end:"2014-01-03",total:3}
               ]
             },
             {
@@ -58,8 +58,8 @@
               daysPresent:300,
               meetsAmountOfDaysInNZ:false,
               periodsAway:[
-                {start:"2015-01-01",end:"2015-01-03"},
-                {start:"2015-05-01",end:"2015-05-23"},
+                {start:"2015-01-01",end:"2015-01-03",total:3},
+                {start:"2015-05-01",end:"2015-05-23",total:18},
               ]
             },
             {
@@ -67,60 +67,13 @@
               daysPresent:222,
               meetsAmountOfDaysInNZ:true,
               periodsAway:[
-                {start:"2016-01-01",end:"2016-01-03"},
-                {start:"2016-05-01",end:"2016-05-23"},
-                {start:"2016-12-01",end:"2016-12-03"},
+                {start:"2016-01-01",end:"2016-01-03",total:11},
+                {start:"2016-05-01",end:"2016-05-23",total:11},
+                {start:"2016-12-01",end:"2016-12-03",total:11},
               ]
             }
           ]
             
-        }) %>
-
-        <%= react_component("PresenceDebugger", props: {
-          "days_present": {
-            "2015-01-01": true,
-            "2015-01-02": true,
-            "2015-01-03": false,
-            "2015-01-04": true,
-            "2015-01-05": true,
-            "2015-01-06": false,
-            "2015-01-07": false,
-            "2015-01-08": false,
-            "2015-01-09": false,
-            "2015-01-10": false,
-            "2015-01-11": false,
-            "2015-01-12": false,
-            "2015-01-13": false,
-            "2015-01-14": false,
-            "2015-01-15": false,
-            "2015-01-16": false,
-            "2015-01-17": false,
-            "2015-01-18": false,
-            "2015-01-19": false,
-            "2015-01-20": false,
-            "2015-01-21": false,
-            "2015-01-22": false,
-            "2015-01-23": true,
-            "2015-01-25": false,
-            "2015-01-26": false,
-            "2015-01-27": false,
-            "2015-01-28": false,
-            "2015-01-29": false,
-            "2015-01-30": false,
-            "2015-01-31": false,
-
-            "2015-02-01": false,
-            "2015-02-02": false,
-            "2015-02-03": false,
-            "2015-02-04": false,
-            "2015-02-05": true,
-            "2015-02-06": true,
-            "2015-03-01": true,
-            "2015-03-02": true,
-            "2015-03-03": true,
-            "2015-03-04": false,
-            "2015-03-05": true,
-          }
         }) %>
 
         <%= yield %>

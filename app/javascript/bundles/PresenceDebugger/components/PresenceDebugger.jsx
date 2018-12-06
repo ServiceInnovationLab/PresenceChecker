@@ -6,6 +6,15 @@ import TimePeriod from "./TimePeriod";
 
 export default class DaysPresent extends React.Component {
   static propTypes = { days_present: PropTypes.object };
+  // "days_present": {
+  //   "2015-01-01": true,
+  //   "2015-01-02": true,
+  //   "2015-01-03": false,
+  //   "2015-01-04": true,
+  //   "2015-01-05": true,
+  //   "2015-01-06": false,
+  //   "2015-01-07": false
+  // }
 
   constructor(props) {
     super(props);

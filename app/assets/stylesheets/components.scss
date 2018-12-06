@@ -218,9 +218,16 @@ table th {
 
   border-spacing: 0px;
   margin: 0;
-
-  th {
+  td,
+  tr,
+  th,
+  tbody,
+  table {
     padding: 0;
+    margin: 0;
+  }
+  i {
+    padding-left: 10px;
   }
   header {
     background: rgb(167, 225, 180);
@@ -252,24 +259,19 @@ table th {
     width: 100%;
     border-spacing: 0px;
     background: #f3f3f3;
-    .is-dark {
-      color: #717171;
-    }
 
     tr {
       &.is-light {
         background-color: #fcfcfc;
       }
     }
-    td {
-      text-align: center;
-      padding: 0;
-    }
+
     .icon-container {
       width: 10%;
       background: rgb(167, 225, 180);
       i {
         color: green;
+        padding-left: 0;
       }
       &.has-error {
         background: rgb(255, 167, 167);
@@ -279,7 +281,24 @@ table th {
       }
     }
   }
-
+  .date-range {
+    &__dates {
+      padding-left: 23px;
+    }
+    &__total {
+      text-align: right;
+      padding-right: 23px;
+    }
+  }
+  .is-text-center {
+    text-align: center;
+  }
+  .is-text-left {
+    text-align: left;
+  }
+  .is-dark {
+    color: #717171;
+  }
   .has-bottom-border {
     border-bottom: 3px solid lightgray;
   }

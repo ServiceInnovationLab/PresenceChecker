@@ -11,10 +11,19 @@ export default class Year extends React.Component {
   }
 
   render() {
-    const { year, daysPresent, meetsAmountOfDaysInNZ } = this.props;
+    const {
+      year,
+      daysPresent,
+      meetsAmountOfDaysInNZ,
+      periodsAway
+    } = this.props;
     const { isCollapsed } = this.state;
     return (
-      <table className={`year-table`} cellPadding="0" cellSpacing="0">
+      <table
+        className={`year-table is-text-center`}
+        cellPadding="0"
+        cellSpacing="0"
+      >
         <tbody>
           <tr>
             <td className="header-container has-bottom-border has-right-border">
@@ -22,7 +31,8 @@ export default class Year extends React.Component {
             </td>
             <td className="has-bottom-border">{daysPresent}</td>
             <td className="has-bottom-border">
-              <button className="btn light"
+              <button
+                className="btn light"
                 onClick={() =>
                   this.setState({ isCollapsed: !this.state.isCollapsed })
                 }
@@ -48,18 +58,32 @@ export default class Year extends React.Component {
           <tr>
             <td colSpan="4">
               <table className="details-table">
-                <tr className={`is-light ${isCollapsed ? "u-hide" : ""}`}>
-                  <td
-                    colSpan="2"
-                    className="secondary-header has-bottom-border has-border--light"
-                  >
-                    <h3 className="is-dark">Travel Days</h3>
-                  </td>
-                </tr>
-                <tr className={`is-light ${isCollapsed ? "u-hide" : ""}`}>
-                  <td>Away </td>
-                  <td>10 days for life </td>
-                </tr>
+                <tbody>
+                  <tr className={`is-light ${isCollapsed ? "u-hide" : ""}`}>
+                    <td
+                      colSpan="2"
+                      className="secondary-header has-bottom-border has-border--light"
+                    >
+                      <h3 className="is-dark">Travel Days</h3>
+                    </td>
+                  </tr>
+                  {periodsAway.map(({ start, end,total }) => {
+                    return (
+                      <tr
+                        className={`is-light is-text-left date-range ${
+                          isCollapsed ? "u-hide" : ""
+                        }`}
+                      >
+                        <td className="date-range__dates">
+                          <h3 className="is-dark">
+                            {start} - {end}
+                          </h3>{" "}
+                        </td>
+                        <td className="date-range__total">{total} days</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
               </table>
             </td>
           </tr>

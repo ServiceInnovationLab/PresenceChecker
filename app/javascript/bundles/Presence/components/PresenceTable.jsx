@@ -11,20 +11,20 @@ export default class PresenceTable extends React.Component {
   }
 
   render() {
-    const { years,isEligible } = this.props;
+    const { years, isEligible, totalDays } = this.props;
 
     return (
       <div className={`results`}>
-        <table className="presence-table"  cellPadding="0" cellSpacing="0">
+        <table className="presence-table" cellPadding="0" cellSpacing="0">
           <tbody>
             <tr colSpan="4">
               <th>
                 <header className={isEligible ? "" : "has-error"}>
-                  <span>Total days: xxxx</span>
+                  <span>Total days: {totalDays}</span>
                   <i
                     className={`fas ${isEligible ? "fa-check" : "fa-times"}`}
                   />
-                </header>{" "}
+                </header>
               </th>
             </tr>
             {years.map(year => {
