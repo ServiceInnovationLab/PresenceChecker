@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: %i[show]
 
   def index
-    @clients = Client.all
+    @clients = Client.joins(:identity).where(serial_number: params[:serial_number])
   end
 
   def show
