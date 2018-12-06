@@ -6,9 +6,9 @@
 
   <%= render partial: 'search' %>
 
-  <%- if !@clients.size.positive? %>
+  <%- if @clients.size.positive? %>
     <%- @clients.each do |client| %>
-      <%= react_component("Identity", props: {id: @clients.first.nil? ? '' : @clients.first.passport_no,
+      <%= react_component("Identity", props: {id: client.nil? ? '' : client.id,
         identities: @identities
         }) %>
 
