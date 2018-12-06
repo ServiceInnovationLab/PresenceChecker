@@ -39,12 +39,12 @@ ActiveRecord::Schema.define(version: 2018_12_05_025832) do
     t.bigint "country_of_birth_id"
     t.text "nationality"
     t.bigint "issuing_state_id"
-    t.text "serial_no", null: false
+    t.text "serial_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_identities_on_client_id"
     t.index ["country_of_birth_id"], name: "index_identities_on_country_of_birth_id"
-    t.index ["issuing_state_id", "serial_no"], name: "index_identities_on_issuing_state_id_and_serial_no", unique: true
+    t.index ["issuing_state_id", "serial_number"], name: "index_identities_on_issuing_state_id_and_serial_number", unique: true
     t.index ["issuing_state_id"], name: "index_identities_on_issuing_state_id"
   end
 
