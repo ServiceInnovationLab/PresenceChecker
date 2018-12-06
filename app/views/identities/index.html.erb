@@ -8,6 +8,8 @@
 
 <h1>Identities</h1>
 
+<% if @identities.size.positive? %>
+
 <table>
   <thead>
     <tr>
@@ -37,7 +39,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% else %>
+  No records found
+<% end %>
 <br>
-
-<%= link_to 'New Identity', new_identity_path %>
