@@ -76,5 +76,6 @@ group :test do
   # Coverage
   gem 'simplecov'
   # test framework
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
 end
