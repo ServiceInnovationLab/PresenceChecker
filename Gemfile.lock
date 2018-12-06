@@ -198,7 +198,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.60.0)
+    rubocop (0.61.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -288,7 +288,7 @@ DEPENDENCIES
   rails (~> 5.2.2)
   react_on_rails
   rspec-rails
-  rubocop (= 0.60.0)
+  rubocop (= 0.61.0)
   sass-rails (~> 5.0)
   selenium-webdriver
   simplecov
