@@ -3,14 +3,10 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show edit update destroy]
 
-  # GET /clients
-  # GET /clients.json
   def index
     @clients = Client.all
   end
 
-  # GET /clients/1
-  # GET /clients/1.json
   def show
     @identities = Identity.where(client_id: params[:id])
 
