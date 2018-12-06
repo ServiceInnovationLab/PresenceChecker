@@ -8,8 +8,8 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @identities = client.identities
-    @movements = client.movements
+    @identities = @client.identities
+    @movements = @client.movements
   end
 
   private
