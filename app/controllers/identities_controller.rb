@@ -2,6 +2,10 @@
 
 class IdentitiesController < ApplicationController
   def index
-    @identities = Identity.all
+    if params[:serial_number]
+      @identities = Identity.where(serial_number: params[:serial_number])
+    else
+      @identities = Identity.all.limit(100)
+    end
   end
 end
