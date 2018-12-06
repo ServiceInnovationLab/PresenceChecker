@@ -64,7 +64,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # opens emails for us
-  gem "letter_opener"
+  gem 'letter_opener'
 end
 
 group :test do
