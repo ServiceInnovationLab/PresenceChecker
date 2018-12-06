@@ -41,7 +41,42 @@
           ]
         }) %>
    
-        <%= react_component("DaysPresent", props: {
+        <%= react_component("PresenceTable", props: {
+          isEligible:true,
+          totalDays:1512,
+          years: [
+            {
+              year:2014,
+              daysPresent:365,
+              meetsAmountOfDaysInNZ:true,
+              periodsAway:[
+                {start:"2014-01-01",end:"2014-01-03"}
+              ]
+            },
+            {
+              year:2015,
+              daysPresent:300,
+              meetsAmountOfDaysInNZ:false,
+              periodsAway:[
+                {start:"2015-01-01",end:"2015-01-03"},
+                {start:"2015-05-01",end:"2015-05-23"},
+              ]
+            },
+            {
+              year:2016,
+              daysPresent:222,
+              meetsAmountOfDaysInNZ:true,
+              periodsAway:[
+                {start:"2016-01-01",end:"2016-01-03"},
+                {start:"2016-05-01",end:"2016-05-23"},
+                {start:"2016-12-01",end:"2016-12-03"},
+              ]
+            }
+          ]
+            
+        }) %>
+
+        <%= react_component("PresenceDebugger", props: {
           "days_present": {
             "2015-01-01": true,
             "2015-01-02": true,
