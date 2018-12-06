@@ -15,5 +15,6 @@
           %tr
             %td= user.email
             %td
-              = link_to user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'pure-button' do
+              = link_to user_path(user), method: :delete, data: { confirm: 'Are you sure?' },
+                class: 'pure-button' do
                 delete
