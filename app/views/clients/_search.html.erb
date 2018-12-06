@@ -1,6 +1,6 @@
 <%= form_tag(clients_path, :method => "get", id: "search-form") do %>
   <div class="well">
-    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
-    <%= submit_tag "Search", class: 'btn success' %>
+    <%= text_field_tag :search, params[:search], placeholder: "Serial Number" %>
+    <%= submit_tag "View", class: 'btn success' %>
   </div>
 <% end %>
