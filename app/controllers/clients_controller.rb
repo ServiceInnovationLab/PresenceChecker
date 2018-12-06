@@ -8,9 +8,8 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @identities = Identity.where(client_id: params[:id])
-
-    @movements = Movement.where(client_id: params[:id]) if Movement.count > 0
+    @identities = client.identities
+    @movements = client.movements
   end
 
   private
