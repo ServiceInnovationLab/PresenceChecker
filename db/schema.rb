@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 2018_12_06_043729) do
   end
 
   create_table "movements", force: :cascade do |t|
-    t.bigint "identities_id", null: false
+    t.bigint "identity_id", null: false
     t.text "movement", null: false
     t.datetime "carrier_date_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["identities_id"], name: "index_movements_on_identities_id"
+    t.index ["identity_id"], name: "index_movements_on_identity_id"
   end
 
   create_table "users", force: :cascade do |t|

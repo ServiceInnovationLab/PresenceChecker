@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe ClientsController, type: :controller do
+RSpec.describe IdentitiesController, type: :controller do
   include Devise::Test::ControllerHelpers
-  let(:user) { FactoryBot.create(:user) }
-  let(:client) { FactoryBot.create :client }
+  let(:user)          { FactoryBot.create(:user) }
 
   context 'not signed in ' do
-    describe 'GET show' do
-      before { get :show, params: { id: client.to_param } }
+    describe 'GET index' do
+      before { get :index }
 
       it { expect(response).to redirect_to(new_user_session_path) }
     end
@@ -17,8 +16,8 @@ RSpec.describe ClientsController, type: :controller do
   context 'user is signed in' do
     before { sign_in user }
 
-    describe 'GET show' do
-      before { get :show, params: { id: client.to_param } }
+    describe 'GET index' do
+      before { get :index }
 
       it { expect(response).to have_http_status(:ok) }
     end
