@@ -15,11 +15,11 @@ class CreateIdentities < ActiveRecord::Migration[5.2]
       t.references :country_of_birth, index: true, foreign_key: {to_table: :countries}
       t.text :nationality
       t.references :issuing_state, index: true, foreign_key: {to_table: :countries}
-      t.text :serial_no, null: false
+      t.text :serial_number, null: false
       t.timestamps
     end
 
     # the serial number is unique for that country
-    add_index :identities, [:issuing_state_id, :serial_no], unique: true
+    add_index :identities, [:issuing_state_id, :serial_number], unique: true
   end
 end
