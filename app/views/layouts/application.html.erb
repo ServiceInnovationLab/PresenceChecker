@@ -15,17 +15,17 @@
 
   <body>
 
-<div class="container">
-  <%= render 'layouts/header' %>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+    <div class="container">
+      <%= render 'layouts/header' %>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
 
-    <%= yield %>
-  </div>
+      <%= yield %>
+    </div>
   </body>
 </html>
 
