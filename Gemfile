@@ -54,7 +54,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rubocop', '0.60.0'
+  gem 'rubocop', '0.61.1'
 end
 
 group :development do
@@ -66,7 +66,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # opens emails for us
-  gem "letter_opener"
+  gem 'letter_opener'
 end
 
 group :test do
