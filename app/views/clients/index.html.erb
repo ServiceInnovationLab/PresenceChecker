@@ -1,63 +1,50 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>ReactOnRailsWithWebpacker</title>
-    <%= csrf_meta_tags %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'hello-world-bundle' %>
-  </head>
 
-  <body>
-    <div class="container">
-      <%= render partial: 'header' %>
-      <header class="main">
-        <h1>Presence results</h1>
-      </header>
 
-      <%= render partial: 'search' %>
+  <header class="main">
+    <h1>Presence results</h1>
+  </header>
 
-      <%- if !@clients.size.positive? %>
-        <%- @clients.each do |client| %>
-          <%= react_component("Identity", props: {id: @clients.first.nil? ? '' : @clients.first.passport_no,
-            identities: @identities
-            }) %>
+  <%= render partial: 'search' %>
 
-            <div class="results">
-              <h2>Presence Data</h2>
+  <%- if !@clients.size.positive? %>
+    <%- @clients.each do |client| %>
+      <%= react_component("Identity", props: {id: @clients.first.nil? ? '' : @clients.first.passport_no,
+        identities: @identities
+        }) %>
+
+        <div class="results">
+          <h2>Presence Data</h2>
+          <div>
+
+            <div class="panel">
+              <header>
+                <h3>Eligible Now</h3>
+              </header>
               <div>
-
-                <div class="panel">
-                  <header>
-                    <h3>Eligible Now</h3>
-                  </header>
-                  <div>
-                  <p>Today's date 1 April 2018</p>
-                    <button class="btn success">Change date</button>
-                    </div>
+              <p>Today's date 1 April 2018</p>
+                <button class="btn success">Change date</button>
                 </div>
-
-                <div class="panel">
-                  <header>
-                    <h3>Dates eligible to apply</h3>
-                  </header>
-                  <div>
-                  <ul class="list-stripped">
-                    <li>1 April 2018 -- 13 April 2018</li>
-                    <li>5 Mat 2018 -- 13 May 2018</li>
-                  </ul>
-                </div>
-
-              </div>
             </div>
+
+            <div class="panel">
+              <header>
+                <h3>Dates eligible to apply</h3>
+              </header>
+              <div>
+              <ul class="list-stripped">
+                <li>1 April 2018 -- 13 April 2018</li>
+                <li>5 Mat 2018 -- 13 May 2018</li>
+              </ul>
+            </div>
+
           </div>
         </div>
-        <% end %>
-      <%else%>
-        <p>There are no results containing the term(s) <%= params[:search] %>.</p>
-      <%end%>
-      <%= yield %>
+      </div>
     </div>
+    <% end %>
+  <%else%>
+    <p>There are no results containing the term(s) <%= params[:search] %>.</p>
+  <%end%>
+  <%= yield %>
+</div>
 
-  </body>
-</html>
