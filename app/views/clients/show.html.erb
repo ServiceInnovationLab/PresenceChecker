@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div>
-  <strong>Passport No.</strong>
-  <%= @client.passport_no %>
+  <strong>Client Number</strong>
+  <%= @client.im_client_id %>
 
   <h2>Identities</h2>
   <%-@identities.each do |identity|%>
@@ -13,9 +13,8 @@
       <tbody>
       <tr>
       <td><%=identity.first_name%></td>
-      <td><%=identity.last_name%></td>
-      <td><%=identity.date_of_birth%></td>
-      <td><%=identity.country_of_birth%></td>
+      <td><%=identity.family_name%></td>
+      <td><%=identity.country_of_birth.name%></td>
       </tr>
       </tbody>
     <table>
@@ -40,6 +39,40 @@
       <table>
     <%end%>
   <%end%>
+
+      <%= react_component("Identity", props: {id: @client.nil? ? '' : @client.id,
+        identities: @identities
+        }) %>
+
+        <div class="results">
+          <h2>Presence Data</h2>
+          <div>
+
+            <div class="panel">
+              <header>
+                <h3>Eligible Now</h3>
+              </header>
+              <div>
+              <p>Today's date 1 April 2018</p>
+                <button class="btn success">Change date</button>
+                </div>
+            </div>
+
+            <div class="panel">
+              <header>
+                <h3>Dates eligible to apply</h3>
+              </header>
+              <div>
+              <ul class="list-stripped">
+                <li>1 April 2018 -- 13 April 2018</li>
+                <li>5 Mat 2018 -- 13 May 2018</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 <%#= link_to 'Edit', edit_client_path(@client) %>
