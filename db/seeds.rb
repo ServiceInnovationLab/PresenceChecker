@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'faker'
 include Faker
 
 5.times do
   Client.create(
-    passport_no: Bank.iban("be")
+    passport_no: Bank.iban('be')
   )
 end
 
@@ -15,15 +17,14 @@ end
     third_name: '',
     date_of_birth: '2001-09-10',
     country_of_birth: Faker::Address.country,
-    client_id: i+1
+    client_id: i + 1
   )
 end
 
 5.times do |i|
   Movement.create(
     arrival_date: 8.days.ago,
-    departure_date: 1.days.ago,
+    departure_date: 1.day.ago,
     client_id: i
   )
 end
-

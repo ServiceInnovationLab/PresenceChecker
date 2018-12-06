@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class IdentitiesController < ApplicationController
-  before_action :set_identity, only: [:show, :edit, :update, :destroy]
+  before_action :set_identity, only: %i[show edit update destroy]
 
   # GET /identities
   # GET /identities.json
@@ -9,13 +11,12 @@ class IdentitiesController < ApplicationController
 
   # GET /identities/1
   # GET /identities/1.json
-  def show
-  end
+  def show; end
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_identity
-      @identity = Identity.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_identity
+    @identity = Identity.find(params[:id])
+  end
 end

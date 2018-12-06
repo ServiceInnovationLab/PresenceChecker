@@ -8,10 +8,10 @@ class HelloWorldController < ApplicationController
     # @clients = Client.all
     # # @search = Client.search(params[:search])
     @results = Client.all
-    if params[:search]
-      @results = Client.search(params[:search]).order("created_at DESC")
-    else
-      @results = Client.all.order('created_at DESC')
-    end
+    @results = if params[:search]
+                 Client.search(params[:search]).order('created_at DESC')
+               else
+                 Client.all.order('created_at DESC')
+               end
   end
 end
