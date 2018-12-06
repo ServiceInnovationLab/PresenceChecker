@@ -34,6 +34,8 @@ gem 'devise'
 gem 'react_on_rails'
 gem 'webpacker'
 
+gem 'seed_dump'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

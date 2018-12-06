@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_025832) do
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
-    t.text "im_client_id"
+    t.text "im_client_id", null: false
     t.text "file_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -39,22 +39,22 @@ ActiveRecord::Schema.define(version: 2018_12_05_025832) do
     t.bigint "country_of_birth_id"
     t.text "nationality"
     t.bigint "issuing_state_id"
-    t.text "serial_no", null: false
+    t.text "serial_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_identities_on_client_id"
     t.index ["country_of_birth_id"], name: "index_identities_on_country_of_birth_id"
-    t.index ["issuing_state_id", "serial_no"], name: "index_identities_on_issuing_state_id_and_serial_no", unique: true
+    t.index ["issuing_state_id", "serial_number"], name: "index_identities_on_issuing_state_id_and_serial_number", unique: true
     t.index ["issuing_state_id"], name: "index_identities_on_issuing_state_id"
   end
 
   create_table "movements", force: :cascade do |t|
-    t.bigint "identities_id", null: false
+    t.bigint "identity_id", null: false
     t.text "movement", null: false
     t.datetime "carrier_date_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["identities_id"], name: "index_movements_on_identities_id"
+    t.index ["identity_id"], name: "index_movements_on_identity_id"
   end
 
   create_table "users", force: :cascade do |t|

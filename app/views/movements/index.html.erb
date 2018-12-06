@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Movements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Arrival date</th>
+      <th>Departure date</th>
+      <th>Client</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movements.each do |movement| %>
+      <tr>
+        <td><%= movement.arrival_date %></td>
+        <td><%= movement.departure_date %></td>
+        <td><%= movement.client_id %></td>
+        <td><%= link_to 'Show', movement %></td>
+        <td><%= link_to 'Edit', edit_movement_path(movement) %></td>
+        <td><%= link_to 'Destroy', movement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Movement', new_movement_path %>
