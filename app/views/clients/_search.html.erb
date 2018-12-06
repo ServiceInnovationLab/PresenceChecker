@@ -1,4 +1,4 @@
-<%= form_tag(home_index_path, :method => "get", id: "search-form") do %>
+<%= form_tag(clients_path, :method => "get", id: "search-form") do %>
   <div class="well">
     <%= text_field_tag :search, params[:search], placeholder: "Search" %>
     <%= submit_tag "Search", class: 'btn success' %>
