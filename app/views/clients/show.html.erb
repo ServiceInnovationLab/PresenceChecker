@@ -4,21 +4,7 @@
   <strong>Client Number</strong>
   <%= @client.im_client_id %>
 
-  <h2>Identities</h2>
-  <%-@identities.each do |identity|%>
-    <table border="1">
-      <thead>
 
-      </thead>
-      <tbody>
-      <tr>
-      <td><%=identity.first_name%></td>
-      <td><%=identity.family_name%></td>
-      <td><%=identity.country_of_birth.name%></td>
-      </tr>
-      </tbody>
-    <table>
-  <%end%>
 
   <h2>Movements</h2>
   <% if @movements %>
