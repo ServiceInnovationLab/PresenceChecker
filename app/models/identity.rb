@@ -9,5 +9,4 @@ class Identity < ApplicationRecord
   def country_of_birth_name
     country_of_birth.name
   end
-
 end
