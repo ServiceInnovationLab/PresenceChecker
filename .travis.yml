@@ -18,8 +18,8 @@ deploy:
   on:
     repo: ServiceInnovationLab/PresenceChecker
   app:
-    dev: presencechecker-staging
-    master: presencechecker
+    # dev: presencechecker-staging
+    master: presence-prod
   run:
   - bundle install
   - yarn install
