@@ -13,8 +13,7 @@ export default class Identity extends React.Component {
   }
 
   render() {
-    const { id, identities, country } = this.props;
-
+    const { id, identities } = this.props;
     const closedClassName = this.state.isCollapsed ? "isCollapsed" : "isOpen";
     return (
       <div className="results">
