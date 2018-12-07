@@ -11,9 +11,7 @@ class EligibilityService
     {
       'persons' => {
         'Ruby' => {
-          'present_in_new_zealand' => {
-            presence_by_day
-          },
+          'present_in_new_zealand' => presence_by_day
           'citizenship__meets_each_year_minimum_presence_requirements' => {
             @day: nil
           }
