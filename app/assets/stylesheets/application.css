@@ -14,7 +14,9 @@
  *= require_self
  */
 
-/*@import './lists.scss';
+@import './react-datepicker-cssmodules.min.css';
+@import './react-datepicker.min.css';
+@import './lists.scss';
 @import './components.scss';
 @import './utils.scss';
 */

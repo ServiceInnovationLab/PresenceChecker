@@ -10,6 +10,6 @@ end
   4.times do
     identity = FactoryBot.create(:identity, client: client)
     FactoryBot.create_list :departure, 10, identity: identity
-    # FactoryBot.create_list :arrival, 10, identity: identity
+    FactoryBot.create_list :arrival, 10, identity: identity
   end
 end
