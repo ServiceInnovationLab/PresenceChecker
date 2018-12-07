@@ -15,6 +15,7 @@ RSpec.describe Identity, type: :model do
         FactoryBot.create_list(:departure, 7, identity: identity)
         FactoryBot.create_list(:arrival, 1, identity: identity)
       end
+
       it 'can find movements through identities' do
         expect(identity.movements.size).to eq(7 + 1)
       end
