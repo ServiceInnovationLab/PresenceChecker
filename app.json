@@ -4,6 +4,9 @@
     "postdeploy": "rake db:migrate db:seed"
   },
   "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    }
   },
   "formation": {
   },
