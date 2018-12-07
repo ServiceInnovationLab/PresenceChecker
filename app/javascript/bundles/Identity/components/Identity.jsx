@@ -20,7 +20,6 @@ export default class Identity extends React.Component {
         <h2>Identity</h2>
         <div className="results-content">
           <h3>Client ID {id}</h3>
-          {console.log(id)}
           <div>
             <button
               onClick={() =>

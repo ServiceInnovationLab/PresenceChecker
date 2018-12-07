@@ -8,12 +8,32 @@ body {
   padding: 20px;
 }
 
+.main-menu {
+  text-align: right;
+  margin-bottom: 70px;
+  padding-left: 0;
+
+  li {
+    display: inline-block;
+    padding: 0 20px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    a {
+      display: inline-block;
+    }
+  }
+}
+
 .btn {
   min-width: 150px;
   color: #fff;
   font-weight: bold;
   font-size: 18px;
   padding: 6px 20px 8px;
+
   /* margin: 0; */
   display: inline-block;
   vertical-align: bottom;
@@ -139,13 +159,6 @@ table th {
 
 .list-stripped {
   font-weight: bold;
-  margin: 0;
-  margin-top: 10px;
   list-style: none;
   padding: 0 20px;
-  text-align: left;
-  li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-  }
 }
