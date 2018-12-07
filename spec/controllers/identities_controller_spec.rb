@@ -18,8 +18,15 @@ RSpec.describe IdentitiesController, type: :controller do
 
     describe 'GET index' do
       before { get :index }
-
       it { expect(response).to have_http_status(:ok) }
+
+      context 'when searching for an identity' do
+        let(:identity) { FactoryBot.create :identity }
+        before { get :index, params: { serial_number: identity.serial_number } }
+        it 'finds the identity' do
+          expect(assigns(:identities)).to eq [identity]
+        end
+      end
     end
   end
 end

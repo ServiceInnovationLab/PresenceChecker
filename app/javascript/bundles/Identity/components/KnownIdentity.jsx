@@ -54,7 +54,7 @@ export default class KnownIdentity extends React.Component {
             <tbody>
               <tr>
                 <th scope="row">Country of birth</th>
-                <td>{cob}</td>
+                <td>{country_of_birth}</td>
               </tr>
               <tr>
                 <th scope="row">Nationality</th>

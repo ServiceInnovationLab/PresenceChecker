@@ -26,9 +26,9 @@
     <%end%>
   <%end%>
 
-  <%= react_component("Identity", props: {id: @client.id,
-    identities: @client.identities.as_json(methods: :country_of_birth_name)
-  }) %>
+      <%= react_component("Identity", props: {id: @client.id,
+        identities: @client.identities.as_json(methods: :country_of_birth_name)
+      }) %>
 
   <%= react_component("EligibilityDates", props: {
     eligibleDateRanges:[
