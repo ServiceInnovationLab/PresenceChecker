@@ -1,0 +1,21 @@
+{
+  "name": "PresenceChecker",
+  "scripts": {
+    "postdeploy": "rake db:migrate db:seed"
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

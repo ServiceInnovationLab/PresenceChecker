@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+['brenda.wallace', 'dana.iti'].each do |name|
+  email = "#{name}@dia.govt.nz"
+  User.invite!(email: email) unless User.find_by(email: email)
+end
+
+5.times do
+  client = FactoryBot.create :client
+  4.times do
+    identity = FactoryBot.create(:identity, client: client)
+    FactoryBot.create_list :departure, 10, identity: identity
+    FactoryBot.create_list :arrival, 10, identity: identity
+  end
+end

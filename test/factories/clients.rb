@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :client do
-    identity { "TYTRW81" }
-    country { "Canada" }
-    departures { "2018-11-30 12:14:13" }
-    arrivals { "2018-11-30 12:14:13" }
+    im_client_id { Faker::Number.leading_zero_number(10) }
+    file_number { Faker::Number.leading_zero_number(10) }
   end
 end

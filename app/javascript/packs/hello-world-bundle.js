@@ -1,4 +1,4 @@
-import ReactOnRails from "react-on-rails";
+import ReactOnRails from 'react-on-rails';
 
 import Identity from "../bundles/Identity/components/Identity";
 import EligibilityDates from "../bundles/Presence/components/EligibilityDates";

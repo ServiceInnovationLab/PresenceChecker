@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
 class Client < ApplicationRecord
-  def self.search(search)
-    where("name LIKE ?", "%#{search}%")
-    where("content LIKE ?", "%#{search}%")
-  end
+  has_many :identities, dependent: :destroy
+  has_many :movements, through: :identities
 end

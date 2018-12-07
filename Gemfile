@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
+gem 'devise_invitable', '~> 1.7.0'
 
 gem 'react_on_rails'
 gem 'webpacker'
@@ -49,7 +50,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rubocop', '0.60.0'
+  gem 'rubocop', '0.61.1'
 end
 
 group :development do
@@ -59,6 +60,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # opens emails for us
+  gem 'letter_opener'
 end
 
 group :test do
