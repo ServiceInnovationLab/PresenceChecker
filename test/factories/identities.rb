@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :identity do
+    client
     identity_number { Faker::IDNumber.spanish_foreign_citizen_number }
     family_name { Faker::Name.last_name }
     first_name { Faker::Name.first_name }
