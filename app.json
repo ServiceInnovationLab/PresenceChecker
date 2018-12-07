@@ -7,9 +7,7 @@
   },
   "formation": {
   },
-  "addons": [
-
-  ],
+  "addons": [ "sendgrid"],
   "engines": {
     "yarn": ">= 0.25.2"
   },
