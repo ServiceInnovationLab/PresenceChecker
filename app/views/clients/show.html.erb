@@ -26,10 +26,9 @@
     <%end%>
   <%end%>
 
-      <%= react_component("Identity", props: {id: @client.nil? ? '' : @client.id,
-        identities: @identities,
-        country: @country_of_birth
-        }) %>
+      <%= react_component("Identity", props: {id: @client.id,
+        identities: @client.identities.as_json(methods: :country_of_birth_name)
+      }) %>
 
         <div class="results">
           <h2>Presence Data</h2>

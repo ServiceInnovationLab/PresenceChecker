@@ -37,7 +37,7 @@ export default class Identity extends React.Component {
             </button>
             <div className={`results-items ${closedClassName}`}>
               {identities.map((details, index) => {
-                return <KnownIdentity key={`identity-${index}`} country={country} {...details} />;
+                return <KnownIdentity key={`identity-${index}`} {...details} />;
               })}
             </div>
           </div>

@@ -13,7 +13,7 @@ export default class KnownIdentity extends React.Component {
       first_name,
       second_name = "",
       third_name = "",
-      country,
+      country_of_birth,
       nationality,
       gender
     } = this.props;
@@ -54,7 +54,7 @@ export default class KnownIdentity extends React.Component {
             <tbody>
               <tr>
                 <th scope="row">Country of birth</th>
-                <td>{country}</td>
+                <td>{country_of_birth}</td>
               </tr>
               <tr>
                 <th scope="row">Nationality</th>
