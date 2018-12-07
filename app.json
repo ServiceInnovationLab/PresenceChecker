@@ -4,12 +4,13 @@
     "postdeploy": "rake db:migrate db:seed"
   },
   "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    }
   },
   "formation": {
   },
-  "addons": [
-
-  ],
+  "addons": [ "sendgrid"],
   "engines": {
     "yarn": ">= 0.25.2"
   },
