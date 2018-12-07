@@ -21,6 +21,7 @@ RSpec.describe ClientsController, type: :controller do
       before { get :show, params: { id: client.to_param } }
 
       it { expect(response).to have_http_status(:ok) }
+      it { expect(assigns(:client)).to eq client }
     end
   end
 end
