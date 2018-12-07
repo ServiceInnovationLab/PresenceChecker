@@ -2,8 +2,14 @@
 
 FactoryBot.define do
   factory :movement do
-    arrival_date { '2018-12-04' }
-    departure_date { '2018-12-04' }
-    client_id { 'MyString' }
+    identity { Factory.create :identity }
+    direction { '' }
+    carrier_date_time { Faker::Date.backward(3650) }
+  end
+  factory :departure, parent: :movement do
+    direction { 'departure' }
+  end
+  factory :arrival, parent: :movement do
+    direction { 'arrival' }
   end
 end
