@@ -9,16 +9,14 @@ export default class KnownIdentity extends React.Component {
   render() {
     const {
       id,
-      lastName,
-      firstName,
-      middleName = "",
-      thirdName = "",
-      dob,
-      cob,
+      family_name,
+      first_name,
+      second_name = "",
+      third_name = "",
+      country_of_birth,
       nationality,
       gender
     } = this.props;
-
     return (
       <div className="parent identities">
         <div className="left">
@@ -34,7 +32,7 @@ export default class KnownIdentity extends React.Component {
               </tr>
               <tr>
                 <th scope="row">Surname</th>
-                <td>{lastName}</td>
+                <td>{family_name}</td>
               </tr>
               <tr>
                 <th scope="row">First name</th>
@@ -42,7 +40,7 @@ export default class KnownIdentity extends React.Component {
               </tr>
               <tr>
                 <th scope="row">Second name</th>
-                <td>{middleName}</td>
+                <td>{second_name}</td>
               </tr>
               <tr>
                 <th scope="row">Third name</th>
@@ -59,16 +57,16 @@ export default class KnownIdentity extends React.Component {
                 <td>{cob}</td>
               </tr>
               <tr>
-                <th scope="row">DOB</th>
-                <td>{dob}</td>
-              </tr>
-              <tr>
                 <th scope="row">Nationality</th>
                 <td>{nationality}</td>
               </tr>
               <tr>
                 <th scope="row">Gender</th>
                 <td>{gender}</td>
+              </tr>
+              <tr>
+                <th scope="row">&nbsp;</th>
+                <td>&nbsp;</td>
               </tr>
               <tr>
                 <th scope="row">&nbsp;</th>
