@@ -27,7 +27,8 @@
   <%end%>
 
       <%= react_component("Identity", props: {id: @client.nil? ? '' : @client.id,
-        identities: @identities
+        identities: @identities,
+        country: @country_of_birth
         }) %>
 
         <div class="results">

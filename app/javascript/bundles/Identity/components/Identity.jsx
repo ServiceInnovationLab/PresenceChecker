@@ -13,14 +13,14 @@ export default class Identity extends React.Component {
   }
 
   render() {
-    const { id, identities } = this.props;
+    const { id, identities, country } = this.props;
+
     const closedClassName = this.state.isCollapsed ? "isCollapsed" : "isOpen";
     return (
       <div className="results">
         <h2>Identity</h2>
         <div className="results-content">
           <h3>Client ID {id}</h3>
-          {console.log(id)}
           <div>
             <button
               onClick={() =>
@@ -37,7 +37,7 @@ export default class Identity extends React.Component {
             </button>
             <div className={`results-items ${closedClassName}`}>
               {identities.map((details, index) => {
-                return <KnownIdentity key={`identity-${index}`} {...details} />;
+                return <KnownIdentity key={`identity-${index}`} country={country} {...details} />;
               })}
             </div>
           </div>

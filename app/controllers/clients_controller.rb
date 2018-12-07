@@ -10,7 +10,7 @@ class ClientsController < ApplicationController
   def show
     @identities = @client.identities
     @movements = @client.movements
-    @country_of_birth = @client.id
+    @country_of_birth = @client.identities.first.country_of_birth.name
   end
 
   private
