@@ -10,6 +10,9 @@
   "addons": [
 
   ],
+  "engines": {
+    "yarn": ">= 0.25.2"
+  },
   "buildpacks": [
     {
       "url": "heroku/nodejs"
