@@ -1,5 +1,0 @@
-= form_tag(identities_path, :method => "get", id: "search-form") do
-  .well
-    %label
-      = text_field_tag :serial_number, params[:serial_number], placeholder: "Serial Number"
-      = submit_tag "Search", class: 'btn success'
