@@ -94,4 +94,9 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  host = ENV['DEFAULT_URL_HOST'] ||
+         "#{ENV.fetch('HEROKU_APP_NAME')}.herokuapp.com"
+
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 end
