@@ -4,21 +4,7 @@
   <strong>Client Number</strong>
   <%= @client.im_client_id %>
 
-  <h2>Identities</h2>
-  <%-@identities.each do |identity|%>
-    <table border="1">
-      <thead>
 
-      </thead>
-      <tbody>
-      <tr>
-      <td><%=identity.first_name%></td>
-      <td><%=identity.family_name%></td>
-      <td><%=identity.country_of_birth.name%></td>
-      </tr>
-      </tbody>
-    <table>
-  <%end%>
 
   <h2>Movements</h2>
   <% if @movements %>
@@ -40,9 +26,9 @@
     <%end%>
   <%end%>
 
-      <%= react_component("Identity", props: {id: @client.nil? ? '' : @client.id,
-        identities: @identities
-        }) %>
+      <%= react_component("Identity", props: {id: @client.id,
+        identities: @client.identities.as_json(methods: :country_of_birth_name)
+      }) %>
 
         <div class="results">
           <h2>Presence Data</h2>
