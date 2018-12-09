@@ -107,11 +107,11 @@ header.main {
     padding-left: 20px;
     padding-right: 20px;
     h3 {
-      color: #3593B4;
+      color: #3593b4;
       font-size: 24px;
     }
     i {
-      color: #A4A4A4;
+      color: #a4a4a4;
     }
   }
   &-items {
@@ -127,8 +127,8 @@ header.main {
 table {
   font-size: 16px;
 }
-table th,
-table td {
+
+table {
   text-align: left;
   padding: 7px 30px 7px 15px;
 }
@@ -197,6 +197,7 @@ table td {
 
   &.is-wide {
     width: 60%;
+    text-align: left;
   }
 }
 .is-within-range {
