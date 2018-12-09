@@ -1,3 +1,7 @@
+
+$blue:#3593b4;
+$grey:#a4a4a4;
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(51, 51, 51);
@@ -107,11 +111,11 @@ header.main {
     padding-left: 20px;
     padding-right: 20px;
     h3 {
-      color: #3593b4;
+      color: $blue;
       font-size: 24px;
     }
     i {
-      color: #a4a4a4;
+      color: $grey;
     }
   }
   &-items {
@@ -123,12 +127,8 @@ header.main {
 }
 
 /* columns */
-
 table {
   font-size: 16px;
-}
-
-table {
   text-align: left;
   padding: 7px 30px 7px 15px;
 }

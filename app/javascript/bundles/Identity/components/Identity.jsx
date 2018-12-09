@@ -4,7 +4,7 @@ import KnownIdentity from "./KnownIdentity";
 
 export default class Identity extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired
   };
 
   constructor(props) {
