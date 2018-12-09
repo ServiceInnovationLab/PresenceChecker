@@ -10,9 +10,13 @@ export default class Year extends React.Component {
     this.state = { isCollapsed: true };
   }
 
+  getYear(date) {
+    return date.split('-')[0];
+  }
   render() {
     const {
       year,
+      yearIndex,
       daysPresent,
       meetsAmountOfDaysInNZ,
       periodsAway
@@ -27,7 +31,7 @@ export default class Year extends React.Component {
         <tbody>
           <tr>
             <td className="header-container has-bottom-border has-right-border">
-              <h3 className="is-dark">{year}</h3>
+              <h3 className="is-dark">Year {yearIndex}</h3>
             </td>
             <td className="has-bottom-border">{daysPresent}</td>
             <td className="has-bottom-border">
@@ -76,7 +80,9 @@ export default class Year extends React.Component {
                       >
                         <td className="date-range__dates">
                           <h3 className="is-dark">
-                            {start} - {end}
+                            {this.getYear(start) === this.getYear(end) &&
+                              <span>{format(start, "D MMM, YYYY")} - {format(end, "D MMM, YYYY")}</span>
+                            }
                           </h3>{" "}
                         </td>
                         <td className="date-range__total">{total} days</td>
