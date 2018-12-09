@@ -5,10 +5,10 @@
       <% if user_signed_in? %>
         <li><%= link_to('Home', root_path) %></li>
         <li><%= link_to('Users', users_path) %></li>
-        <li class="right">You are signed in as <%=current_user.email%></li>
         <li class="right">
           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
         </li>
+        <li class="right">You are signed in as <%=current_user.email%></li>
       <% else %>
         <li>
         <%= link_to('Login', new_user_session_path)  %>
