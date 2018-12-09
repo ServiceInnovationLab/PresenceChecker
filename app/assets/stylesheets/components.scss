@@ -5,6 +5,7 @@ $grey:#a4a4a4;
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(51, 51, 51);
+  margin: 0;
 }
 
 .debug-table {
@@ -20,9 +21,17 @@ body {
 }
 
 .main-menu {
-  margin-bottom: 70px;
-  padding-left: 0;
-  text-align: right;
+  background-color: #24292e;
+  color: hsla(0,0%,100%,.75);
+  padding-bottom: 12px;
+  padding-top: 12px;
+  margin: 0;
+  margin-bottom: 60px;
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+  }
 
   li {
     display: inline-block;
@@ -34,7 +43,18 @@ body {
 
     a {
       display: inline-block;
+      color: #fff;
+      margin: -1px 15px -1px -2px;
+      white-space: nowrap;
+      text-decoration: none;
+      &:hover {
+        color: hsla(0,0%,100%,.75);
+      }
     }
+  }
+
+  .right {
+    float: right;
   }
 }
 
@@ -200,14 +220,15 @@ table {
     text-align: left;
   }
 }
+
 .is-within-range {
   background-color: rgb(167, 225, 180);
   border-radius: 30px;
 }
+
 .list-stripped {
   font-weight: bold;
   list-style: none;
-  padding: 0 20px;
 }
 
 .timetable {
@@ -247,6 +268,7 @@ table {
   table {
     padding: 0;
     margin: 0;
+    text-align: center;
   }
   i {
     padding-left: 10px;
