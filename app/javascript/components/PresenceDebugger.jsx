@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { format } from "date-fns";
+import PropTypes from 'prop-types';
+import React from 'react';
+import { format } from 'date-fns';
 
-import TimePeriod from "./TimePeriod";
+import TimePeriod from './TimePeriod';
 
 export default class DaysPresent extends React.Component {
   static propTypes = { days_present: PropTypes.object };
@@ -16,18 +16,14 @@ export default class DaysPresent extends React.Component {
   //   "2015-01-07": false
   // }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { days_present } = this.props;
     const totalDaysArray = Object.entries(days_present);
     const months = {};
-    totalDaysArray.forEach(dateObject => {
+    totalDaysArray.forEach((dateObject) => {
       const dateString = dateObject[0];
       const wasInNZ = dateObject[1];
-      const monthKey = dateString.substr(0, dateString.lastIndexOf("-")); //includes month and year
+      const monthKey = dateString.substr(0, dateString.lastIndexOf('-')); //includes month and year
       if (!months[monthKey]) {
         months[monthKey] = [];
       }
@@ -36,12 +32,12 @@ export default class DaysPresent extends React.Component {
     });
 
     return (
-      <div className={`results`}>
-        {Object.entries(months).map(([key, days]) => {
+      <div className="results">
+        {Object.entries(months).map(([ key, days ]) => {
           return (
             <TimePeriod
               key={key}
-              periodName={format(key, "MMMM YYYY")}
+              periodName={format(key, 'MMMM YYYY')}
               days={days}
             />
           );
