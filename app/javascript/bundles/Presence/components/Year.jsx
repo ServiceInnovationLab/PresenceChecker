@@ -7,7 +7,7 @@ export default class Year extends React.Component {
 
   static propTypes = {
     year: PropTypes.number,
-    daysPresent: PropTypes.string,
+    daysPresent: PropTypes.number,
     meetsAmountOfDaysInNZ: PropTypes.bool,
     periodsAway: PropTypes.array
   };
@@ -69,12 +69,13 @@ export default class Year extends React.Component {
                       <h3 className="is-dark">Travel Days</h3>
                     </td>
                   </tr>
-                  {periodsAway.map(({ start, end,total }) => {
+                  {periodsAway.map(({ start, end, total }, index) => {
                     return (
                       <tr
                         className={`is-light is-text-left date-range ${
                           isCollapsed ? "u-hide" : ""
                         }`}
+                        key={`awayPeriod_${index}`}
                       >
                         <td className="date-range__dates">
                           <h3 className="is-dark">

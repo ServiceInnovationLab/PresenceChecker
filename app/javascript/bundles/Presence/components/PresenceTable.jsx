@@ -4,7 +4,7 @@ import React from "react";
 import Year from "./Year";
 
 export default class PresenceTable extends React.Component {
-  static propTypes = { years: PropTypes.array };
+  static propTypes = { years: PropTypes.arrayOf(PropTypes.object) };
 
   render() {
     const { years, isEligible, totalDays } = this.props;
@@ -25,7 +25,7 @@ export default class PresenceTable extends React.Component {
             </tr>
             {years.map(year => {
               return (
-                <tr className="">
+                <tr key={`year_${year.year}`}>
                   <td>
                     <Year {...year} />
                   </td>
