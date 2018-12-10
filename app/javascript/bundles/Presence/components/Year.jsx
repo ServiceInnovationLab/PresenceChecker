@@ -67,9 +67,10 @@ export default class Year extends React.Component {
                       <h3 className="is-dark">Travel Days</h3>
                     </td>
                   </tr>
-                  {periodsAway.map(({ start, end,total }) => {
+                  {periodsAway.map(({ start, end,total },index) => {
                     return (
                       <tr
+                      key={index}
                         className={`is-light is-text-left date-range ${
                           isCollapsed ? "u-hide" : ""
                         }`}
