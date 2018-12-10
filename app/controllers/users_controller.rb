@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: %i[destroy]
+  before_action :set_current_user, only: %i[index]
 
   def index
     @users = User.order(:email)
@@ -13,6 +14,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_current_user
+    @current_user = current_user
+  end
 
   def set_user
     @user = User.find(params[:id])
