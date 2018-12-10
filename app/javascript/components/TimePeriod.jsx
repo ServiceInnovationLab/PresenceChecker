@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { sumBy } from 'lodash';
 import React from 'react';
 
-import Table from '../../../components/Table';
+import Table from './Table';
 
 export default class TimePeriod extends React.Component {
   static propTypes = {
