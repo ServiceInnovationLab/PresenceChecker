@@ -44,6 +44,9 @@ gem 'haml'
 gem 'factory_bot_rails'
 gem 'faker'
 
+gem 'httparty'
+gem 'dotenv-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
