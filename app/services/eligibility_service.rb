@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EligibilityService
-  def initialise(client, day)
+  def initialize(client, day)
     @client = client
     @day = day
     response = calculate(query)
@@ -30,7 +30,8 @@ class EligibilityService
           },
           'days_present_in_new_zealand_in_preceeding_year' => {
             @day => nil
-          }
+          },
+          'present_in_new_zealand' => presence_values
         }
       },
       'families' => {
@@ -44,6 +45,25 @@ class EligibilityService
         }
       }
     }
+  end
+
+  def presence_values
+    date_format = '%Y-%m-%d'
+    presence = {}
+
+    @client.movements.order(:carrier_date_time).each do |movement|
+      if movement.direction == 'arrival'
+        presence[movement.carrier_date_time.to_date.strftime(date_format)] = true
+      elsif movement.direction == 'departure'
+        # today they're here, tomorrow they're not
+        # today = movement.carrier_date_time.to_date.strftime(date_format)
+        tomorrow = (movement.carrier_date_time.to_date + 1).strftime(date_format)
+        # presence[today] = true
+        presence[tomorrow] = false
+      end
+    end
+
+    presence
   end
 
   # def presence_by_day
