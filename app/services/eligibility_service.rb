@@ -26,6 +26,8 @@ class EligibilityService
     @response['persons'][person_name]['days_present_in_new_zealand_in_preceeding_year']
   end
 
+  private
+
   def query
     {
       'persons' => {
@@ -80,9 +82,6 @@ class EligibilityService
     presence
   end
 
-  # def presence_by_day
-  #    { @day: @client.present_in_nz? }
-  # end
   def date_format
     '%Y-%m-%d'
   end

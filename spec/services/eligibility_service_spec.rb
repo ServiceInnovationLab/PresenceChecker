@@ -8,8 +8,7 @@ RSpec.describe EligibilityService, type: :model do
   let(:identity) { FactoryBot.create :identity, client: client }
   let(:day) { '2019-06-01' }
 
-  it { expect(service.of_url).to eq 'https://api.rules.nz/calculate' }
-
+  it { expect(service.send(:of_url)).to eq 'https://api.rules.nz/calculate' }
 
   describe 'presence_values' do
     context 'when has lots of movements in the past' do
@@ -21,7 +20,7 @@ RSpec.describe EligibilityService, type: :model do
         FactoryBot.create :arrival, carrier_date_time: '2018-05-16', identity: identity
       end
       it { expect(client.movements.count).to eq 3 }
-      it { expect(service.presence_values).to eq('2018-01-01' => true, '2018-05-02' => false, '2018-05-16' => true) }
+      it { expect(service.send(:presence_values)).to eq('2018-01-01' => true, '2018-05-02' => false, '2018-05-16' => true) }
     end
   end
 
@@ -63,9 +62,9 @@ RSpec.describe EligibilityService, type: :model do
   end
 
   describe 'dates to ask OF for' do
-    it { expect(service.years_before(1)).to eq '2018-06-01' }
-    it { expect(service.years_before(2)).to eq '2017-06-01' }
-    it { expect(service.years_before(3)).to eq '2016-06-01' }
-    it { expect(service.years_before(4)).to eq '2015-06-01' }
+    it { expect(service.send(:years_before, 1)).to eq '2018-06-01' }
+    it { expect(service.send(:years_before, 2)).to eq '2017-06-01' }
+    it { expect(service.send(:years_before, 3)).to eq '2016-06-01' }
+    it { expect(service.send(:years_before, 4)).to eq '2015-06-01' }
   end
 end
