@@ -34,7 +34,7 @@ RSpec.describe EligibilityService, type: :model do
           FactoryBot.create :arrival, carrier_date_time: '2018-05-16', identity: identity
         end
         it { expect(client.movements.count).to eq 3 }
-        it { expect(service.presence_values).to eq('2018-01-01' => true, '2018-05-16' => true) }
+        it { expect(service.presence_values).to eq('2018-01-01' => true, '2018-05-02' => false, '2018-05-16' => true) }
       end
     end
   end
