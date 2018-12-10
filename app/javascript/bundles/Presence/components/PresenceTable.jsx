@@ -27,10 +27,10 @@ export default class PresenceTable extends React.Component {
                 </header>
               </th>
             </tr>
-            {years.map(year => {
+            {years.map((year,index) => {
               return (
-                <tr className="">
-                  <td>
+                <tr key={index} className="">
+                  <td >
                     <Year {...year} />
                   </td>
                 </tr>
