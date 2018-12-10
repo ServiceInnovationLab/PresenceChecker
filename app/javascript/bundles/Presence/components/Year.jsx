@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+import { getYear, format } from "date-fns";
 import React from "react";
 
 export default class Year extends React.Component {
@@ -10,9 +10,6 @@ export default class Year extends React.Component {
     this.state = { isCollapsed: true };
   }
 
-  getYear(date) {
-    return date.split('-')[0];
-  }
   render() {
     const {
       yearIndex,
@@ -79,7 +76,7 @@ export default class Year extends React.Component {
                       >
                         <td className="date-range__dates">
                           <h3 className="is-dark">
-                            {this.getYear(start) === this.getYear(end) &&
+                            {getYear(start) === getYear(end) &&
                               <span>{format(start, "D MMM, YYYY")} - {format(end, "D MMM, YYYY")}</span>
                             }
                           </h3>{" "}

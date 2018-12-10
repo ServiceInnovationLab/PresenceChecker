@@ -79,7 +79,7 @@ export default class EligibilityDates extends React.Component {
               <h3>Dates eligible to apply</h3>
             </header>
             <div>
-              <ul className="list-stripped" style={{textAlign: 'right', paddingRight: '20px'}}>
+              <ul className="list-stripped right">
                 {eligibleDateRanges.map((range, index) => {
                   return (
                     <li key={index}>
