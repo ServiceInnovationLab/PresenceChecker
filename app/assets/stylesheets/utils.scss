@@ -5,10 +5,14 @@
   cursor: pointer !important;
 }
 .u-hide {
-  display:none !important;
+  display: none !important;
 }
 
 .u-clear-button-defaults {
   border-width: 0;
   padding: 0;
+}
+
+.u-padding-left-small {
+  padding-left: 15px !important;
 }
