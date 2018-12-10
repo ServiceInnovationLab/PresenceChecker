@@ -1,19 +1,35 @@
+# frozen_string_literal: true
+
 class EligibilityService
-  def presence_count(client, day)
+  def initialise(client, day)
     @client = client
     @day = day
     response = calculate(query)
-    response['properties'][property_name]['rates_rebate'][year]
-  end
   end
 
-  def of_query
+  def meets_presence_requirements
+    response['persons'][person_name]['citizenship__meets_each_year_minimum_presence_requirements']
+  end
+
+  def days_present_in_preceeding_year
+    response['persons'][person_name]['days_present_in_new_zealand_in_preceeding_year']
+  end
+
+  def query
     {
       'persons' => {
-        'Ruby' => {
-          'present_in_new_zealand' => presence_by_day
+        person_name => {
           'citizenship__meets_each_year_minimum_presence_requirements' => {
-            @day: nil
+            @day => nil
+          },
+          'citizenship__meets_5_year_presence_requirement' => {
+            @day => nil
+          },
+          'citizenship__meets_each_year_minimum_presence_requirements' => {
+            @day => nil
+          },
+          'days_present_in_new_zealand_in_preceeding_year' => {
+            @day => nil
           }
         }
       },
@@ -30,14 +46,23 @@ class EligibilityService
     }
   end
 
-  def presence_by_day
-    client.movents.order(carrier_datetime) do |movement|
-      
-    end
+  # def presence_by_day
+  #    { @day: @client.present_in_nz? }
+  # end
+
+  def person_name
+    'Ruby'
   end
 
   def calculate(query)
-    headers = { 'Content-Type' => 'application/json' }
-    JSON.parse(HTTParty.post(ENV['OPENFISCA_ORIGIN'], body: query.to_json, headers: headers).body)
+    JSON.parse(HTTParty.post(of_url, body: query.to_json, headers: headers).body)
+  end
+
+  def headers
+    { 'Content-Type' => 'application/json' }
+  end
+
+  def of_url
+    "#{ENV['OPENFISCA_URL']}/calculate"
   end
 end
