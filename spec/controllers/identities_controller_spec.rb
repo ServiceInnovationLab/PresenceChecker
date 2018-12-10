@@ -35,11 +35,11 @@ RSpec.describe IdentitiesController, type: :controller do
         let(:identity) { FactoryBot.create :identity }
 
         it 'redirects to the related client\'s show page' do
-          expect(get :index, params: { serial_number: identity.serial_number }).to redirect_to(client_path(identity.client))
+          expect(get(:index, params: { serial_number: identity.serial_number })).to redirect_to(client_path(identity.client))
         end
 
         it 'doesn\'t redirect without an exact match' do
-          expect(get :index, params: { serial_number: "a" }).not_to redirect_to(client_path(identity.client))
+          expect(get(:index, params: { serial_number: "a" })).not_to redirect_to(client_path(identity.client))
         end
       end
     end
