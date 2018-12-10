@@ -15,7 +15,6 @@ export default class Year extends React.Component {
   }
   render() {
     const {
-      year,
       yearIndex,
       daysPresent,
       meetsAmountOfDaysInNZ,
