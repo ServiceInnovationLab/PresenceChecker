@@ -4,7 +4,11 @@ import { sumBy } from "lodash";
 import React from "react";
 
 export default class TimePeriod extends React.Component {
-  static propTypes = { days_present: PropTypes.array };
+  static propTypes = {
+    periodName: PropTypes.string,
+    days: PropTypes.number
+  };
+
   render() {
     const { periodName, days } = this.props;
     return (

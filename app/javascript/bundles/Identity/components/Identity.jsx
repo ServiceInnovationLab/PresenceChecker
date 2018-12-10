@@ -3,14 +3,11 @@ import React from "react";
 import KnownIdentity from "./KnownIdentity";
 
 export default class Identity extends React.Component {
-  static propTypes = {
-    id: PropTypes.string.isRequired
-  };
+  state = { isCollapsed: true };
 
-  constructor(props) {
-    super(props);
-    this.state = { isCollapsed: true };
-  }
+  static propTypes = {
+    id: PropTypes.number.isRequired
+  };
 
   render() {
     const { id, identities } = this.props;

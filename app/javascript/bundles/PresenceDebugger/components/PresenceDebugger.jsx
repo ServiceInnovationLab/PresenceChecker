@@ -16,10 +16,6 @@ export default class DaysPresent extends React.Component {
   //   "2015-01-07": false
   // }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { days_present } = this.props;
     const totalDaysArray = Object.entries(days_present);

@@ -6,10 +6,6 @@ import Year from "./Year";
 export default class PresenceTable extends React.Component {
   static propTypes = { years: PropTypes.array };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { years, isEligible, totalDays } = this.props;
 

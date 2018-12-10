@@ -7,10 +7,6 @@ import TimePeriod from "./TimePeriod";
 export default class DaysPresent extends React.Component {
   static propTypes = { days_present: PropTypes.object };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { days_present } = this.props;
     const totalDaysArray = Object.entries(days_present);

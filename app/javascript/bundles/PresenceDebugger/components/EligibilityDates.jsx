@@ -4,17 +4,14 @@ import DatePicker from "react-datepicker";
 import { format, isWithinRange, eachDay } from "date-fns";
 
 export default class EligibilityDates extends React.Component {
+  state = {
+    selectedDate: new Date(),
+    isEligible: this.isEligible(new Date())
+  };
+
   static propTypes = {
     eligibleDateRanges: PropTypes.array.isRequired
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedDate: new Date(),
-      isEligible: this.isEligible(new Date())
-    };
-  }
 
   allDaysInRange = () => {
     const { eligibleDateRanges } = this.props;
@@ -26,7 +23,7 @@ export default class EligibilityDates extends React.Component {
 
   isEligible = date => {
     const { eligibleDateRanges } = this.props;
-    let isEligible;
+    let isEligible = false;
     for (let index = 0; index < eligibleDateRanges.length; index++) {
       const { start, end } = eligibleDateRanges[index];
       if (isWithinRange(date, start, end)) {
@@ -68,7 +65,7 @@ export default class EligibilityDates extends React.Component {
               <DatePicker
                 inline
                 highlightDates={highlightWithRanges}
-                selected={this.state.selectedDate}
+                selected={selectedDate}
                 onChange={this.onDateChange}
               />
             </div>

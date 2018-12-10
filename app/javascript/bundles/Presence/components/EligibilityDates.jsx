@@ -4,17 +4,14 @@ import DatePicker from "react-datepicker";
 import { format, isWithinRange, eachDay } from "date-fns";
 
 export default class EligibilityDates extends React.Component {
+  state = {
+    selectedDate: new Date(),
+    isEligible: this.isEligible(new Date())
+  };
+
   static propTypes = {
     eligibleDateRanges: PropTypes.array.isRequired
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedDate: new Date(),
-      isEligible: this.isEligible(new Date())
-    };
-  }
 
   allDaysInRange = () => {
     const { eligibleDateRanges } = this.props;
@@ -24,21 +21,22 @@ export default class EligibilityDates extends React.Component {
     return allDaysInRange.reduce((acc, val) => acc.concat(val));
   };
 
-  isEligible = date => {
+  checkEligibility = (date = Date.now()) => {
     const { eligibleDateRanges } = this.props;
-    let isEligible;
+    let eligible = false;
     for (let index = 0; index < eligibleDateRanges.length; index++) {
       const { start, end } = eligibleDateRanges[index];
       if (isWithinRange(date, start, end)) {
-        isEligible = true;
+        eligible = true;
       }
     }
-    return isEligible;
+    return eligible;
   };
   onDateChange = date => {
+    let newDate = new Date(date);
     this.setState({
-      selectedDate: new Date(date),
-      isEligible: this.isEligible(new Date(date))
+      selectedDate: newDate,
+      isEligible: this.checkEligibility(newDate)
     });
   };
 
@@ -68,7 +66,7 @@ export default class EligibilityDates extends React.Component {
               <DatePicker
                 inline
                 highlightDates={highlightWithRanges}
-                selected={this.state.selectedDate}
+                selected={selectedDate}
                 onChange={this.onDateChange}
               />
             </div>
@@ -84,7 +82,7 @@ export default class EligibilityDates extends React.Component {
                   return (
                     <li key={index}>
                       {format(range.start, "D MMMM YYYY")}
-                      {` - `}
+                      {" - "}
                       {format(range.end, "D MMMM YYYY")}
                     </li>
                   );

@@ -5,6 +5,7 @@ import React from "react";
 
 export default class TimePeriod extends React.Component {
   static propTypes = { days_present: PropTypes.array };
+
   render() {
     const { periodName, days } = this.props;
     return (

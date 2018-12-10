@@ -3,12 +3,14 @@ import { format } from "date-fns";
 import React from "react";
 
 export default class Year extends React.Component {
-  static propTypes = {};
+  state = { isCollapsed: true };
 
-  constructor(props) {
-    super(props);
-    this.state = { isCollapsed: true };
-  }
+  static propTypes = {
+    year: PropTypes.number,
+    daysPresent: PropTypes.string,
+    meetsAmountOfDaysInNZ: PropTypes.bool,
+    periodsAway: PropTypes.array
+  };
 
   render() {
     const {
