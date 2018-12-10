@@ -1,4 +1,4 @@
-@import './colours';
+@import "./colours";
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -19,8 +19,8 @@ body {
 }
 
 .main-menu {
-  background-color: #24292e;
-  color: hsla(0, 0%, 100%, 0.75);
+  background-color: $dark-blue;
+  color: $main-menu-grey;
   padding-bottom: 12px;
   padding-top: 12px;
   margin: 0;
@@ -41,12 +41,12 @@ body {
 
     a {
       display: inline-block;
-      color: #fff;
+      color: $white;
       margin: -1px 15px -1px -2px;
       white-space: nowrap;
       text-decoration: none;
       &:hover {
-        color: hsla(0, 0%, 100%, 0.75);
+        color: $main-menu-grey;
       }
     }
   }
@@ -88,7 +88,7 @@ body {
   background-color: $blue;
   border: $blue;
   &:hover {
-    background-color: rgba(105, 172, 225, 0.8);
+    background-color: $light-blue-transparent;
   }
 }
 
@@ -108,7 +108,7 @@ input[type="text"] {
 header.main {
   padding-bottom: 5px;
   margin-bottom: 30px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid $black;
 }
 
 .results {
@@ -165,16 +165,16 @@ table {
 }
 
 .parent.identities {
-  border-top: 1px solid $light-grey;
   border-bottom: 1px solid $light-grey;
-  padding-top: 25px;
+  border-top: 1px solid $light-grey;
   padding-bottom: 25px;
+  padding-top: 25px;
 }
 
 .panel {
   display: inline-block;
   vertical-align: top;
-  background: rgba(167, 225, 180, 0.15);
+  background: $grey-blue;
   width: 30%;
   text-align: center;
   padding-bottom: 30px;
@@ -206,10 +206,19 @@ table {
     margin-left: 15px;
   }
 
+  i {
+    color: $green;
+  }
   &.has-error {
-    background: rgba(255, 167, 167, 0.15);
+    background: $red-transparent;
     header {
       background: $light-red;
+    }
+
+    &.has-error {
+      i {
+        color: $red;
+      }
     }
   }
 
@@ -230,11 +239,11 @@ table {
 }
 
 .timetable {
-  border: 1px solid black;
+  border: 1px solid $black;
   width: 100%;
   .days-row {
-    border: 1px solid black;
-    background-color: red;
+    border: 1px solid $black;
+    background-color: $red;
     height: 50px;
     text-align: center;
     .is-in-country {
@@ -279,14 +288,8 @@ table {
     font-size: 20px;
     font-weight: bold;
 
-    i {
-      color: $green;
-    }
     &.has-error {
       background: $light-red;
-      i {
-        color: red;
-      }
     }
   }
 
@@ -300,25 +303,25 @@ table {
   .year-table {
     width: 100%;
     border-spacing: 0px;
-    background: #f3f3f3;
+    background: $off-white;
 
     tr {
       &.is-light {
-        background-color: #fcfcfc;
+        background-color: $light-white;
       }
     }
 
     .icon-container {
       width: 10%;
-      background: rgb(167, 225, 180);
+      background: $light-green;
       i {
-        color: green;
+        color: $green;
         padding-left: 0;
       }
       &.has-error {
-        background: rgb(255, 167, 167);
+        background: $light-red;
         i {
-          color: red;
+          color: $red;
         }
       }
     }
@@ -339,7 +342,7 @@ table {
     text-align: left;
   }
   .is-dark {
-    color: #717171;
+    color: $lighter-grey;
   }
   .has-bottom-border {
     border-bottom: 3px solid lightgray;
@@ -349,6 +352,6 @@ table {
   }
 
   .has-border--light {
-    border-color: rgb(230, 225, 225);
+    border-color: $off-white;
   }
 }

@@ -59,7 +59,7 @@ export default class EligibilityDates extends React.Component {
         <h2>Presence Data</h2>
         <div>
           <div className={`panel ${isPassingClass}`}>
-            <header className="has-icon ">
+            <header className={`has-icon ${isPassingClass}`}>
               {isEligible ? <h3>Eligible Now</h3> : <h3> Not eligible</h3>}
               <i className={`fas ${isEligible ? "fa-check" : "fa-times"}`} />
             </header>
@@ -79,7 +79,7 @@ export default class EligibilityDates extends React.Component {
               <h3>Dates eligible to apply</h3>
             </header>
             <div>
-              <ul className="list-stripped">
+              <ul className="list-stripped u-padding-left-small">
                 {eligibleDateRanges.map((range, index) => {
                   return (
                     <li key={index}>
