@@ -2,7 +2,7 @@
 
 <div>
       <%= react_component("Identity", props: {id: @client.id,
-        identities: @client.identities.as_json(methods: :country_of_birth_name)
+        identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name])
       }) %>
 
   <%= react_component("EligibilityDates", props: {
