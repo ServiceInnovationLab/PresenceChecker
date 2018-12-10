@@ -7,5 +7,7 @@ class IdentitiesController < ApplicationController
                   else
                     Identity.all.limit(100)
                   end
+
+    redirect_to client_path(@identities.first.client) if @identities.count == 1
   end
 end
