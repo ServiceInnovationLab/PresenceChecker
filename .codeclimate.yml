@@ -1,3 +1,4 @@
-engines:
+checks:
   method-lines:
-    enabled: false
+    config:
+      threshold: 50
