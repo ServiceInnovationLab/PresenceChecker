@@ -11,7 +11,7 @@ export default class DaysPresent extends React.Component {
 		const { days_present } = this.props;
 		const totalDaysArray = Object.entries(days_present);
 		const months = {};
-		totalDaysArray.forEach(dateObject => {
+		totalDaysArray.forEach((dateObject) => {
 			const dateString = dateObject[0];
 			const wasInNZ = dateObject[1];
 			const monthKey = dateString.substr(0, dateString.lastIndexOf('-')); //includes month and year
@@ -24,7 +24,7 @@ export default class DaysPresent extends React.Component {
 
 		return (
 			<div className={`results`}>
-				{Object.entries(months).map(([key, days]) => {
+				{Object.entries(months).map(([ key, days ]) => {
 					return (
 						<TimePeriod
 							key={key}

@@ -42,11 +42,7 @@ export default class Year extends React.Component {
 								})}
 						>
 							<span>details</span>
-							<i
-								className={`fas fa-chevron-${isCollapsed
-									? 'down'
-									: 'up'} `}
-							/>
+							<i className={`fas fa-chevron-${isCollapsed ? 'down' : 'up'} `} />
 						</button>
 					</td>
 					<td
@@ -64,11 +60,7 @@ export default class Year extends React.Component {
 				<tr>
 					<td colSpan="4">
 						<Table className="details-table">
-							<tr
-								className={`is-light ${isCollapsed
-									? 'u-hide'
-									: ''}`}
-							>
+							<tr className={`is-light ${isCollapsed ? 'u-hide' : ''}`}>
 								<td
 									colSpan="2"
 									className="secondary-header has-bottom-border has-border--light"
@@ -89,9 +81,7 @@ export default class Year extends React.Component {
 												{start} - {end}
 											</h3>{' '}
 										</td>
-										<td className="date-range__total">
-											{total} days
-										</td>
+										<td className="date-range__total">{total} days</td>
 									</tr>
 								);
 							})}

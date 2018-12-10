@@ -35,7 +35,7 @@ export default class EligibilityDates extends React.Component {
 		return allDaysInRange.reduce((acc, val) => acc.concat(val));
 	};
 
-	onDateChange = date => {
+	onDateChange = (date) => {
 		const { eligibleDateRanges } = this.props;
 		let newDate = new Date(date);
 
@@ -63,16 +63,8 @@ export default class EligibilityDates extends React.Component {
 				<div>
 					<div className={`panel ${isPassingClass}`}>
 						<header className={`has-icon ${isPassingClass}`}>
-							{isEligible ? (
-								<h3>Eligible Now</h3>
-							) : (
-								<h3> Not eligible</h3>
-							)}
-							<i
-								className={`fas ${isEligible
-									? 'fa-check'
-									: 'fa-times'}`}
-							/>
+							{isEligible ? <h3>Eligible Now</h3> : <h3> Not eligible</h3>}
+							<i className={`fas ${isEligible ? 'fa-check' : 'fa-times'}`} />
 						</header>
 						<div>
 							<p>Selected date {date}</p>

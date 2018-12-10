@@ -12,20 +12,12 @@ export default class PresenceTable extends React.Component {
 
 		return (
 			<div className="results">
-				<Table
-					className="presence-table"
-					cellPadding="0"
-					cellSpacing="0"
-				>
+				<Table className="presence-table" cellPadding="0" cellSpacing="0">
 					<tr colSpan="4">
 						<th>
 							<header className={isEligible ? '' : 'has-error'}>
 								<span>Total days: {totalDays}</span>
-								<i
-									className={`fas ${isEligible
-										? 'fa-check'
-										: 'fa-times'}`}
-								/>
+								<i className={`fas ${isEligible ? 'fa-check' : 'fa-times'}`} />
 							</header>
 						</th>
 					</tr>

@@ -28,15 +28,9 @@ export default class KnownIdentity extends React.Component {
 							<b>{id}</b>
 						</TableRow>
 						<TableRow headerLabel="Surname">{family_name}</TableRow>
-						<TableRow headerLabel="First name">
-							{first_name}
-						</TableRow>
-						<TableRow headerLabel="Second name">
-							{second_name || ''}
-						</TableRow>
-						<TableRow headerLabel="Third name">
-							{third_name || ''}
-						</TableRow>
+						<TableRow headerLabel="First name">{first_name}</TableRow>
+						<TableRow headerLabel="Second name">{second_name || ''}</TableRow>
+						<TableRow headerLabel="Third name">{third_name || ''}</TableRow>
 					</Table>
 				</div>
 				<div className="right">
@@ -44,9 +38,7 @@ export default class KnownIdentity extends React.Component {
 						<TableRow headerLabel="Country of birth">
 							{country_of_birth_name}
 						</TableRow>
-						<TableRow headerLabel="Nationality">
-							{nationality}
-						</TableRow>
+						<TableRow headerLabel="Nationality">{nationality}</TableRow>
 						<TableRow headerLabel="Gender">{gender}</TableRow>
 						<TableRow />
 						<TableRow />
@@ -57,7 +49,7 @@ export default class KnownIdentity extends React.Component {
 	}
 }
 
-const TableRow = props => (
+const TableRow = (props) => (
 	<tr>
 		<th scope="row">{props.headerLabel}</th>
 		<td>{props.children}</td>

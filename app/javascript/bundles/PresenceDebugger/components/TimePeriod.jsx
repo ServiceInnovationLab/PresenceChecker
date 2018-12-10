@@ -22,10 +22,7 @@ export default class TimePeriod extends React.Component {
 				<tr className="days-row">
 					{days.map(({ fullDate, inNZ }) => {
 						return (
-							<td
-								key={fullDate}
-								className={inNZ ? 'is-in-country' : ''}
-							>
+							<td key={fullDate} className={inNZ ? 'is-in-country' : ''}>
 								{format(fullDate, 'DD')}
 							</td>
 						);

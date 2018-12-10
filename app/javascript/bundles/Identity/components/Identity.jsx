@@ -11,9 +11,7 @@ export default class Identity extends React.Component {
 
 	render() {
 		const { id, identities } = this.props;
-		const closedClassName = this.state.isCollapsed
-			? 'isCollapsed'
-			: 'isOpen';
+		const closedClassName = this.state.isCollapsed ? 'isCollapsed' : 'isOpen';
 		return (
 			<div className="results">
 				<h2>Identity</h2>
@@ -29,20 +27,14 @@ export default class Identity extends React.Component {
 						>
 							<span>Known Identities</span>
 							<i
-								className={`fas fa-chevron-${this.state
-									.isCollapsed
+								className={`fas fa-chevron-${this.state.isCollapsed
 									? 'down'
 									: 'up'}`}
 							/>
 						</button>
 						<div className={`results-items ${closedClassName}`}>
 							{identities.map((details, index) => {
-								return (
-									<KnownIdentity
-										key={`identity-${index}`}
-										{...details}
-									/>
-								);
+								return <KnownIdentity key={`identity-${index}`} {...details} />;
 							})}
 						</div>
 					</div>
