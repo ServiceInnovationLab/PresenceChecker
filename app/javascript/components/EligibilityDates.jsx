@@ -49,7 +49,6 @@ export default class EligibilityDates extends React.Component {
   render() {
     const { selectedDate, isEligible } = this.state;
     const { eligibleDateRanges } = this.props;
-    const date = format(selectedDate, 'D MMMM YYYY');
 
     const highlightWithRanges = [
       {
