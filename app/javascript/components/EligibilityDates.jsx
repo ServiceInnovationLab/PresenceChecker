@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import DatePicker from 'react-datepicker';
 import { format, isWithinRange, eachDay } from 'date-fns';
+
+import PresenceDates from '../bundles/Presence/components/PresenceDates';
 
 const checkEligibility = (eligibleDateRanges, date = new Date()) => {
   let eligible = false;
@@ -49,7 +50,6 @@ export default class EligibilityDates extends React.Component {
     const { selectedDate, isEligible } = this.state;
     const { eligibleDateRanges } = this.props;
     const date = format(selectedDate, 'D MMMM YYYY');
-    const isPassingClass = isEligible ? '' : 'has-error';
 
     const highlightWithRanges = [
       {
@@ -58,24 +58,15 @@ export default class EligibilityDates extends React.Component {
     ];
 
     return (
-      <div className={`results`}>
+      <div className="results">
         <h2>Presence Data</h2>
         <div>
-          <div className={`panel ${isPassingClass}`}>
-            <header className={`has-icon ${isPassingClass}`}>
-              {isEligible ? <h3>Eligible Now</h3> : <h3> Not eligible</h3>}
-              <i className={`fas ${isEligible ? 'fa-check' : 'fa-times'}`} />
-            </header>
-            <div>
-              <p>Selected date {date}</p>
-              <DatePicker
-                inline
-                highlightDates={highlightWithRanges}
-                selected={selectedDate}
-                onChange={this.onDateChange}
-              />
-            </div>
-          </div>
+          <PresenceDates
+            isEligible={isEligible}
+            selectedDate={selectedDate}
+            onDateChange={this.onDateChange}
+            highlightDates={highlightWithRanges}
+          />
 
           <div className="panel is-wide">
             <header>
