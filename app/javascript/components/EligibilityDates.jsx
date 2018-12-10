@@ -1,61 +1,61 @@
-import PropTypes from "prop-types";
-import React from "react";
-import DatePicker from "react-datepicker";
-import { format, isWithinRange, eachDay } from "date-fns";
+import PropTypes from "prop-types"
+import React from "react"
+import DatePicker from "react-datepicker"
+import { format, isWithinRange, eachDay } from "date-fns"
 
 const checkEligibility = (eligibleDateRanges, date = new Date()) => {
-  let eligible = false;
+  let eligible = false
 
   for (let index = 0; index < eligibleDateRanges.length; index++) {
-    const { start, end } = eligibleDateRanges[index];
+    const { start, end } = eligibleDateRanges[index]
     if (isWithinRange(date, start, end)) {
-      eligible = true;
-      break;
+      eligible = true
+      break
     }
   }
 
-  return eligible;
-};
+  return eligible
+}
 
 export default class EligibilityDates extends React.Component {
   state = {
     selectedDate: new Date(),
     isEligible: checkEligibility(this.props.eligibleDateRanges)
-  };
+  }
 
   static propTypes = {
     eligibleDateRanges: PropTypes.array.isRequired
-  };
+  }
 
   allDaysInRange = () => {
-    const { eligibleDateRanges } = this.props;
+    const { eligibleDateRanges } = this.props
     const allDaysInRange = eligibleDateRanges.map(({ start, end }) => {
-      return eachDay(start, end, 1);
-    });
-    return allDaysInRange.reduce((acc, val) => acc.concat(val));
-  };
+      return eachDay(start, end, 1)
+    })
+    return allDaysInRange.reduce((acc, val) => acc.concat(val))
+  }
 
   onDateChange = date => {
-    const { eligibleDateRanges } = this.props;
-    let newDate = new Date(date);
+    const { eligibleDateRanges } = this.props
+    let newDate = new Date(date)
 
     this.setState({
       selectedDate: newDate,
       isEligible: checkEligibility(eligibleDateRanges, newDate)
-    });
-  };
+    })
+  }
 
   render() {
-    const { selectedDate, isEligible } = this.state;
-    const { eligibleDateRanges } = this.props;
-    const date = format(selectedDate, "D MMMM YYYY");
-    const isPassingClass = isEligible ? "" : "has-error";
+    const { selectedDate, isEligible } = this.state
+    const { eligibleDateRanges } = this.props
+    const date = format(selectedDate, "D MMMM YYYY")
+    const isPassingClass = isEligible ? "" : "has-error"
 
     const highlightWithRanges = [
       {
         "is-within-range": this.allDaysInRange()
       }
-    ];
+    ]
 
     return (
       <div className={`results`}>
@@ -90,13 +90,13 @@ export default class EligibilityDates extends React.Component {
                       {" - "}
                       {format(range.end, "D MMMM YYYY")}
                     </li>
-                  );
+                  )
                 })}
               </ul>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
