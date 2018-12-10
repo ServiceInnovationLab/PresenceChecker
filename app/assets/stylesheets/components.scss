@@ -1,10 +1,8 @@
-
-$blue:#3593b4;
-$grey:#a4a4a4;
+@import "./colours.scss";
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: rgb(51, 51, 51);
+  color: $dark-grey;
 }
 
 .debug-table {
@@ -15,7 +13,7 @@ body {
 }
 
 .well {
-  background: rgb(238, 238, 238);
+  background: $off-white;
   padding: 20px;
 }
 
@@ -40,7 +38,7 @@ body {
 
 .btn {
   min-width: 150px;
-  color: #fff;
+  color: $white;
   font-weight: bold;
   font-size: 18px;
   padding: 6px 20px 8px;
@@ -49,9 +47,9 @@ body {
   display: inline-block;
   vertical-align: bottom;
   &.light {
-    background-color: #d3d3d3;
-    border: #d3d3d3;
-    color: #333333;
+    background-color: $dark-white;
+    border: $dark-white;
+    color: $dark-grey;
   }
   &:hover {
     cursor: pointer;
@@ -59,23 +57,23 @@ body {
 }
 
 .btn.default {
-  background-color: #333;
-  border: #333;
+  background-color: $dark-grey;
+  border: $dark-grey;
   &:hover {
-    background-color: rgba(#333, 0.8);
+    background-color: rgba($dark-grey, 0.8);
   }
 }
 
 .btn.success {
-  background-color: rgb(105, 172, 225);
-  border: rgb(105, 172, 225);
+  background-color: $blue;
+  border: $blue;
   &:hover {
     background-color: rgba(105, 172, 225, 0.8);
   }
 }
 
 input[type="text"] {
-  border: 1px solid #ccc;
+  border: 1px solid $light-grey;
   padding: 10px 5px;
   font-weight: 18px;
   width: 300px;
@@ -103,7 +101,7 @@ header.main {
   }
 
   h2 {
-    background: rgb(169, 220, 228);
+    background: $light-blue;
     padding: 10px 15px;
   }
 
@@ -142,13 +140,13 @@ table {
 }
 
 .parent .right {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid $extra-light-grey;
   padding-left: 40px;
 }
 
 .parent.identities {
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-top: 1px solid $light-grey;
+  border-bottom: 1px solid $light-grey;
   padding-top: 25px;
   padding-bottom: 25px;
 }
@@ -162,7 +160,7 @@ table {
   padding-bottom: 30px;
   header {
     text-align: left;
-    background: rgb(167, 225, 180);
+    background:$light-green;
 
     h3 {
       padding: 10px 20px;
@@ -191,7 +189,7 @@ table {
   &.has-error {
     background: rgba(255, 167, 167, 0.15);
     header {
-      background: rgb(255, 167, 167);
+      background: $light-red;
     }
   }
 
@@ -201,7 +199,7 @@ table {
   }
 }
 .is-within-range {
-  background-color: rgb(167, 225, 180);
+  background-color: $light-green;
   border-radius: 30px;
 }
 .list-stripped {
@@ -219,11 +217,11 @@ table {
     height: 50px;
     text-align: center;
     .is-in-country {
-      background-color: green;
+      background-color: $green;
     }
   }
   .total {
-    background-color: lightgray;
+    background-color: $light-grey;
     width: 90px;
     text-align: center;
     &__header {
@@ -252,7 +250,7 @@ table {
     padding-left: 10px;
   }
   header {
-    background: rgb(167, 225, 180);
+    background: $light-green
     width: 52%;
     padding: 10px 20px;
     margin: 0;
@@ -260,10 +258,10 @@ table {
     font-weight: bold;
 
     i {
-      color: green;
+      color: $green;
     }
     &.has-error {
-      background: rgb(255, 167, 167);
+      background: $light-red;
       i {
         color: red;
       }
