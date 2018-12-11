@@ -10,9 +10,10 @@ class EligibilityService
     @response = calculate(query)
   end
 
-  ## Returns boolean
+  ## Returns 100 days forward from @day, with eligibliity as a boolean
+  ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_minimum_presence_requirements
-    @response['persons'][person_name]['citizenship__meets_minimum_presence_requirements'][@day]
+    @response['persons'][person_name]['citizenship__meets_minimum_presence_requirements']
   end
 
   ## Returns boolean
@@ -36,9 +37,7 @@ class EligibilityService
     {
       'persons' => {
         person_name => {
-          'citizenship__meets_minimum_presence_requirements' => {
-            @day => nil
-          },
+          'citizenship__meets_minimum_presence_requirements' => one_hundred_days_of_nulls,
           'citizenship__meets_each_year_minimum_presence_requirements' => {
             @day => nil
           },
@@ -66,6 +65,15 @@ class EligibilityService
         }
       }
     }
+  end
+
+  def one_hundred_days_of_nulls
+    days = {}
+  
+    2.times do |i|
+      days[@day.to_date + i] = nil
+    end
+    days
   end
 
   def presence_values
@@ -99,7 +107,9 @@ class EligibilityService
   end
 
   def calculate(query)
-    JSON.parse(HTTParty.post(of_url, body: query.to_json, headers: headers).body)
+    # Rails.cache.fetch("@client.id/@day.date.strftime(date_format)", expires_in: 12.hours) do
+      JSON.parse(HTTParty.post(of_url, body: query.to_json, headers: headers).body)
+    # end
   end
 
   def headers
