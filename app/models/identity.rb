@@ -6,11 +6,7 @@ class Identity < ApplicationRecord
   belongs_to :country_of_birth, class_name: 'Country'
   belongs_to :issuing_state, class_name: 'Country'
 
-  def country_of_birth_name
-    country_of_birth.name
-  end
+  delegate :name, to: :country_of_birth, prefix: true
 
-  def issuing_state_name
-    issuing_state.name
-  end
+  delegate :name, to: :issuing_state, prefix: true
 end
