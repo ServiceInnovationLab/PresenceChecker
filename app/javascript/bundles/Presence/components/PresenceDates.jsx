@@ -3,7 +3,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import { format } from 'date-fns';
 
-export default class EligibilityDates extends React.Component {
+export default class PresenceDates extends React.Component {
   static propTypes = {
     isEligible: PropTypes.bool,
     onDateChange: PropTypes.func,

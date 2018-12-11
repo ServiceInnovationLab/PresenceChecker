@@ -3,7 +3,7 @@ import ReactOnRails from 'react-on-rails';
 import { format, isWithinRange, eachDay } from 'date-fns';
 
 import Identity from '../bundles/Identity/components/Identity';
-import EligibilityDates from '../components/EligibilityDates';
+import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
 
 const checkEligibility = (eligibleDateRanges, date = new Date()) => {
@@ -48,13 +48,7 @@ class ShowClient extends React.Component {
 
   render() {
     const { selectedDate, isEligible } = this.state;
-    const {
-      clientId,
-      identities,
-      eligibleDateRanges,
-      totalDays,
-      years
-    } = this.props;
+    const { clientId, identities, totalDays, years } = this.props;
 
     const highlightWithRanges = [
       {
@@ -68,18 +62,22 @@ class ShowClient extends React.Component {
           <Identity id={clientId} identities={identities} />
         </section>
         <section className="dates-wrapper">
-          <EligibilityDates
-            eligibleDateRanges={eligibleDateRanges}
-            onDateChange={this.onDateChange}
-            selectedDate={selectedDate}
-            isEligible={isEligible}
-            highlightWithRanges={highlightWithRanges}
-          />
-          <PresenceTable
-            isEligible={isEligible}
-            totalDays={totalDays}
-            years={years}
-          />
+          <h2>Presence Data</h2>
+          <div className="results dates-wrapper-left">
+            <PresenceDates
+              onDateChange={this.onDateChange}
+              selectedDate={selectedDate}
+              isEligible={isEligible}
+              highlightWithRanges={highlightWithRanges}
+            />
+          </div>
+          <div className="results dates-wrapper-right">
+            <PresenceTable
+              isEligible={isEligible}
+              totalDays={totalDays}
+              years={years}
+            />
+          </div>
         </section>
       </main>
     );
