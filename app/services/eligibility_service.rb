@@ -72,7 +72,7 @@ class EligibilityService
   def one_hundred_days_of_nulls
     days = {}
   
-    2.times do |i|
+    100.times do |i|
       days[@day.to_date + i] = nil
     end
     days
