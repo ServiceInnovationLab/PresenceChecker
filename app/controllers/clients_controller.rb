@@ -21,7 +21,7 @@ class ClientsController < ApplicationController
     @service.run!
 
     render json: {
-      @requested_date => {
+      requested_date => {
         'meetsMinimumPresence' => @service.meets_minimum_presence_requirements[requested_date],
         'last5Years' => @service.enough_days_by_rolling_year.values,
         'daysInNZ' => @service.days_by_rolling_year.values
