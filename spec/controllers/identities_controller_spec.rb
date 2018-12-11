@@ -39,7 +39,7 @@ RSpec.describe IdentitiesController, type: :controller do
         end
 
         it 'doesn\'t redirect without an exact match' do
-          expect(get(:index, params: { serial_number: "a" })).not_to redirect_to(client_path(identity.client))
+          expect(get(:index, params: { serial_number: 'a' })).not_to redirect_to(client_path(identity.client))
         end
       end
     end

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :movement do
-    identity { Factory.create :identity }
+    identity { FactoryBot.create :identity }
     direction { '' }
     carrier_date_time { Faker::Date.backward(3650) }
   end
