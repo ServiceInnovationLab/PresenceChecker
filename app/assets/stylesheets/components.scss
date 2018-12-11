@@ -284,8 +284,6 @@ table {
 .presence-table {
   width: 100%;
   padding: 0;
-  padding-top: 15px;
-  padding-bottom: 15px;
   border-spacing: 0px;
   margin: 0;
 
@@ -387,5 +385,20 @@ table {
 
   .has-border--light {
     border-color: $off-white;
+  }
+}
+
+.dates-wrapper {
+  .dates-wrapper-left,
+  .dates-wrapper-right {
+    display: inline-block;
+    min-width: 40%;
+    vertical-align: top;
+  }
+  .dates-wrapper-left {
+    margin-right: 1rem;
+  }
+  .dates-wrapper-right {
+    width: calc(60% - 1rem);
   }
 }
