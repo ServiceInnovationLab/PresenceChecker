@@ -44,29 +44,22 @@ class EligibilityService
   end
 
   def query
+    # Open Fisca will calculate and return the value of a variable, if you pass it in as null.
     {
       'persons' => {
         person_name => {
-          'citizenship__meets_minimum_presence_requirements' => seven_days_of_nulls,
-          'citizenship__meets_each_year_minimum_presence_requirements' => seven_days_of_nulls,
-          'citizenship__meets_5_year_presence_requirement' => seven_days_of_nulls,
-          'days_present_in_new_zealand_in_preceeding_year' => {
-            @day => nil,
-            years_before(1) => nil,
-            years_before(2) => nil,
-            years_before(3) => nil,
-            years_before(4) => nil
-          },
-          'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => {
-            @day => nil,
-            years_before(1) => nil,
-            years_before(2) => nil,
-            years_before(3) => nil,
-            years_before(4) => nil
-          },
+          # The values from the future that we want calculated
+          'citizenship__meets_minimum_presence_requirements' => future_days_of_nulls,
+          'citizenship__meets_each_year_minimum_presence_requirements' => future_days_of_nulls,
+          'citizenship__meets_5_year_presence_requirement' => future_days_of_nulls,
+          # the values from past that we want calculated
+          'days_present_in_new_zealand_in_preceeding_year' => five_past_years_of_nulls,
+          'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => five_past_years_of_nulls,
+          # our input, the presence in NZ
           'present_in_new_zealand' => presence_values
         }
       },
+      # boiler plate that open fisca needs
       'families' => {
         'happy' => {
           'others': ['Ruby']
@@ -80,10 +73,20 @@ class EligibilityService
     }
   end
 
-  def seven_days_of_nulls
+  def five_past_years_of_nulls
+    {
+      @day => nil,
+      years_before(1) => nil,
+      years_before(2) => nil,
+      years_before(3) => nil,
+      years_before(4) => nil
+    }
+  end
+
+  def future_days_of_nulls
     days = {}
 
-    7.times do |i|
+    2.times do |i|
       days[@day.to_date + i] = nil
     end
     days
@@ -116,8 +119,8 @@ class EligibilityService
   end
 
   def calculate(query)
-    # Rails.cache.fetch("@client.id/@day.date.strftime(date_format)", expires_in: 12.hours) do
-      JSON.parse(HTTParty.post(of_url, body: query.to_json, headers: headers).body)
+    # Rails.cache.fetch(query) do
+      JSON.parse(HTTParty.post(of_url, body: query.to_json, headers: headers, timeout: timeout).body)
     # end
   end
 
@@ -127,5 +130,9 @@ class EligibilityService
 
   def of_url
     "#{ENV['OPENFISCA_URL']}/calculate"
+  end
+
+  def timeout
+    ENV['OPENFISCA_TIMEOUT']
   end
 end
