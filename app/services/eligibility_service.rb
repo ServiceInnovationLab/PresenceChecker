@@ -81,11 +81,15 @@ class EligibilityService
       if movement.direction == 'arrival'
         presence[movement.carrier_date_time.to_date.strftime(date_format)] = true
       elsif movement.direction == 'departure'
-        presence[tomorrow] = false unless @client.arrived_on_this_day?(today) || @client.arrived_on_this_day?(tomorrow)
+        presence[tomorrow] = false unless only_absent_for_same_day_or_next?
       end
     end
 
     presence
+  end
+
+  def only_absent_for_same_day_or_next?
+    @client.arrived_on_this_day?(today) || @client.arrived_on_this_day?(tomorrow)
   end
 
   def today
