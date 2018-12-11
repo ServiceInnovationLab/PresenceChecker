@@ -105,3 +105,13 @@ Movement.find_or_create_by!(identity_id: identity_4.id, direction: "arrival", ca
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: "departure", carrier_date_time: 50.days.ago)
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: "arrival", carrier_date_time: 40.days.ago)
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: "departure", carrier_date_time: 30.days.ago)
+
+#########################
+
+# Jenny Jones
+
+country_4 = Country.find_or_create_by!(name: "United Kingdom")
+client_3 = Client.find_or_create_by!(im_client_id: "1234567", file_number: "3")
+identity_5 = Identity.find_or_create_by!(client_id: client_3.id, identity_number: "Y-5183346-E", family_name: "Jones", first_name: "Jenny", second_name: "", third_name: "", gender: "Male", country_of_birth_id: country_4.id, nationality: country_4.name, issuing_state_id: country_4.id, serial_number: "Y-5775136-E")
+
+Movement.find_or_create_by!(identity_id: identity_4.id, direction: "arrival", carrier_date_time: 1800.days.ago)
