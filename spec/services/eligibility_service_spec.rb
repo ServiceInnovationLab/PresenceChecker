@@ -25,7 +25,6 @@ RSpec.describe EligibilityService, type: :model do
   end
 
   describe 'presence_count' do
-
     subject { service.presence_count(client, day) }
 
     context 'when not present in nz' do
