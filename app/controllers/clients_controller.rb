@@ -32,7 +32,7 @@ class ClientsController < ApplicationController
   private
 
   def requested_date
-    params[:date] || Date.today.strftime('%Y-%m-%d')
+    params[:day] || Date.today.strftime('%Y-%m-%d')
   end
 
   # Use callbacks to share common setup or constraints between actions.
