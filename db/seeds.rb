@@ -105,3 +105,17 @@ Movement.find_or_create_by!(identity_id: identity_4.id, direction: "arrival", ca
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: "departure", carrier_date_time: 50.days.ago)
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: "arrival", carrier_date_time: 40.days.ago)
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: "departure", carrier_date_time: 30.days.ago)
+
+
+
+
+# Arrived and never left
+identity = FactoryBot.create :identity
+FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+
+
+# arrived, had onl one holiday
+identity = FactoryBot.create :identity
+FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+FactoryBot.create :departure, carrier_date_time: 1.week.ago, identity: identity
+FactoryBot.create :arrival, carrier_date_time: 1.day.ago, identity: identity
