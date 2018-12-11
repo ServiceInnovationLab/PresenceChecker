@@ -13,27 +13,35 @@ class EligibilityService
   ## Returns 7 days forward from @day, with eligibility as a boolean
   ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_minimum_presence_requirements
-    @response['persons'][person_name]['citizenship__meets_minimum_presence_requirements']
+    person_result 'citizenship__meets_minimum_presence_requirements'
   end
 
   ## Returns 7 days forward from @day, with eligibility as a boolean
   ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_each_year_minimum_presence_requirements
-    @response['persons'][person_name]['citizenship__meets_each_year_minimum_presence_requirements']
+    person_result 'citizenship__meets_each_year_minimum_presence_requirements'
   end
 
   ## Returns 7 days forward from @day, with eligibility as a boolean
   ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_5_year_presence_requirement
-    @response['persons'][person_name]['citizenship__meets_5_year_presence_requirement']
+    person_result 'citizenship__meets_5_year_presence_requirement'
   end
 
   ## Returns hash e.g. {'2019-06-01': 365, '2018-06-01': 12, '2017-06-01': 132, '2016-06-01': 12, '2015-06-01': 0 }
   def days_by_rolling_year
-    @response['persons'][person_name]['days_present_in_new_zealand_in_preceeding_year']
+    person_result 'days_present_in_new_zealand_in_preceeding_year'
+  end
+
+  def enough_days_by_rolling_year
+    person_result 'citizenship__meets_preceeding_single_year_minimum_presence_requirement'
   end
 
   private
+
+  def person_result(key)
+    @response['persons'][person_name][key]
+  end
 
   def query
     {
@@ -43,6 +51,13 @@ class EligibilityService
           'citizenship__meets_each_year_minimum_presence_requirements' => seven_days_of_nulls,
           'citizenship__meets_5_year_presence_requirement' => seven_days_of_nulls,
           'days_present_in_new_zealand_in_preceeding_year' => {
+            @day => nil,
+            years_before(1) => nil,
+            years_before(2) => nil,
+            years_before(3) => nil,
+            years_before(4) => nil
+          },
+          'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => {
             @day => nil,
             years_before(1) => nil,
             years_before(2) => nil,
@@ -67,7 +82,7 @@ class EligibilityService
 
   def seven_days_of_nulls
     days = {}
-  
+
     7.times do |i|
       days[@day.to_date + i] = nil
     end
