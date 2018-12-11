@@ -23,5 +23,51 @@ RSpec.describe ClientsController, type: :controller do
       it { expect(response).to have_http_status(:ok) }
       it { expect(assigns(:client)).to eq client }
     end
+
+    describe 'get eligibility' do
+      let(:identity) { FactoryBot.create :identity, client: client }
+      before do
+        Timecop.freeze(Time.local(2019))
+
+        FactoryBot.create :arrival, identity: identity, carrier_date_time: 7.years.ago
+      end
+
+      after do
+        Timecop.return
+      end
+
+      subject { JSON.parse(response.body)['2019-01-01'] }
+
+      it { expect(response).to have_http_status(:ok) }
+
+      context 'with no holidays data' do
+        before do
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
+        end
+        it { expect(subject['meetsMinimumPresence']).to eq(true) }
+      end
+
+      context 'person with a one year absence' do
+        before do
+          FactoryBot.create :departure, identity: identity, carrier_date_time: 4.years.ago
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: 3.years.ago
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
+        end
+        it { expect(subject['meetsMinimumPresence']).to eq(false) }
+      end
+
+      context 'person with days absent' do
+        before do
+          # trip one
+          FactoryBot.create :departure, identity: identity, carrier_date_time: 600.days.ago
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: 500.days.ago
+          # trip two
+          FactoryBot.create :departure, identity: identity, carrier_date_time: 10.days.ago
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: 7.days.ago
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
+        end
+        it { expect(subject['meetsMinimumPresence']).to eq(true) }
+      end
+    end
   end
 end
