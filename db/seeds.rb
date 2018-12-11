@@ -4,6 +4,9 @@
   email = "#{name}@dia.govt.nz"
   User.invite!(email: email) unless User.find_by(email: email)
 end
+['mischa.saunders@ackama.com', 'ianzltd@gmail.com'].each do |email|
+  User.invite!(email: email) unless User.find_by(email: email)
+end
 
 # 5.times do
 #   client = FactoryBot.find_or_create_by :client
@@ -118,7 +121,7 @@ end
   holiday_length =  Random.rand(10...42)
   holiday_start = Random.rand(50...100).weeks.ago
   holiday_end = holiday_start + holiday_length
-  
+
   FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
   FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
 end
