@@ -84,8 +84,7 @@ class EligibilityService
         # today they're here, tomorrow they're not
         # today = movement.carrier_date_time.to_date.strftime(date_format)
         tomorrow = (movement.carrier_date_time.to_date + 1).strftime(date_format)
-        # presence[today] = true
-        presence[tomorrow] = false
+        presence[tomorrow] = false unless @client.arrived_on_this_day?(tomorrow)
       end
     end
 
