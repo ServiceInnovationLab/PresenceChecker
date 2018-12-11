@@ -417,3 +417,15 @@ table {
     width: calc(60% - 1rem);
   }
 }
+
+
+.movements-table {
+  header {
+    background: $light-blue;
+    color: $dark-grey;
+  }
+  h3 {
+    text-align: left;
+    padding-left: 20px;
+  }
+}

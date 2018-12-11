@@ -7,7 +7,7 @@ class MovementsTable extends React.Component {
     const {movements} = this.props;
     return (
       <div>
-        <table className="presence-table" cellpadding="0" cellspacing="0" style={{margin: '20px 0'}}>
+        <table className="presence-table movements-table" cellpadding="0" cellspacing="0" style={{margin: '20px 0'}}>
           <tbody>
             <tr colSpan="4">
               <th>
@@ -22,7 +22,7 @@ class MovementsTable extends React.Component {
                   <tbody>
                     <tr>
                       <td style={{width: '20%'}} className="header-container has-bottom-border has-right-border">
-                        <h3 className="is-dark">{item.direction}</h3>
+                        <h3 className="is-dark">{item.direction.charAt(0).toUpperCase() + item.direction.slice(1)}</h3>
                       </td>
                       <td className="has-bottom-border">{format(item.carrier_date_time, 'DD MMM YYYY')}</td>
                     </tr>
