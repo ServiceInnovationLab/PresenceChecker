@@ -19,7 +19,12 @@ class ClientsController < ApplicationController
     @service.run!
 
     # URL to call this would look like /clients/eligibility?id=1&date="2019-01-01"
-    @service.to_json
+    # URL to call this would look like /clients/eligibility?id=1&date="2019-01-01"
+    {
+      meetsMinimumPresence: true,
+      last5Years: [true, true, true, true, true],
+      daysInNZ: [365, 365, 365, 365, 365]
+    }
   end
 
   private
