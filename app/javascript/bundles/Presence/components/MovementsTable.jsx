@@ -7,7 +7,7 @@ class MovementsTable extends React.Component {
     const {movements} = this.props;
     return (
       <div>
-        <table className="presence-table movements-table" cellpadding="0" cellspacing="0" style={{margin: '20px 0'}}>
+        <table className="presence-table movements-table" cellpadding="0" cellspacing="0">
           <tbody>
             <tr colSpan="4">
               <th>
