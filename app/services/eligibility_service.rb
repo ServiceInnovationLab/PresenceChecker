@@ -79,33 +79,21 @@ class EligibilityService
 
     @client.movements.order(:carrier_date_time).each do |movement|
       if movement.direction == 'arrival'
-        presence[movement.carrier_date_time.to_date.strftime(date_format)] = true
+        presence[movement.day] = true
       elsif movement.direction == 'departure'
-        presence[tomorrow] = false unless only_absent_for_same_day_or_next?
+        presence[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
       end
     end
 
     presence
   end
 
-  def only_absent_for_same_day_or_next?
-    @client.arrived_on_this_day?(today) || @client.arrived_on_this_day?(tomorrow)
-  end
-
-  def today
-    movement.carrier_date_time.to_date.strftime(date_format)
-  end
-
-  def tomorrow
-    (movement.carrier_date_time.to_date + 1).strftime(date_format)
+  def years_before(num_years)
+    (@day.to_date - num_years.year).strftime(date_format)
   end
 
   def date_format
     '%Y-%m-%d'
-  end
-
-  def years_before(num_years)
-    (@day.to_date - num_years.year).strftime(date_format)
   end
 
   def person_name
