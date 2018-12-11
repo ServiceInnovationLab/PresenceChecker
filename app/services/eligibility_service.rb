@@ -86,7 +86,7 @@ class EligibilityService
   def future_days_of_nulls
     days = {}
 
-    7.times do |i|
+    1.times do |i|
       days[@day.to_date + i] = nil
     end
     days
