@@ -29,7 +29,7 @@ RSpec.describe ClientsController, type: :controller do
       before do
         Timecop.freeze(Time.local(2019))
 
-        FactoryBot.create :arrival, identity: identity, carrier_date_time: 7.years.ago
+        FactoryBot.create :arrival, identity: identity, carrier_date_time: '2011-12-31'
       end
 
       after do
@@ -51,8 +51,8 @@ RSpec.describe ClientsController, type: :controller do
 
       context 'person with a one year absence' do
         before do
-          FactoryBot.create :departure, identity: identity, carrier_date_time: 4.years.ago
-          FactoryBot.create :arrival, identity: identity, carrier_date_time: 3.years.ago
+          FactoryBot.create :departure, identity: identity, carrier_date_time: '2014-12-31'
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: '2013-12-31'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(false) }
@@ -64,11 +64,11 @@ RSpec.describe ClientsController, type: :controller do
       context 'person with days absent' do
         before do
           # trip one
-          FactoryBot.create :departure, identity: identity, carrier_date_time: 600.days.ago
-          FactoryBot.create :arrival, identity: identity, carrier_date_time: 500.days.ago
+          FactoryBot.create :departure, identity: identity, carrier_date_time: '2017-05-10'
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: '2017-08-18'
           # trip two
-          FactoryBot.create :departure, identity: identity, carrier_date_time: 10.days.ago
-          FactoryBot.create :arrival, identity: identity, carrier_date_time: 7.days.ago
+          FactoryBot.create :departure, identity: identity, carrier_date_time: '2018-12-21'
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: '2018-12-24'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(true) }
