@@ -32,12 +32,12 @@ end
 
 #### Lee Jun-fan ####
 
-Country.create!(name: "United States of America")
+country_1 = Country.create!(name: "United States of America")
 client_1 = Client.create!(im_client_id: "12345", file_number: "1")
-identity_id = Identity.create!(client_id: client_1.id, identity_number: "Y-3183346-E", family_name: "Lee", first_name: "Bruce", second_name: "", third_name: "", gender: "Male", country_of_birth_id: 1, nationality: "United State", issuing_state_id: 1, serial_number: "Y-3775136-E")
+identity_id = Identity.create!(client_id: client_1.id, identity_number: "Y-3183346-E", family_name: "Lee", first_name: "Bruce", second_name: "", third_name: "", gender: "Male", country_of_birth_id: country_1.id, nationality: country_1.name, issuing_state_id: country_1.id, serial_number: "Y-3775136-E")
 
-Country.create!(name: "Hong Kong")
-identity_2 = Identity.create!(client_id: client_1.id, identity_number: "Y-3183347-E", family_name: "Lee", first_name: "Jun-fan", second_name: "", third_name: "", gender: "Male", country_of_birth_id: 1, nationality: "Hong Kong", issuing_state_id: 2, serial_number: "Y-3775137-E")
+country_2 = Country.create!(name: "Hong Kong")
+identity_2 = Identity.create!(client_id: client_1.id, identity_number: "Y-3183347-E", family_name: "Lee", first_name: "Jun-fan", second_name: "", third_name: "", gender: "Male", country_of_birth_id: country_2.id, nationality: country_2.name, issuing_state_id: country_2.id, serial_number: "Y-3775137-E")
 
 # Identity 1
 Movement.create!(identity_id: identity_id.id, direction: "departure", carrier_date_time: "2007-09-26 20:00:00")
