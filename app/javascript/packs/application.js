@@ -5,6 +5,7 @@ import { format, isWithinRange, eachDay } from 'date-fns';
 import Identity from '../bundles/Identity/components/Identity';
 import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
+import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
 const checkEligibility = (eligibleDateRanges, date = new Date()) => {
   let eligible = false;
@@ -108,6 +109,7 @@ class ShowClient extends React.Component {
               totalDays={totalDays}
               years={years}
             />
+            <MovementsTable />
           </div>
         </section>
       </main>
