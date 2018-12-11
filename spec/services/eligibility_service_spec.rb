@@ -19,9 +19,37 @@ RSpec.describe EligibilityService, type: :model do
         FactoryBot.create :departure, carrier_date_time: '2018-05-01', identity: identity
         FactoryBot.create :arrival, carrier_date_time: '2018-05-16', identity: identity
       end
+
       it { expect(client.movements.count).to eq 3 }
       it { expect(service.send(:presence_values)).to eq('2018-01-01' => true, '2018-05-02' => false, '2018-05-16' => true) }
     end
+
+    context 'when returning to NZ next day' do
+      before do
+        FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
+        FactoryBot.create :departure, carrier_date_time: '2016-04-01', identity: identity
+        FactoryBot.create :arrival, carrier_date_time: '2016-04-02', identity: identity
+      end
+      it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-02' => true) }
+    end
+
+    context 'when returning to NZ same day' do
+      before do
+        FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
+        FactoryBot.create :departure, carrier_date_time: '2016-04-01', identity: identity
+        FactoryBot.create :arrival, carrier_date_time: '2016-04-01', identity: identity
+      end
+      it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-01' => true) }
+    end
+    context 'when returning to NZ with one day absence' do
+      before do
+        FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
+        FactoryBot.create :departure, carrier_date_time: '2016-04-01', identity: identity
+        FactoryBot.create :arrival, carrier_date_time: '2016-04-03', identity: identity
+      end
+      it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-02' => false, '2016-04-03' => true) }
+    end
+
   end
 
   describe 'presence_count' do
@@ -29,6 +57,7 @@ RSpec.describe EligibilityService, type: :model do
 
     context 'when not present in nz' do
       before { service.run! }
+
       it "Adds up the previous 5 years to all be zero" do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 0, '2016-06-01' => 0, '2017-06-01' => 0, '2018-06-01' => 0, '2019-06-01' => 0)
       end
@@ -41,6 +70,7 @@ RSpec.describe EligibilityService, type: :model do
         FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
         service.run!
       end
+
       it "Adds up the previous 5 years to all be present" do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 366, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
       end
@@ -55,6 +85,7 @@ RSpec.describe EligibilityService, type: :model do
         FactoryBot.create :arrival, carrier_date_time: '2016-04-01', identity: identity
         service.run!
       end
+
       it "works out the absence for 4 months" do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 276, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
       end
