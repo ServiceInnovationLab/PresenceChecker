@@ -3,7 +3,7 @@ import ReactOnRails from 'react-on-rails';
 import { format, isWithinRange, eachDay } from 'date-fns';
 
 import Identity from '../bundles/Identity/components/Identity';
-import EligibilityDates from '../components/EligibilityDates';
+import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
 
 const checkEligibility = (eligibleDateRanges, date = new Date()) => {
@@ -18,6 +18,12 @@ const checkEligibility = (eligibleDateRanges, date = new Date()) => {
   }
 
   return eligible;
+};
+
+const getCSRF = () => {
+  let element = document.querySelector("meta[name=\"csrf-token\"]");
+  if (element) { return element.getAttribute("content"); }
+  return "";
 };
 
 class ShowClient extends React.Component {
@@ -44,17 +50,36 @@ class ShowClient extends React.Component {
     });
 
     // This is where we'll call the service with a fetch request
+    this.checkSelectedDate(newDate);
   };
+
+  checkSelectedDate = selectedDate => {
+    const { clientId } = this.props;
+
+    fetch(`/clients/eligibility?id=${clientId}&date=${selectedDate}`, {
+      method: "GET",
+      mode: "same-origin",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": getCSRF()
+      }
+    })
+      .then(result => {
+        return result.json();
+      })
+      .then(response => {
+        debugger;
+        // This response should be the EligibilityService object
+      })
+      .catch(error => {
+        console.error("Server error:", error);
+      });
+  }
 
   render() {
     const { selectedDate, isEligible } = this.state;
-    const {
-      clientId,
-      identities,
-      eligibleDateRanges,
-      totalDays,
-      years
-    } = this.props;
+    const { clientId, identities, totalDays, years } = this.props;
 
     const highlightWithRanges = [
       {
@@ -68,18 +93,22 @@ class ShowClient extends React.Component {
           <Identity id={clientId} identities={identities} />
         </section>
         <section className="dates-wrapper">
-          <EligibilityDates
-            eligibleDateRanges={eligibleDateRanges}
-            onDateChange={this.onDateChange}
-            selectedDate={selectedDate}
-            isEligible={isEligible}
-            highlightWithRanges={highlightWithRanges}
-          />
-          <PresenceTable
-            isEligible={isEligible}
-            totalDays={totalDays}
-            years={years}
-          />
+          <h2>Presence Data</h2>
+          <div className="results dates-wrapper-left">
+            <PresenceDates
+              onDateChange={this.onDateChange}
+              selectedDate={selectedDate}
+              isEligible={isEligible}
+              highlightDates={highlightWithRanges}
+            />
+          </div>
+          <div className="results dates-wrapper-right">
+            <PresenceTable
+              isEligible={isEligible}
+              totalDays={totalDays}
+              years={years}
+            />
+          </div>
         </section>
       </main>
     );
