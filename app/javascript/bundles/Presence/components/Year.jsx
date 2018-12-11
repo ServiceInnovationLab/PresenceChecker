@@ -50,7 +50,7 @@ export default class Year extends React.Component {
           </td>
         </tr>
         <tr >
-          <th colSpan="3" className="has-bottom-border is-light year-table__summary" >Days in NZ: {daysPresent}</th>
+          <th colSpan="3" className="has-bottom-border is-light year-table__summary" >Days in New Zealand: {daysPresent}</th>
         </tr>
 
       </Table>

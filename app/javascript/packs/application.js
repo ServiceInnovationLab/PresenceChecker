@@ -70,6 +70,9 @@ class ShowClient extends React.Component {
     isEligible: checkEligibility(this.props.eligibleDateRanges),
     rollingYearData: this.props.rollingYearData
   };
+  componentDidMount = () => {
+    this.checkSelectedDate()
+  }
 
   allDaysInRange = () => {
     const { eligibleDateRanges } = this.props;
