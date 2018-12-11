@@ -87,8 +87,3 @@ Movement.create(identity_id: 2, direction: "departure", carrier_date_time: "2018
 Movement.create(identity_id: 2, direction: "arrival", carrier_date_time: "2018-07-06 23:20:00")
 Movement.create(identity_id: 2, direction: "departure", carrier_date_time: "2018-09-28 06:40:00")
 Movement.create(identity_id: 2, direction: "arrival", carrier_date_time: "2018-10-03 23:45:00")
-
-
-
-
-
