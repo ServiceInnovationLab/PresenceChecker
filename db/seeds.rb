@@ -113,7 +113,6 @@ Movement.find_or_create_by!(identity_id: identity_4.id, direction: "departure", 
 identity = FactoryBot.create :identity
 FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
 
-
 # arrived, had onl one holiday
 identity = FactoryBot.create :identity
 FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
