@@ -246,7 +246,7 @@ table {
 }
 
 .is-within-range {
-  background-color: $light-green;
+  background-color: rgba($blue-positive, .2);
   border-radius: 30px;
 }
 
@@ -389,15 +389,30 @@ table {
 }
 
 .dates-wrapper {
+  h2 {
+    background: $light-blue;
+    padding: 10px 15px;
+  }
+
   .dates-wrapper-left,
   .dates-wrapper-right {
     display: inline-block;
     min-width: 40%;
     vertical-align: top;
   }
+
   .dates-wrapper-left {
     margin-right: 1rem;
+
+    .panel {
+      background-color: rgba($blue-positive, .2);
+
+      &.has-error {
+        background-color: rgba($yellow-negative, .2);
+      }
+    }
   }
+
   .dates-wrapper-right {
     width: calc(60% - 1rem);
   }

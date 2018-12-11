@@ -68,7 +68,7 @@ class ShowClient extends React.Component {
               onDateChange={this.onDateChange}
               selectedDate={selectedDate}
               isEligible={isEligible}
-              highlightWithRanges={highlightWithRanges}
+              highlightDates={highlightWithRanges}
             />
           </div>
           <div className="results dates-wrapper-right">
