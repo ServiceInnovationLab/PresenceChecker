@@ -132,7 +132,7 @@ class ShowClient extends React.Component {
 
   render() {
     const { selectedDate,isEligible, rollingYearData } = this.state;
-    const { clientId, identities } = this.props;
+    const { clientId, identities, movements } = this.props;
     const highlightWithRanges = [
       {
         'is-within-range': this.allDaysInRange()
@@ -162,7 +162,7 @@ class ShowClient extends React.Component {
               selectedDate={selectedDate}
               rollingYearData={rollingYearData}
             />}
-            <MovementsTable movements={this.props.movements} />
+            <MovementsTable movements={movements} />
           </div>
         </section>
       </main>
