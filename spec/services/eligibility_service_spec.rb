@@ -60,7 +60,7 @@ RSpec.describe EligibilityService, type: :model do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 276, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
       end
       it { expect(service.meets_minimum_presence_requirements[day]).to eq(true) }
-      it { expect(service.meets_5_year_presence_requirement[day]).to eq(false) }
+      it { expect(service.meets_5_year_presence_requirement[day]).to eq(true) }
     end
   end
 
