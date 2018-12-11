@@ -330,7 +330,7 @@ table {
     width: 100%;
     border-spacing: 0px;
     color:$white;
-    
+
     &__summary{
       padding:20px;
       text-align: left;
@@ -342,7 +342,7 @@ table {
         background: $yellow-negative;
       }
     }
-    
+
     .is-light {
       color:$black;
       background-color: $light-white;
@@ -351,7 +351,7 @@ table {
       background:$blue-positive;
     }
 
- 
+
 
     .icon-container {
       width: 10%;
@@ -435,5 +435,22 @@ table {
 
   .dates-wrapper-right {
     width: calc(60% - 1rem);
+  }
+}
+
+
+.movements-table {
+  margin: 20px 0;
+  header {
+    background: $light-blue;
+    color: $dark-grey;
+  }
+  td {
+    background: $even-lighter-grey;
+    color: $dark-grey;
+  }
+  h3 {
+    text-align: left;
+    padding-left: 20px;
   }
 }
