@@ -156,6 +156,7 @@ class ShowClient extends React.Component {
               // isEligible={isEligible}
               // totalDays={totalDays}
               // years={years}
+              selectedDate={selectedDate}
               rollingYearData={rollingYearData}
             />}
           </div>

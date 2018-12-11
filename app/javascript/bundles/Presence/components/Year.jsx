@@ -16,6 +16,8 @@ export default class Year extends React.Component {
 
   render() {
     const {
+      startDate,
+      endingDate,
       year,
       daysPresent,
       meetsAmountOfDaysInNZ,
@@ -34,7 +36,7 @@ export default class Year extends React.Component {
           <td className="header-container has-bottom-border has-right-border">
             <h3>Yr {year}</h3>
           </td>
-          <td className="has-bottom-border">add dates here</td>
+          <td className="has-bottom-border">{startDate} - {endingDate}</td>
           <td
             className={`icon-container has-bottom-border ${meetsAmountOfDaysInNZ
               ? ''

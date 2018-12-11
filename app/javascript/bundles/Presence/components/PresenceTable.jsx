@@ -3,12 +3,13 @@ import React from 'react';
 import { sum } from 'lodash'
 import Year from './Year';
 import Table from '../../../components/Table';
+import { format, subYears, addDays } from 'date-fns';
+
 
 export default class PresenceTable extends React.Component {
   static propTypes = { rollingYearData: PropTypes.object };
-
   render() {
-    const { rollingYearData } = this.props;
+    const { rollingYearData, selectedDate } = this.props;
     const firstKey = Object.keys(rollingYearData)[0];
     const yearData = rollingYearData[firstKey];
     const isEligible = yearData.meetsMinimumPresence;
@@ -24,7 +25,6 @@ export default class PresenceTable extends React.Component {
         periodsAway: []
       }
     })
-
     return (
       <div className="results">
         <Table className="presence-table" cellPadding="0" cellSpacing="0">
@@ -38,10 +38,12 @@ export default class PresenceTable extends React.Component {
             <th>&nbsp;</th>
           </tr>
           {years.map((year, index) => {
+            const startDate = format(addDays(subYears(selectedDate, index + 1), 1), 'DD MMM YYYY')
+            const endingDate = format(subYears(selectedDate, index), 'DD MMM YYYY')
             return (
               <tr key={index}  className="">
                 <td colSpan="2">
-                  <Year {...year} />
+                  <Year startDate={startDate} endingDate={endingDate} {...year} />
                 </td>
               </tr>
             );
