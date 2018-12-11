@@ -51,14 +51,14 @@ RSpec.describe ClientsController, type: :controller do
 
       context 'person with a one year absence' do
         before do
-          FactoryBot.create :departure, identity: identity, carrier_date_time: '2014-12-31'
-          FactoryBot.create :arrival, identity: identity, carrier_date_time: '2013-12-31'
+          FactoryBot.create :departure, identity: identity, carrier_date_time: '2013-12-31'
+          FactoryBot.create :arrival, identity: identity, carrier_date_time: '2014-12-31'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(false) }
-        it { expect(subject['last5Years']).to eq([true, false, true, true, true]) }
+        it { expect(subject['last5Years']).to eq([false, true, true, true, true]) }
         # there's a 2, the day they left and the day they returned both count
-        it { expect(subject['daysInNZ']).to eq([364, 2, 366, 365, 365]) }
+        it { expect(subject['daysInNZ']).to eq([2, 365, 366, 365, 365]) }
       end
 
       context 'person with days absent' do
