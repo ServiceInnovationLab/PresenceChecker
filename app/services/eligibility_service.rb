@@ -10,18 +10,22 @@ class EligibilityService
     @response = calculate(query)
   end
 
+  ## Returns boolean
   def meets_minimum_presence_requirements
     @response['persons'][person_name]['citizenship__meets_minimum_presence_requirements'][@day]
   end
 
+  ## Returns boolean
   def meets_each_year_minimum_presence_requirements
     @response['persons'][person_name]['citizenship__meets_each_year_minimum_presence_requirements'][@day]
   end
 
+  ## Returns boolean
   def meets_5_year_presence_requirement
     @response['persons'][person_name]['citizenship__meets_5_year_presence_requirement'][@day]
   end
 
+  ## Returns hash e.g. {'2019-06-01': 365, '2018-06-01': 12, '2017-06-01': 132, '2016-06-01': 12, '2015-06-01': 0 }
   def days_by_rolling_year
     @response['persons'][person_name]['days_present_in_new_zealand_in_preceeding_year']
   end
