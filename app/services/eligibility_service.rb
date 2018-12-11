@@ -120,7 +120,7 @@ class EligibilityService
 
   def calculate(query)
     Rails.cache.fetch(query) do
-      JSON.parse(HTTParty.post(of_url, body: query.to_json, headers: headers, timeout: timeout).body)
+      JSON.parse!(HTTParty.post(of_url, body: query.to_json, headers: headers, timeout: timeout).body)
     end
   end
 
