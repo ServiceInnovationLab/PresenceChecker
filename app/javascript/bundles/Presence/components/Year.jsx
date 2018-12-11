@@ -24,27 +24,17 @@ export default class Year extends React.Component {
     const { isCollapsed } = this.state;
     return (
       <Table
-        className={`year-table is-text-center`}
+        className={`year-table is-text-center ${meetsAmountOfDaysInNZ
+          ? ''
+          : 'has-error'}`}
         cellPadding="0"
         cellSpacing="0"
       >
-        <tr>
+        <tr >
           <td className="header-container has-bottom-border has-right-border">
-            <h3 className="is-dark">{year}</h3>
+            <h3>Yr {year}</h3>
           </td>
-          <td className="has-bottom-border">{daysPresent}</td>
-          <td className="has-bottom-border">
-            <button
-              className="btn light"
-              onClick={() =>
-                this.setState({
-                  isCollapsed: !this.state.isCollapsed
-                })}
-            >
-              <span>details</span>
-              <i className={`fas fa-chevron-${isCollapsed ? 'down' : 'up'} `} />
-            </button>
-          </td>
+          <td className="has-bottom-border">add dates here</td>
           <td
             className={`icon-container has-bottom-border ${meetsAmountOfDaysInNZ
               ? ''
@@ -57,37 +47,10 @@ export default class Year extends React.Component {
             />
           </td>
         </tr>
-        <tr>
-          <td colSpan="4">
-            <Table className="details-table">
-              <tr className={`is-light ${isCollapsed ? 'u-hide' : ''}`}>
-                <td
-                  colSpan="2"
-                  className="secondary-header has-bottom-border has-border--light"
-                >
-                  <h3 className="is-dark">Travel Days</h3>
-                </td>
-              </tr>
-              {periodsAway.map(({ start, end, total }, index) => {
-                return (
-                  <tr
-                    key={index}
-                    className={`is-light is-text-left date-range ${isCollapsed
-                      ? 'u-hide'
-                      : ''}`}
-                  >
-                    <td className="date-range__dates">
-                      <h3 className="is-dark">
-                        {start} - {end}
-                      </h3>{' '}
-                    </td>
-                    <td className="date-range__total">{total} days</td>
-                  </tr>
-                );
-              })}
-            </Table>
-          </td>
+        <tr >
+          <th colSpan="3" className="has-bottom-border is-light year-table__summary" >Days in NZ: {daysPresent}</th>
         </tr>
+
       </Table>
     );
   }
