@@ -88,20 +88,6 @@ Movement.create(identity_id: 2, direction: "arrival", carrier_date_time: "2018-0
 Movement.create(identity_id: 2, direction: "departure", carrier_date_time: "2018-09-28 06:40:00")
 Movement.create(identity_id: 2, direction: "arrival", carrier_date_time: "2018-10-03 23:45:00")
 
-# ###########################
-
-# # Su Sua
-# # From Samoa
-
-# ###########################
-
-
-# Country.create(id: 4, name: "Samoa")
-# Client.create(id: 2, im_client_id: "12345", file_number: "1")
-# Identity.create(id: 1, client_id: 1, identity_number: "Y-3183346-E", family_name: "Sua", first_name: "Su", second_name: "", third_name: "", gender: "Female", country_of_birth_id: 1, nationality: "United State", issuing_state_id: 1, serial_number: "Y-3775136-E")
-
-# # Year 1
-# Movement.create(identity_id: 1, direction: "arrival", carrier_date_time: "2018-08-24 20:45:42")
 
 
 
