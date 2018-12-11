@@ -6,6 +6,9 @@
   "env": {
     "HEROKU_APP_NAME": {
       "required": true
+    },
+    "OPENFISCA_URL": {
+      "value": "https://api.rules.nz"
     }
   },
   "formation": {
