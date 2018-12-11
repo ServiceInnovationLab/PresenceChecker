@@ -10,20 +10,22 @@ class EligibilityService
     @response = calculate(query)
   end
 
-  ## Returns 100 days forward from @day, with eligibliity as a boolean
+  ## Returns 100 days forward from @day, with eligibility as a boolean
   ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_minimum_presence_requirements
     @response['persons'][person_name]['citizenship__meets_minimum_presence_requirements']
   end
 
-  ## Returns boolean
+  ## Returns 100 days forward from @day, with eligibility as a boolean
+  ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_each_year_minimum_presence_requirements
-    @response['persons'][person_name]['citizenship__meets_each_year_minimum_presence_requirements'][@day]
+    @response['persons'][person_name]['citizenship__meets_each_year_minimum_presence_requirements']
   end
 
-  ## Returns boolean
+  ## Returns 100 days forward from @day, with eligibility as a boolean
+  ## e.g. {'2019-06-01': true, '2019-06-02': true, '2019-06-03': false ... }
   def meets_5_year_presence_requirement
-    @response['persons'][person_name]['citizenship__meets_5_year_presence_requirement'][@day]
+    @response['persons'][person_name]['citizenship__meets_5_year_presence_requirement']
   end
 
   ## Returns hash e.g. {'2019-06-01': 365, '2018-06-01': 12, '2017-06-01': 132, '2016-06-01': 12, '2015-06-01': 0 }
