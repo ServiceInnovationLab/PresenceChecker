@@ -301,6 +301,10 @@ table {
     padding-left: 10px;
   }
 
+  .is-header{
+    width:55%;
+  }
+
   header {
     color: $white;
     background: $blue-positive;
@@ -325,13 +329,29 @@ table {
   .year-table {
     width: 100%;
     border-spacing: 0px;
-    background: $off-white;
+    color:$white;
+    
+    &__summary{
+      padding:20px;
+      text-align: left;
+    }
 
-    tr {
-      &.is-light {
-        background-color: $light-white;
+    &.has-error {
+      color:$black;
+      tr{
+        background: $yellow-negative;
       }
     }
+    
+    .is-light {
+      color:$black;
+      background-color: $light-white;
+    }
+    tr {
+      background:$blue-positive;
+    }
+
+ 
 
     .icon-container {
       width: 10%;

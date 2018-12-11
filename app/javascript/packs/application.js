@@ -20,6 +20,44 @@ const checkEligibility = (eligibleDateRanges, date = new Date()) => {
   return eligible;
 };
 
+const fakeData = {
+  "2018-01-01": {
+    meetsMinimumPresence: true,
+    last5Years: [true, false, true, true, true],
+    daysInNZ: [143, 10, 122, 121, 120]
+  },
+  "2018-01-02": {
+    meetsMinimumPresence: true,
+    last5Years: [true, true, true, true, true],
+    daysInNZ: [143, 123, 122, 121, 120]
+  },
+  "2018-01-03": {
+    meetsMinimumPresence: true,
+    last5Years: [true, true, true, true, true],
+    daysInNZ: [143, 123, 122, 121, 120]
+  },
+  "2018-01-04": {
+    meetsMinimumPresence: true,
+    last5Years: [true, true, true, true, true],
+    daysInNZ: [143, 123, 122, 121, 120]
+  },
+  "2018-01-05": {
+    meetsMinimumPresence: true,
+    last5Years: [true, true, true, true, true],
+    daysInNZ: [143, 123, 122, 121, 120]
+  },
+  "2018-01-06": {
+    meetsMinimumPresence: true,
+    last5Years: [true, true, true, true, true],
+    daysInNZ: [143, 123, 122, 121, 120]
+  },
+  "2018-01-07": {
+    meetsMinimumPresence: true,
+    last5Years: [true, true, true, true, true],
+    daysInNZ: [143, 123, 122, 121, 120]
+  }
+}
+
 const getCSRF = () => {
   let element = document.querySelector("meta[name=\"csrf-token\"]");
   if (element) { return element.getAttribute("content"); }
@@ -29,8 +67,12 @@ const getCSRF = () => {
 class ShowClient extends React.Component {
   state = {
     selectedDate: new Date(),
-    isEligible: checkEligibility(this.props.eligibleDateRanges)
+    isEligible: checkEligibility(this.props.eligibleDateRanges),
+    rollingYearData: this.props.rollingYearData
   };
+  componentDidMount = () => {
+    this.checkSelectedDate()
+  }
 
   allDaysInRange = () => {
     const { eligibleDateRanges } = this.props;
@@ -53,8 +95,17 @@ class ShowClient extends React.Component {
     this.checkSelectedDate(newDate);
   };
 
+  onDataResponse = (response) => {
+    // isEligible needs some logic, I don't think it can come from props?
+
+    this.setState({ rollingYearData: response })
+  }
+
   checkSelectedDate = selectedDate => {
     const { clientId } = this.props;
+    this.onDataResponse(fakeData);
+
+    return;
 
     fetch(`/clients/eligibility?id=${clientId}&date=${selectedDate}`, {
       method: "GET",
@@ -71,6 +122,7 @@ class ShowClient extends React.Component {
       .then(response => {
         debugger;
         // This response should be the EligibilityService object
+        this.onDataResponse(response);
       })
       .catch(error => {
         console.error("Server error:", error);
@@ -78,8 +130,8 @@ class ShowClient extends React.Component {
   }
 
   render() {
-    const { selectedDate, isEligible } = this.state;
-    const { clientId, identities, totalDays, years } = this.props;
+    const { selectedDate,isEligible, rollingYearData } = this.state;
+    const { clientId, identities } = this.props;
 
     const highlightWithRanges = [
       {
@@ -103,11 +155,13 @@ class ShowClient extends React.Component {
             />
           </div>
           <div className="results dates-wrapper-right">
-            <PresenceTable
-              isEligible={isEligible}
-              totalDays={totalDays}
-              years={years}
-            />
+            {rollingYearData && <PresenceTable
+              // isEligible={isEligible}
+              // totalDays={totalDays}
+              // years={years}
+              selectedDate={selectedDate}
+              rollingYearData={rollingYearData}
+            />}
           </div>
         </section>
       </main>
