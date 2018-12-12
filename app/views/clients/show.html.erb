@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <%= react_component("ShowClient", props: {
-  clientId: @client.id,
+  clientId: @client.im_client_id,
   movements: @movements,
   identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name]),
   eligibleDateRanges:[
