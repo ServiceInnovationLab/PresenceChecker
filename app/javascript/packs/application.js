@@ -137,11 +137,21 @@ class ShowClient extends React.Component {
     const futureEligibility = [ ...this.state.futureEligibility ];
     futureEligibility.push(day);
     this.setState({ futureEligibility });
+    console.log('setting state with day', day);
   };
 
   highlightDates = () => {
-    // This doesn't work right now because we're only taking in one day.
+    const { futureEligibility } = this.state;
     let eligibleDates = [];
+
+    for (let day = 0, l = futureEligibility.length; day < l; day++) {
+      let date = Object.keys(futureEligibility[day])[0];
+      let values = futureEligibility[day][date];
+      let allYears = values.last5Years.every(year => year);
+
+      if (values.meetsMinimumPresence && allYears)
+        eligibleDates.push(date);
+    }
 
     return [
       {
