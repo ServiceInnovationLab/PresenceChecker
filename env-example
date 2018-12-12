@@ -1,1 +1,2 @@
 OPENFISCA_URL: https://api.rules.nz
+OPENFISCA_TIMEOUT: 10

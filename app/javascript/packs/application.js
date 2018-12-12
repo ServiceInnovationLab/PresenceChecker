@@ -5,6 +5,7 @@ import { format, isWithinRange, eachDay } from 'date-fns';
 import Identity from '../bundles/Identity/components/Identity';
 import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
+import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
 const checkEligibility = (eligibleDateRanges, date = new Date()) => {
   let eligible = false;
@@ -131,8 +132,7 @@ class ShowClient extends React.Component {
 
   render() {
     const { selectedDate,isEligible, rollingYearData } = this.state;
-    const { clientId, identities } = this.props;
-
+    const { clientId, identities, movements } = this.props;
     const highlightWithRanges = [
       {
         'is-within-range': this.allDaysInRange()
@@ -162,6 +162,7 @@ class ShowClient extends React.Component {
               selectedDate={selectedDate}
               rollingYearData={rollingYearData}
             />}
+            <MovementsTable movements={movements} />
           </div>
         </section>
       </main>

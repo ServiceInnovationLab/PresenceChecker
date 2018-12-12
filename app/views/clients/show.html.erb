@@ -2,6 +2,7 @@
 
 <%= react_component("ShowClient", props: {
   clientId: @client.id,
+  movements: @movements,
   identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name]),
   eligibleDateRanges:[
     {start:"Dec 17 2018", end:"Jan 13 2019"},
@@ -36,6 +37,5 @@
         {start:"2016-05-01",end:"2016-05-23",total:11},
         {start:"2016-12-01",end:"2016-12-03",total:11},
       ]
-    }
-  ]
+    }  ]
 }) %>

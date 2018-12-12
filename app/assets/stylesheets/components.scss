@@ -301,8 +301,8 @@ table {
     padding-left: 10px;
   }
 
-  .is-header{
-    width:55%;
+  .is-header {
+    width: 55%;
   }
 
   header {
@@ -329,29 +329,29 @@ table {
   .year-table {
     width: 100%;
     border-spacing: 0px;
-    color:$white;
-    
-    &__summary{
-      padding:20px;
+    color: $white;
+
+    &__summary {
+      padding: 20px;
       text-align: left;
     }
 
     &.has-error {
-      color:$black;
-      tr{
+      color: $black;
+
+      tr {
         background: $yellow-negative;
       }
     }
-    
+
     .is-light {
-      color:$black;
+      color: $black;
       background-color: $light-white;
     }
-    tr {
-      background:$blue-positive;
-    }
 
- 
+    tr {
+      background: $blue-positive;
+    }
 
     .icon-container {
       width: 10%;
@@ -436,4 +436,32 @@ table {
   .dates-wrapper-right {
     width: calc(60% - 1rem);
   }
+}
+
+.movements-table {
+  h3 {
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: rgba($black, .05);
+  }
+}
+
+.movements-table-header {
+  margin-top: 20px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.movements-table-wrapper {
+  max-height: 30rem;
+  overflow: hidden;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 2px solid $light-grey;
+  border-top: 0;
 }
