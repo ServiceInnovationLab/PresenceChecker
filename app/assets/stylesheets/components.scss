@@ -227,10 +227,6 @@ table {
 
   i {
     color: $white;
-
-    &.fa-spinner {
-      animation: spin 2s infinite;
-    }
   }
 
   &.has-error {
@@ -408,20 +404,44 @@ table {
   }
 }
 
+.presence-table-header {
+  color: $white;
+  background: $blue-positive;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  width: 75%;
+
+  &.has-error {
+    color: $black;
+    background: $yellow-negative;
+  }
+
+  &.loading {
+    color: $black;
+    background: $light-grey;
+  }
+
+  i {
+    margin-left: 10px;
+  }
+}
+
 .dates-wrapper {
   h2 {
     background: $light-blue;
     padding: 10px 15px;
   }
 
-  .dates-wrapper-left,
-  .dates-wrapper-right {
+  &-left,
+  &-right {
     display: inline-block;
     min-width: 40%;
     vertical-align: top;
   }
 
-  .dates-wrapper-left {
+  &-left {
     margin-right: 1rem;
 
     .panel {
@@ -435,27 +455,9 @@ table {
         background-color: rgba($light-grey, .2);
       }
     }
-
-    .is-header {
-      width: 55%;
-    }
-
-    header {
-      color: $white;
-      background: $blue-positive;
-      padding: 10px 20px;
-      margin: 0;
-      font-size: 20px;
-      font-weight: bold;
-
-      &.has-error {
-        color: $black;
-        background: $yellow-negative;
-      }
-    }
   }
 
-  .dates-wrapper-right {
+  &-right {
     width: calc(60% - 1rem);
   }
 }
@@ -486,4 +488,8 @@ table {
   margin-bottom: 20px;
   border: 2px solid $light-grey;
   border-top: 0;
+}
+
+.fa-spinner {
+  animation: spin 2s infinite;
 }

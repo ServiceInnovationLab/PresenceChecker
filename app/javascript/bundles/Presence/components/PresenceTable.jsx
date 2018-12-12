@@ -28,7 +28,7 @@ export default class PresenceTable extends React.Component {
     }
 
     return (
-      <header className={stateClass}>
+      <header className={`presence-table-header ${stateClass}`}>
         <span>Total days in NZ: {sum(totalDays)}</span>
         <i className={`fas fa-${iconClass}`} />
       </header>
