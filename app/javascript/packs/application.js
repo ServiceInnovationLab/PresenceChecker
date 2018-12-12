@@ -25,37 +25,63 @@ class ShowClient extends React.Component {
   };
 
   checkSelectedDate = selectedDate => {
-    const { databaseId } = this.props;
-    let url = `/clients/${databaseId}/eligibility/${format(
-      selectedDate,
-      'YYYY-MM-DD'
-    )}`;
+    const { futureEligibility } = this.state;
+    const formattedDate = format(selectedDate, 'YYYY-MM-DD');
+    let alreadyChecked = false;
+    let checkedIndex = -1;
 
-    this.setState({
-      loading: true
-    });
-
-    fetch(url, {
-      method: 'GET',
-      mode: 'same-origin',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': getCSRF()
+    for (let day = 0, l = futureEligibility.length; day < l; day++) {
+      if (Object.keys(futureEligibility[day])[0] == formattedDate) {
+        alreadyChecked = true;
+        checkedIndex = day;
+        break;
       }
-    })
-      .then(result => {
-        return result.json();
+    }
+
+    if (!alreadyChecked) {
+      const { databaseId } = this.props;
+      const url = `/clients/${databaseId}/eligibility/${formattedDate}`;
+
+      this.setState({
+        loading: true
+      });
+
+      fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': getCSRF()
+        }
       })
-      .then(response =>
-        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')])
-      )
-      .catch(error => {
-        console.error('Server error:', error);
+        .then(result => {
+          return result.json();
+        })
+        .then(response => this.onDataResponse(response[formattedDate]))
+        .catch(error => {
+          console.error('Server error:', error);
+          this.setState({
+            loading: false
+          });
+        });
+    } else {
+      if (checkedIndex > 0) {
+        const newDay = Object.keys(futureEligibility[checkedIndex])[0];
+        const newState = futureEligibility[checkedIndex][newDay];
+
+        this.setState({
+          loading: false,
+          meetsMinimumPresence: newState.meetsMinimumPresence,
+          daysInNZ: newState.daysInNZ,
+          last5Years: newState.last5Years
+        });
+      } else {
         this.setState({
           loading: false
         });
-      });
+      }
+    }
   };
 
   onDateChange = date => {
@@ -97,7 +123,11 @@ class ShowClient extends React.Component {
       const formattedDate = format(nextWeek[day], 'YYYY-MM-DD');
       let alreadyChecked = false;
 
-      for(let futureDay = 0; futureDay < futureEligibility.length; futureDay++) {
+      for (
+        let futureDay = 0;
+        futureDay < futureEligibility.length;
+        futureDay++
+      ) {
         if (Object.keys(futureEligibility[futureDay])[0] == formattedDate) {
           alreadyChecked = true;
           break;
@@ -146,7 +176,6 @@ class ShowClient extends React.Component {
     const futureEligibility = [ ...this.state.futureEligibility ];
     futureEligibility.push(day);
     this.setState({ futureEligibility });
-    console.log('setting state with day', day);
   };
 
   highlightDates = () => {
