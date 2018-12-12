@@ -1,130 +1,147 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
-import { format, eachDay } from 'date-fns';
+import { format, eachDay, addDays } from 'date-fns';
+
+import { getCSRF } from '../utilities/utilities';
 
 import Identity from '../bundles/Identity/components/Identity';
 import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
-
-const checkEligibility = (dateEligibility, date = new Date()) => {
-  let formattedDate = format(date, 'YYYY-MM-DD');
-  return dateEligibility[formattedDate];
-};
-
-const fakeData = {
-  "2018-01-01": {
-    meetsMinimumPresence: true,
-    last5Years: [true, false, true, true, true],
-    daysInNZ: [143, 10, 122, 121, 120]
-  },
-  "2018-01-02": {
-    meetsMinimumPresence: true,
-    last5Years: [true, true, true, true, true],
-    daysInNZ: [143, 123, 122, 121, 120]
-  },
-  "2018-01-03": {
-    meetsMinimumPresence: true,
-    last5Years: [true, true, true, true, true],
-    daysInNZ: [143, 123, 122, 121, 120]
-  },
-  "2018-01-04": {
-    meetsMinimumPresence: true,
-    last5Years: [true, true, true, true, true],
-    daysInNZ: [143, 123, 122, 121, 120]
-  },
-  "2018-01-05": {
-    meetsMinimumPresence: true,
-    last5Years: [true, true, true, true, true],
-    daysInNZ: [143, 123, 122, 121, 120]
-  },
-  "2018-01-06": {
-    meetsMinimumPresence: true,
-    last5Years: [true, true, true, true, true],
-    daysInNZ: [143, 123, 122, 121, 120]
-  },
-  "2018-01-07": {
-    meetsMinimumPresence: true,
-    last5Years: [true, true, true, true, true],
-    daysInNZ: [143, 123, 122, 121, 120]
-  }
-}
-
-const getCSRF = () => {
-  let element = document.querySelector('meta[name="csrf-token"]');
-  if (element) {
-    return element.getAttribute('content');
-  }
-  return '';
-};
+import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
 class ShowClient extends React.Component {
   state = {
+    loading: false,
+    backgroundLoading: false,
     selectedDate: new Date(),
-    isEligible: checkEligibility(this.props.dateEligibility),
-    rollingYearData: this.props.rollingYearData
+    meetsMinimumPresence: false,
+    daysInNZ: [],
+    last5Years: [],
+    futureEligibility: []
   };
 
   componentDidMount = () => {
-    this.checkSelectedDate()
-  }
+    this.checkSelectedDate(this.state.selectedDate);
+  };
 
-  onDateChange = (date) => {
-    const { dateEligibility } = this.props;
+  checkSelectedDate = selectedDate => {
+    const { databaseId } = this.props;
+    let url = `/clients/${databaseId}/eligibility/${format(
+      selectedDate,
+      'YYYY-MM-DD'
+    )}`;
+
+    this.setState({
+      loading: true
+    });
+
+    fetch(url, {
+      method: 'GET',
+      mode: 'same-origin',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': getCSRF()
+      }
+    })
+      .then(result => {
+        return result.json();
+      })
+      .then(response =>
+        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')])
+      )
+      .catch(error => {
+        console.error('Server error:', error);
+        this.setState({
+          loading: false
+        });
+      });
+  };
+
+  onDateChange = date => {
     let newDate = new Date(date);
 
     this.setState({
       selectedDate: newDate,
-      isEligible: checkEligibility(dateEligibility, newDate)
+      meetsMinimumPresence: false
     });
 
-    // This is where we'll call the service with a fetch request
     this.checkSelectedDate(newDate);
   };
 
-  onDataResponse = (response) => {
-    // isEligible needs some logic, I don't think it can come from props?
+  onDataResponse = response => {
+    this.setState({
+      loading: false,
+      meetsMinimumPresence: response.meetsMinimumPresence,
+      daysInNZ: response.daysInNZ,
+      last5Years: response.last5Years
+    });
 
-    this.setState({ rollingYearData: response })
-  }
+    this.checkNextWeek();
+  };
 
-  checkSelectedDate = selectedDate => {
-    const { clientId } = this.props;
-    const url = `/clients/eligibility?id=${clientId}&date=${format(
-      selectedDate,
-      'YYYY-MM-DD'
-    )}`;
-    this.onDataResponse(fakeData);
+  checkNextWeek = () => {
+    const { databaseId } = this.props;
+    const { selectedDate } = this.state;
+    const nextWeek = eachDay(
+      addDays(selectedDate, 1),
+      addDays(selectedDate, 8)
+    );
+    let loadingNumber = nextWeek.length;
 
-    // fetch(`/clients/eligibility?id=${clientId}&date=${selectedDate}`, {
-    //   method: "GET",
-    //   mode: "same-origin",
-    //   credentials: "same-origin",
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-CSRF-Token': getCSRF()
-    //   }
-    // })
-    //   .then((result) => {
-    //     return result.json();
-    //   })
-    //   .then((response) => {
-    //     debugger;
-    //     // This response should be the EligibilityService object
-    //     this.onDataResponse(response);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Server error:', error);
-    //   });
+    this.setState({
+      backgroundLoading: true
+    });
+
+    for (let day = 0, l = loadingNumber; day < l; day++) {
+      const url = `/clients/${databaseId}/eligibility/${format(
+        nextWeek[day],
+        'YYYY-MM-DD'
+      )}`;
+
+      fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': getCSRF()
+        }
+      })
+        .then(result => {
+          return result.json();
+        })
+        .then(response => {
+          loadingNumber--;
+          if (loadingNumber === 0) {
+            this.setState({
+              backgroundLoading: false
+            });
+          }
+          this.appendEligibleDay(response);
+        })
+        .catch(error => {
+          console.error('Server error:', error);
+
+          loadingNumber--;
+          if (loadingNumber === 0) {
+            this.setState({
+              backgroundLoading: false
+            });
+          }
+        });
+    }
+  };
+
+  appendEligibleDay = day => {
+    const futureEligibility = [ ...this.state.futureEligibility ];
+    futureEligibility.push(day);
+    this.setState({ futureEligibility });
   };
 
   highlightDates = () => {
-    const { dateEligibility } = this.props;
-
+    // This doesn't work right now because we're only taking in one day.
     let eligibleDates = [];
-
-    for (let date in dateEligibility) {
-      if (dateEligibility[date]) eligibleDates.push(date);
-    }
 
     return [
       {
@@ -134,8 +151,14 @@ class ShowClient extends React.Component {
   };
 
   render() {
-    const { selectedDate, isEligible } = this.state;
-    const { clientId, identities } = this.props;
+    const {
+      selectedDate,
+      meetsMinimumPresence,
+      daysInNZ,
+      last5Years,
+      loading
+    } = this.state;
+    const { clientId, identities, movements } = this.props;
 
     return (
       <main role="main">
@@ -148,18 +171,21 @@ class ShowClient extends React.Component {
             <PresenceDates
               onDateChange={this.onDateChange}
               selectedDate={selectedDate}
-              isEligible={isEligible}
+              isEligible={meetsMinimumPresence}
               highlightDates={this.highlightDates()}
+              loading={loading}
             />
           </div>
           <div className="results dates-wrapper-right">
-            {rollingYearData && <PresenceTable
-              // isEligible={isEligible}
-              // totalDays={totalDays}
-              // years={years}
+            <PresenceTable
+              isEligible={meetsMinimumPresence}
+              totalDays={daysInNZ}
+              years={last5Years}
               selectedDate={selectedDate}
-              rollingYearData={rollingYearData}
-            />}
+              // rollingYearData={rollingYearData}
+              loading={loading}
+            />
+            <MovementsTable movements={movements} />
           </div>
         </section>
       </main>

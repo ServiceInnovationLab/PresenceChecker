@@ -2,7 +2,6 @@
 
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show eligibility]
-  before_action :create_eligibility_service, only: %i[show eligibility]
 
   def index
     @clients = Client.joins(:identity).where(serial_number: params[:serial_number])
@@ -13,30 +12,31 @@ class ClientsController < ApplicationController
     @movements = @client.movements
   end
 
+  # URL to call this would look like /clients/:client_id/eligibility/:date.json
+  # e.g. /clients/1/eligibility/2019-01-01.json
   def eligibility
     respond_to :json
 
-    # URL to call this would look like /clients/eligibility?id=1&date="2019-01-01"
-    @eligibility_service.to_json
+    @service = EligibilityService.new(@client, requested_date)
+    @service.run!
+
+    render json: {
+      requested_date => {
+        'meetsMinimumPresence' => @service.meets_minimum_presence_requirements[requested_date],
+        'last5Years' => @service.enough_days_by_rolling_year.values,
+        'daysInNZ' => @service.days_by_rolling_year.values
+      }
+    }
   end
 
   private
 
-  def create_eligibility_service
-    @eligibility_service = EligibilityService.new(@client, params[:date] || now_in_date_format)
-    @eligibility_service.run!
-  end
-
-  def date_format
-    '%Y-%m-%d'
-  end
-
-  def now_in_date_format
-    Time.zone.now.strftime(date_format)
+  def requested_date
+    params[:day] || Date.today.strftime('%Y-%m-%d')
   end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_client
-    @client = Client.find(params[:id])
+    @client = Client.find(params[:id] || params[:client_id])
   end
 end
