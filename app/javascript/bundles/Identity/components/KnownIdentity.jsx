@@ -10,7 +10,7 @@ export default class KnownIdentity extends React.Component {
 
   render() {
     const {
-      id,
+      identity_number,
       family_name,
       first_name,
       second_name,
@@ -26,7 +26,7 @@ export default class KnownIdentity extends React.Component {
         <div className="left">
           <Table>
             <TableRow headerLabel="ID No.">
-              <b>{id}</b>
+              <b>{identity_number}</b>
             </TableRow>
             <TableRow headerLabel="Surname">{family_name}</TableRow>
             <TableRow headerLabel="First name">{first_name}</TableRow>
