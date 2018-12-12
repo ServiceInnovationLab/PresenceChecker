@@ -11,6 +11,7 @@ export default class KnownIdentity extends React.Component {
   render() {
     const {
       identity_number,
+      serial_number,
       family_name,
       first_name,
       second_name,
@@ -36,15 +37,15 @@ export default class KnownIdentity extends React.Component {
         </div>
         <div className="right">
           <Table>
-            <TableRow headerLabel="Issuing state">
-              {issuing_state_name}
-            </TableRow>
+            <TableRow headerLabel="Gender">{gender}</TableRow>
             <TableRow headerLabel="Country of birth">
-              {country_of_birth_name}
+            {country_of_birth_name}
             </TableRow>
             <TableRow headerLabel="Nationality">{nationality}</TableRow>
-            <TableRow headerLabel="Gender">{gender}</TableRow>
-            <TableRow headerLabel="&nbsp;">&nbsp;</TableRow>
+            <TableRow headerLabel="Issuing state">
+            {issuing_state_name}
+            </TableRow>
+            <TableRow headerLabel="Serial number">{serial_number}</TableRow>
           </Table>
         </div>
       </div>
