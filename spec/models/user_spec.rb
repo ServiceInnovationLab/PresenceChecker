@@ -10,6 +10,9 @@ RSpec.describe User, type: :model do
     it 'rejects blank passwords' do
       expect { FactoryBot.create :user, password: '' }.to raise_error(ActiveRecord::RecordInvalid)
     end
+    it 'rejects short passwords' do
+      expect { FactoryBot.create :user, password: 'P@0' }.to raise_error(ActiveRecord::RecordInvalid)
+    end
     it 'rejects alpha only' do
       expect { FactoryBot.create :user, password: 'Password}' }.to raise_error(ActiveRecord::RecordInvalid)
     end
