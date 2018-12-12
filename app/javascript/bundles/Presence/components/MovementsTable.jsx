@@ -16,11 +16,7 @@ class MovementsTable extends React.Component {
         </header>
 
         <div className="movements-table-wrapper">
-          <Table
-            className="presence-table movements-table"
-            cellpadding="0"
-            cellspacing="0"
-          >
+          <Table className="presence-table movements-table">
             {movements.map((item, index) => (
               <tr key={`movement_${index}`}>
                 <td className="header-container has-bottom-border has-right-border">

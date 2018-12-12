@@ -11,6 +11,7 @@ import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
 class ShowClient extends React.Component {
   state = {
+    loading: false,
     selectedDate: new Date(),
     meetsMinimumPresence: false,
     daysInNZ: [],
@@ -27,6 +28,10 @@ class ShowClient extends React.Component {
       selectedDate,
       'YYYY-MM-DD'
     )}`;
+
+    this.setState({
+      loading: true
+    });
 
     fetch(url, {
       method: 'GET',
@@ -45,6 +50,9 @@ class ShowClient extends React.Component {
       )
       .catch(error => {
         console.error('Server error:', error);
+        this.setState({
+          loading: false
+        });
       });
   };
 
@@ -61,6 +69,7 @@ class ShowClient extends React.Component {
 
   onDataResponse = response => {
     this.setState({
+      loading: false,
       meetsMinimumPresence: response.meetsMinimumPresence,
       daysInNZ: response.daysInNZ,
       last5Years: response.last5Years
@@ -68,17 +77,24 @@ class ShowClient extends React.Component {
   };
 
   highlightDates = () => {
+    // This doesn't work right now because we're only taking in one day.
     let eligibleDates = [];
 
     return [
       {
         'is-within-range': eligibleDates
       }
-    ]
-  }
+    ];
+  };
 
   render() {
-    const { selectedDate, meetsMinimumPresence, daysInNZ, last5Years } = this.state;
+    const {
+      selectedDate,
+      meetsMinimumPresence,
+      daysInNZ,
+      last5Years,
+      loading
+    } = this.state;
     const { clientId, identities, movements } = this.props;
 
     return (
@@ -94,16 +110,18 @@ class ShowClient extends React.Component {
               selectedDate={selectedDate}
               isEligible={meetsMinimumPresence}
               highlightDates={this.highlightDates()}
+              loading={loading}
             />
           </div>
           <div className="results dates-wrapper-right">
             {/* {rollingYearData && (
               <PresenceTable
-                // isEligible={meetsMinimumPresence}
-                // totalDays={totalDays}
-                // years={years}
+                isEligible={meetsMinimumPresence}
+                totalDays={totalDays}
+                years={years}
                 selectedDate={selectedDate}
                 rollingYearData={rollingYearData}
+                loading={loading}
               />
             )} */}
             <MovementsTable movements={movements} />

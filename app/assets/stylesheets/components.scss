@@ -1,5 +1,14 @@
 @import './colours';
 
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: $dark-grey;
@@ -200,7 +209,8 @@ table {
       font-weight: bold;
     }
 
-    &.has-error h3 {
+    &.has-error h3,
+    &.loading h3 {
       color: $black;
     }
 
@@ -215,6 +225,10 @@ table {
 
       i {
         font-size: 20px;
+
+        &.fa-spinner {
+          animation: spin 2s infinite;
+        }
       }
     }
   }
@@ -233,6 +247,18 @@ table {
     }
 
     &.has-error {
+      i {
+        color: $black;
+      }
+    }
+  }
+
+  &.loading {
+    header {
+      background: $light-grey;
+    }
+
+    &.loading {
       i {
         color: $black;
       }
@@ -429,6 +455,10 @@ table {
 
       &.has-error {
         background-color: rgba($yellow-negative, .2);
+      }
+
+      &.loading {
+        background-color: rgba($light-grey, .2);
       }
     }
   }
