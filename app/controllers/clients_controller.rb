@@ -9,7 +9,7 @@ class ClientsController < ApplicationController
 
   def show
     @identities = @client.identities
-    @movements = @client.movements
+    @movements = @client.movements.order('carrier_date_time desc')
   end
 
   # URL to call this would look like /clients/:client_id/eligibility/:date.json
