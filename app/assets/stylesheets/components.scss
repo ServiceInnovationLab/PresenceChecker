@@ -1,13 +1,5 @@
 @import './colours';
-
-@keyframes spin {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+@import './keyframes';
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -225,10 +217,6 @@ table {
 
       i {
         font-size: 20px;
-
-        &.fa-spinner {
-          animation: spin 2s infinite;
-        }
       }
     }
   }
@@ -239,6 +227,10 @@ table {
 
   i {
     color: $white;
+
+    &.fa-spinner {
+      animation: spin 2s infinite;
+    }
   }
 
   &.has-error {
@@ -475,7 +467,7 @@ table {
   }
 
   tr:nth-of-type(even) {
-    background-color: rgba($black, .05);
+    background-color: rgba($black, .5);
   }
 }
 
