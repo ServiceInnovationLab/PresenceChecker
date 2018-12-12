@@ -319,24 +319,6 @@ table {
     padding-left: 10px;
   }
 
-  .is-header {
-    width: 55%;
-  }
-
-  header {
-    color: $white;
-    background: $blue-positive;
-    padding: 10px 20px;
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
-
-    &.has-error {
-      color: $black;
-      background: $yellow-negative;
-    }
-  }
-
   .details-table {
     width: 100%;
     padding: 0;
@@ -451,6 +433,24 @@ table {
 
       &.loading {
         background-color: rgba($light-grey, .2);
+      }
+    }
+
+    .is-header {
+      width: 55%;
+    }
+
+    header {
+      color: $white;
+      background: $blue-positive;
+      padding: 10px 20px;
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+
+      &.has-error {
+        color: $black;
+        background: $yellow-negative;
       }
     }
   }

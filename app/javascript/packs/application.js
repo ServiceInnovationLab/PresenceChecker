@@ -23,8 +23,8 @@ class ShowClient extends React.Component {
   };
 
   checkSelectedDate = selectedDate => {
-    const { clientId } = this.props;
-    let url = `/clients/${clientId}/eligibility/${format(
+    const { databaseId } = this.props;
+    let url = `/clients/${databaseId}/eligibility/${format(
       selectedDate,
       'YYYY-MM-DD'
     )}`;
