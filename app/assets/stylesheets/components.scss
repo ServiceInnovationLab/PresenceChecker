@@ -1,4 +1,5 @@
 @import './colours';
+@import './keyframes';
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -200,7 +201,8 @@ table {
       font-weight: bold;
     }
 
-    &.has-error h3 {
+    &.has-error h3,
+    &.loading h3 {
       color: $black;
     }
 
@@ -233,6 +235,18 @@ table {
     }
 
     &.has-error {
+      i {
+        color: $black;
+      }
+    }
+  }
+
+  &.loading {
+    header {
+      background: $light-grey;
+    }
+
+    &.loading {
       i {
         color: $black;
       }
@@ -299,24 +313,6 @@ table {
 
   i {
     padding-left: 10px;
-  }
-
-  .is-header {
-    width: 55%;
-  }
-
-  header {
-    color: $white;
-    background: $blue-positive;
-    padding: 10px 20px;
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
-
-    &.has-error {
-      color: $black;
-      background: $yellow-negative;
-    }
   }
 
   .details-table {
@@ -408,20 +404,44 @@ table {
   }
 }
 
+.presence-table-header {
+  color: $white;
+  background: $blue-positive;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  width: 75%;
+
+  &.has-error {
+    color: $black;
+    background: $yellow-negative;
+  }
+
+  &.loading {
+    color: $black;
+    background: $light-grey;
+  }
+
+  i {
+    margin-left: 10px;
+  }
+}
+
 .dates-wrapper {
   h2 {
     background: $light-blue;
     padding: 10px 15px;
   }
 
-  .dates-wrapper-left,
-  .dates-wrapper-right {
+  &-left,
+  &-right {
     display: inline-block;
     min-width: 40%;
     vertical-align: top;
   }
 
-  .dates-wrapper-left {
+  &-left {
     margin-right: 1rem;
 
     .panel {
@@ -430,10 +450,14 @@ table {
       &.has-error {
         background-color: rgba($yellow-negative, .2);
       }
+
+      &.loading {
+        background-color: rgba($light-grey, .2);
+      }
     }
   }
 
-  .dates-wrapper-right {
+  &-right {
     width: calc(60% - 1rem);
   }
 }
@@ -464,4 +488,8 @@ table {
   margin-bottom: 20px;
   border: 2px solid $light-grey;
   border-top: 0;
+}
+
+.fa-spinner {
+  animation: spin 2s infinite;
 }
