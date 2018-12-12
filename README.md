@@ -43,7 +43,7 @@ bundle install
 ```
 yarn install
 ```
-* setup config envirnment variables from the example
+* setup config environment variables from the example
 ```
 cp env-example .env
 ```
