@@ -5,48 +5,34 @@ import React from 'react';
 import Table from '../../../components/Table';
 
 export default class Year extends React.Component {
-  state = { isCollapsed: true };
-
   static propTypes = {
-    year: PropTypes.number,
+    yearNumber: PropTypes.number,
     daysPresent: PropTypes.number,
-    meetsAmountOfDaysInNZ: PropTypes.bool,
-    periodsAway: PropTypes.array
+    isEligible: PropTypes.bool
   };
 
   render() {
     const {
       startDate,
       endingDate,
-      year,
+      yearNumber,
       daysPresent,
-      meetsAmountOfDaysInNZ,
-      periodsAway
+      isEligible
     } = this.props;
-    const { isCollapsed } = this.state;
+    const errorClass = isEligible ? '' : 'has-error';
+    const iconClass = isEligible ? 'check' : 'times';
+
     return (
-      <Table
-        className={`year-table is-text-center ${meetsAmountOfDaysInNZ
-          ? ''
-          : 'has-error'}`}
-      >
+      <Table className={`year-table is-text-center ${errorClass}`}>
         <tr>
           <td className="header-container has-bottom-border has-right-border">
-            <h3>Yr {year}</h3>
+            <h3>Yr {yearNumber}</h3>
           </td>
           <td className="has-bottom-border">
             {startDate} - {endingDate}
           </td>
-          <td
-            className={`icon-container has-bottom-border ${meetsAmountOfDaysInNZ
-              ? ''
-              : 'has-error'}`}
-          >
-            <i
-              className={`fas  ${meetsAmountOfDaysInNZ
-                ? 'fa-check'
-                : 'fa-times'}`}
-            />
+          <td className={`icon-container has-bottom-border ${errorClass}`}>
+            <i className={`fas fa-${iconClass}`} />
           </td>
         </tr>
         <tr>

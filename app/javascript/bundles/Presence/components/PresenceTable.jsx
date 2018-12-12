@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { sum } from 'lodash';
 import Year from './Year';
-import Table from '../../../components/Table';
 import { format, subYears, addDays } from 'date-fns';
 
 export default class PresenceTable extends React.Component {
@@ -10,7 +9,6 @@ export default class PresenceTable extends React.Component {
     isEligible: PropTypes.bool,
     totalDays: PropTypes.arrayOf(PropTypes.number),
     years: PropTypes.arrayOf(PropTypes.bool),
-    // selectedDate: PropTypes.array,
     loading: PropTypes.bool
   };
 
@@ -37,54 +35,38 @@ export default class PresenceTable extends React.Component {
     );
   };
 
+  startDate = index => {
+    const { selectedDate } = this.props;
+    return format(addDays(subYears(selectedDate, index + 1), 1), 'DD MMM YYYY');
+  };
+
+  endingDate = index => {
+    const { selectedDate } = this.props;
+    return format(subYears(selectedDate, index), 'DD MMM YYYY');
+  };
+
   render() {
-    const { years, selectedDate } = this.props;
-
-    console.log(this.props);
-
-    // const firstKey = Object.keys(rollingYearData)[0];
-    // const yearData = rollingYearData[firstKey];
-    // const isEligible = yearData.meetsMinimumPresence;
-    // const totalDays = sum(yearData.daysInNZ);
-    // create a 'years' array that combines the days and if the person was eligible for that period
-
-    // const years = yearData.last5Years.map((isEligible, index) => {
-    //   return {
-    //     year: yearData.last5Years.length - index,
-    //     daysPresent: yearData.daysInNZ[index],
-    //     meetsAmountOfDaysInNZ: isEligible,
-    //     //we need to get rid of the periodsAway, this is just to get it working
-    //     periodsAway: []
-    //   };
-    // });
+    const { years, totalDays, loading } = this.props;
+    let formattedYears = years.map((isEligible, index) => {
+      return {
+        index,
+        isEligible,
+        yearNumber: years.length - index,
+        daysPresent: totalDays[index],
+        startDate: this.startDate(index),
+        endingDate: this.endingDate(index)
+      };
+    });
 
     return (
       <div className="results">
         {this.header()}
-        {years && (
-          <Table className="presence-table">
-            {years.map((year, index) => {
-              const startDate = format(
-                addDays(subYears(selectedDate, index + 1), 1),
-                'DD MMM YYYY'
-              );
-              const endingDate = format(
-                subYears(selectedDate, index),
-                'DD MMM YYYY'
-              );
-              return (
-                <tr key={`year_${index}`}>
-                  <td colSpan="2">
-                    <Year
-                      startDate={startDate}
-                      endingDate={endingDate}
-                      {...year}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </Table>
+        {formattedYears && !loading && (
+          <div className="presence-table">
+            {formattedYears.map(year => (
+              <Year key={`year_${year.index}`} {...year} />
+            ))}
+          </div>
         )}
       </div>
     );
