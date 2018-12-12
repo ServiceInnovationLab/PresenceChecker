@@ -13,7 +13,6 @@ export default class PresenceDates extends React.Component {
 
   header = stateClass => {
     const { isEligible, loading } = this.props;
-
     let iconClass = '';
     let headerText = '';
 

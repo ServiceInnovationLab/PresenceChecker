@@ -114,16 +114,14 @@ class ShowClient extends React.Component {
             />
           </div>
           <div className="results dates-wrapper-right">
-            {/* {rollingYearData && (
-              <PresenceTable
-                isEligible={meetsMinimumPresence}
-                totalDays={totalDays}
-                years={years}
-                selectedDate={selectedDate}
-                rollingYearData={rollingYearData}
-                loading={loading}
-              />
-            )} */}
+            <PresenceTable
+              isEligible={meetsMinimumPresence}
+              totalDays={daysInNZ}
+              years={last5Years}
+              selectedDate={selectedDate}
+              // rollingYearData={rollingYearData}
+              loading={loading}
+            />
             <MovementsTable movements={movements} />
           </div>
         </section>
@@ -135,5 +133,3 @@ class ShowClient extends React.Component {
 ReactOnRails.register({
   ShowClient
 });
-
-// eligibleDateRanges, totalDays, years

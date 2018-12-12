@@ -29,14 +29,14 @@ export default class Year extends React.Component {
         className={`year-table is-text-center ${meetsAmountOfDaysInNZ
           ? ''
           : 'has-error'}`}
-        cellPadding="0"
-        cellSpacing="0"
       >
-        <tr >
+        <tr>
           <td className="header-container has-bottom-border has-right-border">
             <h3>Yr {year}</h3>
           </td>
-          <td className="has-bottom-border">{startDate} - {endingDate}</td>
+          <td className="has-bottom-border">
+            {startDate} - {endingDate}
+          </td>
           <td
             className={`icon-container has-bottom-border ${meetsAmountOfDaysInNZ
               ? ''
@@ -49,10 +49,14 @@ export default class Year extends React.Component {
             />
           </td>
         </tr>
-        <tr >
-          <th colSpan="3" className="has-bottom-border is-light year-table__summary" >Days in New Zealand: {daysPresent}</th>
+        <tr>
+          <th
+            colSpan="3"
+            className="has-bottom-border is-light year-table__summary"
+          >
+            Days in New Zealand: {daysPresent}
+          </th>
         </tr>
-
       </Table>
     );
   }
