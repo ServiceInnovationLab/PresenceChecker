@@ -21,10 +21,7 @@ class MovementsTable extends React.Component {
           >
             {movements.map((item) => (
               <tr>
-                <td
-                  style={{ width: '20%' }}
-                  className="header-container has-bottom-border has-right-border"
-                >
+                <td className="header-container has-bottom-border has-right-border">
                   <h3 className="is-dark">
                     {item.direction.charAt(0).toUpperCase() +
                       item.direction.slice(1)}
