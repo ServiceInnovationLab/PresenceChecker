@@ -2,6 +2,9 @@
 
 [![Waffle.io - Issues in progress](https://badge.waffle.io/ServiceInnovationLab/PresenceChecker.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ServiceInnovationLab/PresenceChecker)
 [![Build Status](https://travis-ci.org/ServiceInnovationLab/PresenceChecker.svg?branch=master)](https://travis-ci.org/ServiceInnovationLab/PresenceChecker)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/ServiceInnovationLab/PresenceChecker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ServiceInnovationLab/PresenceChecker/alerts/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/33f8f206d6c46ef84d9d/maintainability)](https://codeclimate.com/github/ServiceInnovationLab/PresenceChecker/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/33f8f206d6c46ef84d9d/test_coverage)](https://codeclimate.com/github/ServiceInnovationLab/PresenceChecker/test_coverage)
 
 # Presence Checker
 
@@ -19,7 +22,7 @@ This is a ruby on rails app. You will need:
 # Install rbenv from https://github.com/rbenv/rbenv then
 rbenv install < .ruby-version
 ```
-* Install PostgreSQL
+* Install PostgreSQL (in a mac)
 ```
 brew install postgresql
 ```
@@ -39,6 +42,10 @@ bundle install
 * Install the javascript dependencies
 ```
 yarn install
+```
+* setup config environment variables from the example
+```
+cp env-example .env
 ```
 * Create the databases
 ```
