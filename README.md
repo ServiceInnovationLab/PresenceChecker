@@ -19,7 +19,7 @@ This is a ruby on rails app. You will need:
 # Install rbenv from https://github.com/rbenv/rbenv then
 rbenv install < .ruby-version
 ```
-* Install PostgreSQL
+* Install PostgreSQL (in a mac)
 ```
 brew install postgresql
 ```
@@ -39,6 +39,10 @@ bundle install
 * Install the javascript dependencies
 ```
 yarn install
+```
+* setup config envirnment variables from the example
+```
+cp env-example .env
 ```
 * Create the databases
 ```
