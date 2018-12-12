@@ -82,7 +82,7 @@ class ShowClient extends React.Component {
 
   checkNextWeek = () => {
     const { databaseId } = this.props;
-    const { selectedDate } = this.state;
+    const { selectedDate, futureEligibility } = this.state;
     const nextWeek = eachDay(
       addDays(selectedDate, 1),
       addDays(selectedDate, 7)
@@ -94,42 +94,51 @@ class ShowClient extends React.Component {
     });
 
     for (let day = 0, l = loadingNumber; day < l; day++) {
-      const url = `/clients/${databaseId}/eligibility/${format(
-        nextWeek[day],
-        'YYYY-MM-DD'
-      )}`;
+      const formattedDate = format(nextWeek[day], 'YYYY-MM-DD');
+      let alreadyChecked = false;
 
-      fetch(url, {
-        method: 'GET',
-        mode: 'same-origin',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': getCSRF()
+      for(let futureDay = 0; futureDay < futureEligibility.length; futureDay++) {
+        if (Object.keys(futureEligibility[futureDay])[0] == formattedDate) {
+          alreadyChecked = true;
+          break;
         }
-      })
-        .then(result => {
-          return result.json();
-        })
-        .then(response => {
-          loadingNumber--;
-          if (loadingNumber === 0) {
-            this.setState({
-              backgroundLoading: false
-            });
-          }
-          this.appendEligibleDay(response);
-        })
-        .catch(error => {
-          console.error('Server error:', error);
+      }
 
-          loadingNumber--;
-          if (loadingNumber === 0) {
-            this.setState({
-              backgroundLoading: false
-            });
+      if (!alreadyChecked) {
+        const url = `/clients/${databaseId}/eligibility/${formattedDate}`;
+
+        fetch(url, {
+          method: 'GET',
+          mode: 'same-origin',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': getCSRF()
           }
-        });
+        })
+          .then(result => {
+            return result.json();
+          })
+          .then(response => {
+            loadingNumber--;
+            if (loadingNumber === 0) {
+              this.setState({
+                backgroundLoading: false
+              });
+            }
+            this.appendEligibleDay(response);
+          })
+          .catch(error => {
+            console.error('Server error:', error);
+
+            loadingNumber--;
+            if (loadingNumber === 0) {
+              this.setState({
+                backgroundLoading: false
+              });
+            }
+          });
+      }
     }
   };
 
@@ -149,8 +158,7 @@ class ShowClient extends React.Component {
       let values = futureEligibility[day][date];
       let allYears = values.last5Years.every(year => year);
 
-      if (values.meetsMinimumPresence && allYears)
-        eligibleDates.push(date);
+      if (values.meetsMinimumPresence && allYears) eligibleDates.push(date);
     }
 
     return [
