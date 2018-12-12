@@ -85,7 +85,7 @@ class ShowClient extends React.Component {
     const { selectedDate } = this.state;
     const nextWeek = eachDay(
       addDays(selectedDate, 1),
-      addDays(selectedDate, 8)
+      addDays(selectedDate, 7)
     );
     let loadingNumber = nextWeek.length;
 
