@@ -35,28 +35,28 @@ export default class PresenceTable extends React.Component {
     );
   };
 
-  startDate = yrNumber => {
+  startDate = yearNum => {
     const { selectedDate } = this.props;
-    return format(addDays(subYears(selectedDate, yrNumber), 1), 'DD MMM YYYY');
+    return format(addDays(subYears(selectedDate, yearNum), 1), 'DD MMM YYYY');
   };
 
-  endingDate = yrNumber => {
+  endingDate = yearNum => {
     const { selectedDate } = this.props;
-    return format(subYears(selectedDate, yrNumber - 1), 'DD MMM YYYY');
+    return format(subYears(selectedDate, yearNum - 1), 'DD MMM YYYY');
   };
 
   render() {
     const { years, totalDays, loading } = this.props;
-    let yrNumber = 6
+    let yearNum = 6
     let formattedYears = map(years, (isEligible, yearEndDate) => {
-      yrNumber --
+      yearNum --
       return {
-        yrNumber,
+        yearNum,
         isEligible,
-        yearNumber: yrNumber,
+        yearNumber: yearNum,
         daysPresent: totalDays[yearEndDate],
-        startDate: this.startDate(yrNumber),
-        endingDate: this.endingDate(yrNumber)
+        startDate: this.startDate(yearNum),
+        endingDate: this.endingDate(yearNum)
       };
     }).reverse()
 
@@ -66,7 +66,7 @@ export default class PresenceTable extends React.Component {
         {formattedYears && !loading && (
           <div className="presence-table">
             {formattedYears.map(year => (
-              <Year key={`year_${year.yrNumber}`} {...year} />
+              <Year key={`year_${year.yearNum}`} {...year} />
             ))}
           </div>
         )}
