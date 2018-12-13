@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { sum } from 'lodash';
+import { sum, map } from 'lodash';
 import Year from './Year';
 import { format, subYears, addDays } from 'date-fns';
 
@@ -29,34 +29,36 @@ export default class PresenceTable extends React.Component {
 
     return (
       <header className={`presence-table-header ${stateClass}`}>
-        <span>Total days in NZ: {sum(totalDays)}</span>
+      <span>Total days in New Zealand: {sum(map(totalDays, eachYear => eachYear))}</span>
         <i className={`fas fa-${iconClass}`} />
       </header>
     );
   };
 
-  startDate = index => {
+  startDate = yrNumber => {
     const { selectedDate } = this.props;
-    return format(addDays(subYears(selectedDate, index + 1), 1), 'DD MMM YYYY');
+    return format(addDays(subYears(selectedDate, yrNumber), 1), 'DD MMM YYYY');
   };
 
-  endingDate = index => {
+  endingDate = yrNumber => {
     const { selectedDate } = this.props;
-    return format(subYears(selectedDate, index), 'DD MMM YYYY');
+    return format(subYears(selectedDate, yrNumber - 1), 'DD MMM YYYY');
   };
 
   render() {
     const { years, totalDays, loading } = this.props;
-    let formattedYears = years.map((isEligible, index) => {
+    let yrNumber = 6
+    let formattedYears = map(years, (isEligible, yearEndDate) => {
+      yrNumber --
       return {
-        index,
+        yrNumber,
         isEligible,
-        yearNumber: years.length - index,
-        daysPresent: totalDays[index],
-        startDate: this.startDate(index),
-        endingDate: this.endingDate(index)
+        yearNumber: yrNumber,
+        daysPresent: totalDays[yearEndDate],
+        startDate: this.startDate(yrNumber),
+        endingDate: this.endingDate(yrNumber)
       };
-    });
+    }).reverse()
 
     return (
       <div className="results">
@@ -64,7 +66,7 @@ export default class PresenceTable extends React.Component {
         {formattedYears && !loading && (
           <div className="presence-table">
             {formattedYears.map(year => (
-              <Year key={`year_${year.index}`} {...year} />
+              <Year key={`year_${year.yrNumber}`} {...year} />
             ))}
           </div>
         )}
