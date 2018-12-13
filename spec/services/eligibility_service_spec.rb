@@ -49,7 +49,6 @@ RSpec.describe EligibilityService, type: :model do
       end
       it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-02' => false, '2016-04-03' => true) }
     end
-
   end
 
   describe 'presence_count' do
