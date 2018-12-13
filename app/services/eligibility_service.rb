@@ -31,7 +31,7 @@ class EligibilityService
 
       @eligibility.save!
 
-      puts(@eligibility)
+      Rails.logger.info @eligibility
     end
 
     @eligibility
