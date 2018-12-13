@@ -1,41 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <%= react_component("ShowClient", props: {
-  clientId: @client.id,
+  databaseId: @client.id,
+  clientId: @client.im_client_id,
   movements: @movements,
-  identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name]),
-  eligibleDateRanges:[
-    {start:"Dec 17 2018", end:"Jan 13 2019"},
-    {start:"Feb 17 2019", end:"April 13 2019"},
-    {start:"Jun 11 2019", end:"Jul 3 2019"},
-  ],
-  totalDays: 1512,
-  years: [
-    {
-      year:2014,
-      daysPresent:365,
-      meetsAmountOfDaysInNZ:true,
-      periodsAway:[
-        {start:"2014-01-01",end:"2014-01-03",total:3}
-      ]
-    },
-    {
-      year:2015,
-      daysPresent:300,
-      meetsAmountOfDaysInNZ:false,
-      periodsAway:[
-        {start:"2015-01-01",end:"2015-01-03",total:3},
-        {start:"2015-05-01",end:"2015-05-23",total:18},
-      ]
-    },
-    {
-      year:2016,
-      daysPresent:222,
-      meetsAmountOfDaysInNZ:true,
-      periodsAway:[
-        {start:"2016-01-01",end:"2016-01-03",total:11},
-        {start:"2016-05-01",end:"2016-05-23",total:11},
-        {start:"2016-12-01",end:"2016-12-03",total:11},
-      ]
-    }  ]
+  identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name])
 }) %>
