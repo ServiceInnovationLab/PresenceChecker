@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe EligibilityService, type: :model do
-  let(:service) { EligibilityService.new(client, day) }
+  let(:service) { EligibilityService.new(client, day, 1) }
   let(:client) { FactoryBot.create :client }
   let(:identity) { FactoryBot.create :identity, client: client }
   let(:day) { '2019-06-01' }
@@ -54,49 +54,61 @@ RSpec.describe EligibilityService, type: :model do
   describe 'presence_count' do
     subject { service.presence_count(client, day) }
 
-    context 'when not present in nz' do
-      before { service.run! }
-
-      it 'Adds up the previous 5 years to all be zero' do
-        expect(service.days_by_rolling_year).to eq('2015-06-01' => 0, '2016-06-01' => 0, '2017-06-01' => 0, '2018-06-01' => 0, '2019-06-01' => 0)
-      end
-      it { expect(service.meets_minimum_presence_requirements[day]).to eq(false) }
-      it { expect(service.meets_5_year_presence_requirement[day]).to eq(false) }
+    it 'saves eligiblity only once' do
+      expect { service.run! }.to change { Eligibility.count }.by(1)
+      expect { service.run! }.not_to change { Eligibility.count }
     end
 
-    context 'when present all the days' do
-      before do
-        FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
-        service.run!
+    subject { Eligibility.last }
+
+    describe 'fetching' do
+      context 'when not present in nz' do
+        before { service.run! }
+
+        it 'Adds up the previous 5 years to all be zero' do
+          expect(subject.present_days_by_rolling_year).to eq('2015-06-01' => 0, '2016-06-01' => 0, '2017-06-01' => 0, '2018-06-01' => 0, '2019-06-01' => 0)
+        end
+        it { expect(subject.minimum_presence).to eq(false) }
+        it { expect(subject.five_year_presence).to eq(false) }
+        it { expect(subject.each_year_presence).to eq(false) }
       end
 
-      it 'Adds up the previous 5 years to all be present' do
-        expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 366, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
-      end
-      it { expect(service.meets_minimum_presence_requirements[day]).to eq(true) }
-      it { expect(service.meets_5_year_presence_requirement[day]).to eq(true) }
-    end
+      context 'when present all the days' do
+        before do
+          FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
+          service.run!
+        end
 
-    context 'when in out of NZ for 4 months' do
-      before do
-        FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
-        FactoryBot.create :departure, carrier_date_time: '2016-01-01', identity: identity
-        FactoryBot.create :arrival, carrier_date_time: '2016-04-01', identity: identity
-        service.run!
+        it 'Adds up the previous 5 years to all be present' do
+          expect(subject.present_days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 366, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
+        end
+        it { expect(subject.minimum_presence).to eq(true) }
+        it { expect(subject.five_year_presence).to eq(true) }
+        it { expect(subject.each_year_presence).to eq(true) }
       end
 
-      it 'works out the absence for 4 months' do
-        expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 276, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
+      context 'when in out of NZ for 4 months' do
+        before do
+          FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
+          FactoryBot.create :departure, carrier_date_time: '2016-01-01', identity: identity
+          FactoryBot.create :arrival, carrier_date_time: '2016-04-01', identity: identity
+          service.run!
+        end
+
+        it 'works out the absence for 4 months' do
+          expect(subject.present_days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 276, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
+        end
+        it { expect(subject.minimum_presence).to eq(true) }
+        it { expect(subject.five_year_presence).to eq(true) }
+        it { expect(subject.each_year_presence).to eq(true) }
       end
-      it { expect(service.meets_minimum_presence_requirements[day]).to eq(true) }
-      it { expect(service.meets_5_year_presence_requirement[day]).to eq(true) }
     end
   end
 
   describe 'dates to ask OF for' do
-    it { expect(service.send(:years_before, 1)).to eq '2018-06-01' }
-    it { expect(service.send(:years_before, 2)).to eq '2017-06-01' }
-    it { expect(service.send(:years_before, 3)).to eq '2016-06-01' }
-    it { expect(service.send(:years_before, 4)).to eq '2015-06-01' }
+    it { expect(service.send(:years_before, '2019-06-01', 1)).to eq '2018-06-01' }
+    it { expect(service.send(:years_before, '2019-06-01', 2)).to eq '2017-06-01' }
+    it { expect(service.send(:years_before, '2019-06-01', 3)).to eq '2016-06-01' }
+    it { expect(service.send(:years_before, '2019-06-01', 4)).to eq '2015-06-01' }
   end
 end
