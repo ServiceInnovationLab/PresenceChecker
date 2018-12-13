@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :user, aliases: [:owner] do
     email { Faker::Internet.email }
-    password { Faker::Internet.password }
+    password { "#{Faker::Internet.password}P@ssw0rd}" }
     # after(:create) do |user, _evaluator|
     #   user.confirm
     # end
