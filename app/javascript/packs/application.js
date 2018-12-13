@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
-import { format } from 'date-fns';
+import { format, eachDay, addDays } from 'date-fns';
 
 import { getCSRF } from '../utilities/utilities';
 
@@ -12,10 +12,12 @@ import MovementsTable from '../bundles/Presence/components/MovementsTable';
 class ShowClient extends React.Component {
   state = {
     loading: false,
+    backgroundLoading: false,
     selectedDate: new Date(),
     meetsMinimumPresence: false,
     daysInNZ: [],
-    last5Years: []
+    last5Years: [],
+    futureEligibility: []
   };
 
   componentDidMount = () => {
@@ -74,6 +76,67 @@ class ShowClient extends React.Component {
       daysInNZ: response.daysInNZ,
       last5Years: response.last5Years
     });
+
+    this.checkNextWeek();
+  };
+
+  checkNextWeek = () => {
+    const { databaseId } = this.props;
+    const { selectedDate } = this.state;
+    const nextWeek = eachDay(
+      addDays(selectedDate, 1),
+      addDays(selectedDate, 8)
+    );
+    let loadingNumber = nextWeek.length;
+
+    this.setState({
+      backgroundLoading: true
+    });
+
+    for (let day = 0, l = loadingNumber; day < l; day++) {
+      const url = `/clients/${databaseId}/eligibility/${format(
+        nextWeek[day],
+        'YYYY-MM-DD'
+      )}`;
+
+      fetch(url, {
+        method: 'GET',
+        mode: 'same-origin',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': getCSRF()
+        }
+      })
+        .then(result => {
+          return result.json();
+        })
+        .then(response => {
+          loadingNumber--;
+          if (loadingNumber === 0) {
+            this.setState({
+              backgroundLoading: false
+            });
+          }
+          this.appendEligibleDay(response);
+        })
+        .catch(error => {
+          console.error('Server error:', error);
+
+          loadingNumber--;
+          if (loadingNumber === 0) {
+            this.setState({
+              backgroundLoading: false
+            });
+          }
+        });
+    }
+  };
+
+  appendEligibleDay = day => {
+    const futureEligibility = [ ...this.state.futureEligibility ];
+    futureEligibility.push(day);
+    this.setState({ futureEligibility });
   };
 
   highlightDates = () => {

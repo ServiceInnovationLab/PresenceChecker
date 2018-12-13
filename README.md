@@ -15,7 +15,7 @@ This software is a tool to calculate and predict days where a person is eligible
 ## How to run
 This app is built to run on Linux, but also runs nicely on MacOS. Windows is not supported, so YMMV.
 
-This is a ruby on rails app. You will need:
+This is a ruby on rails app. You will need to:
 * Git clone this repo
 * Install the correct version of Ruby. We reccomend installing `rbenv` to manage multiple versions of ruby, and then using that to install the version of ruby specified in our file `.ruby-version`
 ```
@@ -26,7 +26,7 @@ rbenv install < .ruby-version
 ```
 brew install postgresql
 ```
-* Start PostgreSQL on startup 
+* Start PostgreSQL on startup
 ```
 brew services start postgresql
 ```
@@ -59,3 +59,7 @@ bundle exec rake db:seed
 ```
 bundle exec rails server
 ```
+
+## Deployment
+
+Deployments happen automatically (performed by TravisCI) when code is merged into the `master` branch.
