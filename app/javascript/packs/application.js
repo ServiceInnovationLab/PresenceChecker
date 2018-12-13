@@ -81,6 +81,8 @@ class ShowClient extends React.Component {
           loading: false
         });
       }
+
+      this.checkNextWeek();
     }
   };
 
