@@ -7,8 +7,8 @@ import { format, subYears, addDays } from 'date-fns';
 export default class PresenceTable extends React.Component {
   static propTypes = {
     isEligible: PropTypes.bool,
-    totalDays: PropTypes.arrayOf(PropTypes.number),
-    years: PropTypes.arrayOf(PropTypes.bool),
+    totalDays: PropTypes.object,
+    years: PropTypes.object,
     loading: PropTypes.bool
   };
 
