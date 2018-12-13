@@ -6,7 +6,7 @@ RSpec.describe 'layouts/application', type: :view do
 
   include Devise::Test::ControllerHelpers
 
-  describe 'header view' do
+  describe 'application view' do
     let(:current_user) { FactoryBot.create :user }
 
     before do
