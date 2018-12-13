@@ -7,7 +7,32 @@ export default class PresenceDates extends React.Component {
   static propTypes = {
     isEligible: PropTypes.bool,
     onDateChange: PropTypes.func,
-    highlightDates: PropTypes.array
+    highlightDates: PropTypes.array,
+    loading: PropTypes.bool
+  };
+
+  header = stateClass => {
+    const { isEligible, loading } = this.props;
+    let iconClass = '';
+    let headerText = '';
+
+    if (loading) {
+      iconClass = 'spinner';
+      headerText = 'Loading...';
+    } else if (isEligible) {
+      iconClass = 'check';
+      headerText = 'Eligible Now';
+    } else {
+      iconClass = 'times';
+      headerText = 'Not eligible';
+    }
+
+    return (
+      <header className={`has-icon ${stateClass}`}>
+        <h3>{headerText}</h3>
+        <i className={`fas fa-${iconClass}`} />
+      </header>
+    );
   };
 
   render() {
@@ -15,26 +40,28 @@ export default class PresenceDates extends React.Component {
       isEligible,
       selectedDate,
       onDateChange,
-      highlightDates
+      highlightDates,
+      loading
     } = this.props;
     const date = format(selectedDate, 'D MMMM YYYY');
-    const isPassingClass = isEligible ? '' : 'has-error';
+    let stateClass = '';
+
+    if (loading) {
+      stateClass = 'loading';
+    } else if (!isEligible) {
+      stateClass = 'has-error';
+    }
 
     return (
-      <div className={`panel ${isPassingClass}`}>
-        <header className={`has-icon ${isPassingClass}`}>
-          {isEligible ? <h3>Eligible Now</h3> : <h3> Not eligible</h3>}
-          <i className={`fas ${isEligible ? 'fa-check' : 'fa-times'}`} />
-        </header>
-        <div>
-          <p>Selected date {date}</p>
-          <DatePicker
-            inline
-            highlightDates={highlightDates}
-            selected={selectedDate}
-            onChange={onDateChange}
-          />
-        </div>
+      <div className={`panel ${stateClass}`}>
+        {this.header(stateClass)}
+        <p>Selected date {date}</p>
+        <DatePicker
+          inline
+          highlightDates={highlightDates}
+          selected={selectedDate}
+          onChange={onDateChange}
+        />
       </div>
     );
   }

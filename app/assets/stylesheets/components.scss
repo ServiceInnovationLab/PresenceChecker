@@ -1,4 +1,5 @@
 @import './colours';
+@import './keyframes';
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -200,7 +201,8 @@ table {
       font-weight: bold;
     }
 
-    &.has-error h3 {
+    &.has-error h3,
+    &.loading h3 {
       color: $black;
     }
 
@@ -233,6 +235,18 @@ table {
     }
 
     &.has-error {
+      i {
+        color: $black;
+      }
+    }
+  }
+
+  &.loading {
+    header {
+      background: $light-grey;
+    }
+
+    &.loading {
       i {
         color: $black;
       }
@@ -301,20 +315,6 @@ table {
     padding-left: 10px;
   }
 
-  header {
-    color: $white;
-    background: $blue-positive;
-    padding: 10px 20px;
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
-
-    &.has-error {
-      color: $black;
-      background: $yellow-negative;
-    }
-  }
-
   .details-table {
     width: 100%;
     padding: 0;
@@ -325,12 +325,28 @@ table {
   .year-table {
     width: 100%;
     border-spacing: 0px;
-    background: $off-white;
+    color: $white;
+
+    &__summary {
+      padding: 20px;
+      text-align: left;
+    }
+
+    &.has-error {
+      color: $black;
+
+      tr {
+        background: $yellow-negative;
+      }
+    }
+
+    .is-light {
+      color: $black;
+      background-color: $light-white;
+    }
 
     tr {
-      &.is-light {
-        background-color: $light-white;
-      }
+      background: $blue-positive;
     }
 
     .icon-container {
@@ -388,20 +404,44 @@ table {
   }
 }
 
+.presence-table-header {
+  color: $white;
+  background: $blue-positive;
+  padding: 10px 20px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  width: 75%;
+
+  &.has-error {
+    color: $black;
+    background: $yellow-negative;
+  }
+
+  &.loading {
+    color: $black;
+    background: $light-grey;
+  }
+
+  i {
+    margin-left: 10px;
+  }
+}
+
 .dates-wrapper {
   h2 {
     background: $light-blue;
     padding: 10px 15px;
   }
 
-  .dates-wrapper-left,
-  .dates-wrapper-right {
+  &-left,
+  &-right {
     display: inline-block;
     min-width: 40%;
     vertical-align: top;
   }
 
-  .dates-wrapper-left {
+  &-left {
     margin-right: 1rem;
 
     .panel {
@@ -410,10 +450,46 @@ table {
       &.has-error {
         background-color: rgba($yellow-negative, .2);
       }
+
+      &.loading {
+        background-color: rgba($light-grey, .2);
+      }
     }
   }
 
-  .dates-wrapper-right {
+  &-right {
     width: calc(60% - 1rem);
   }
+}
+
+.movements-table {
+  h3 {
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: rgba($black, .05);
+  }
+}
+
+.movements-table-header {
+  margin-top: 20px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.movements-table-wrapper {
+  max-height: 30rem;
+  overflow: hidden;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 2px solid $light-grey;
+  border-top: 0;
+}
+
+.fa-spinner {
+  animation: spin 2s infinite;
 }

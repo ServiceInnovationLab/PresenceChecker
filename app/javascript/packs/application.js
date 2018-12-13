@@ -1,91 +1,101 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
-import { format, isWithinRange, eachDay } from 'date-fns';
+import { format } from 'date-fns';
+
+import { getCSRF } from '../utilities/utilities';
 
 import Identity from '../bundles/Identity/components/Identity';
 import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
-
-const checkEligibility = (eligibleDateRanges, date = new Date()) => {
-  let eligible = false;
-
-  for (let index = 0; index < eligibleDateRanges.length; index++) {
-    const { start, end } = eligibleDateRanges[index];
-    if (isWithinRange(date, start, end)) {
-      eligible = true;
-      break;
-    }
-  }
-
-  return eligible;
-};
-
-const getCSRF = () => {
-  let element = document.querySelector("meta[name=\"csrf-token\"]");
-  if (element) { return element.getAttribute("content"); }
-  return "";
-};
+import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
 class ShowClient extends React.Component {
   state = {
+    loading: false,
     selectedDate: new Date(),
-    isEligible: checkEligibility(this.props.eligibleDateRanges)
+    meetsMinimumPresence: false,
+    daysInNZ: [],
+    last5Years: []
   };
 
-  allDaysInRange = () => {
-    const { eligibleDateRanges } = this.props;
-    const allDaysInRange = eligibleDateRanges.map(({ start, end }) => {
-      return eachDay(start, end, 1);
-    });
-    return allDaysInRange.reduce((acc, val) => acc.concat(val));
-  };
-
-  onDateChange = (date) => {
-    const { eligibleDateRanges } = this.props;
-    let newDate = new Date(date);
-
-    this.setState({
-      selectedDate: newDate,
-      isEligible: checkEligibility(eligibleDateRanges, newDate)
-    });
-
-    // This is where we'll call the service with a fetch request
-    this.checkSelectedDate(newDate);
+  componentDidMount = () => {
+    this.checkSelectedDate(this.state.selectedDate);
   };
 
   checkSelectedDate = selectedDate => {
-    const { clientId } = this.props;
+    const { databaseId } = this.props;
+    let url = `/clients/${databaseId}/eligibility/${format(
+      selectedDate,
+      'YYYY-MM-DD'
+    )}`;
 
-    fetch(`/clients/eligibility?id=${clientId}&date=${selectedDate}`, {
-      method: "GET",
-      mode: "same-origin",
-      credentials: "same-origin",
+    this.setState({
+      loading: true
+    });
+
+    fetch(url, {
+      method: 'GET',
+      mode: 'same-origin',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": getCSRF()
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': getCSRF()
       }
     })
       .then(result => {
         return result.json();
       })
-      .then(response => {
-        debugger;
-        // This response should be the EligibilityService object
-      })
+      .then(response =>
+        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')])
+      )
       .catch(error => {
-        console.error("Server error:", error);
+        console.error('Server error:', error);
+        this.setState({
+          loading: false
+        });
       });
-  }
+  };
 
-  render() {
-    const { selectedDate, isEligible } = this.state;
-    const { clientId, identities, totalDays, years } = this.props;
+  onDateChange = date => {
+    let newDate = new Date(date);
 
-    const highlightWithRanges = [
+    this.setState({
+      selectedDate: newDate,
+      meetsMinimumPresence: false
+    });
+
+    this.checkSelectedDate(newDate);
+  };
+
+  onDataResponse = response => {
+    this.setState({
+      loading: false,
+      meetsMinimumPresence: response.meetsMinimumPresence,
+      daysInNZ: response.daysInNZ,
+      last5Years: response.last5Years
+    });
+  };
+
+  highlightDates = () => {
+    // This doesn't work right now because we're only taking in one day.
+    let eligibleDates = [];
+
+    return [
       {
-        'is-within-range': this.allDaysInRange()
+        'is-within-range': eligibleDates
       }
     ];
+  };
+
+  render() {
+    const {
+      selectedDate,
+      meetsMinimumPresence,
+      daysInNZ,
+      last5Years,
+      loading
+    } = this.state;
+    const { clientId, identities, movements } = this.props;
 
     return (
       <main role="main">
@@ -98,16 +108,21 @@ class ShowClient extends React.Component {
             <PresenceDates
               onDateChange={this.onDateChange}
               selectedDate={selectedDate}
-              isEligible={isEligible}
-              highlightDates={highlightWithRanges}
+              isEligible={meetsMinimumPresence}
+              highlightDates={this.highlightDates()}
+              loading={loading}
             />
           </div>
           <div className="results dates-wrapper-right">
             <PresenceTable
-              isEligible={isEligible}
-              totalDays={totalDays}
-              years={years}
+              isEligible={meetsMinimumPresence}
+              totalDays={daysInNZ}
+              years={last5Years}
+              selectedDate={selectedDate}
+              // rollingYearData={rollingYearData}
+              loading={loading}
             />
+            <MovementsTable movements={movements} />
           </div>
         </section>
       </main>

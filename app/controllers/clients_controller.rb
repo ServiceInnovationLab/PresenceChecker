@@ -9,23 +9,34 @@ class ClientsController < ApplicationController
 
   def show
     @identities = @client.identities
-    @movements = @client.movements
+    @movements = @client.movements.order('carrier_date_time desc')
   end
 
+  # URL to call this would look like /clients/:client_id/eligibility/:date.json
+  # e.g. /clients/1/eligibility/2019-01-01.json
   def eligibility
     respond_to :json
 
-    @service = EligibilityService.new(Client.find(params[:id]), params[:date] || Date.now)
+    @service = EligibilityService.new(@client, requested_date)
     @service.run!
 
-    # URL to call this would look like /clients/eligibility?id=1&date="2019-01-01"
-    @service.to_json
+    render json: {
+      requested_date => {
+        'meetsMinimumPresence' => @service.meets_minimum_presence_requirements[requested_date],
+        'last5Years' => @service.enough_days_by_rolling_year.values,
+        'daysInNZ' => @service.days_by_rolling_year.values
+      }
+    }
   end
 
   private
 
+  def requested_date
+    params[:day] || Date.today.strftime('%Y-%m-%d')
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_client
-    @client = Client.find(params[:id])
+    @client = Client.find(params[:id] || params[:client_id])
   end
 end
