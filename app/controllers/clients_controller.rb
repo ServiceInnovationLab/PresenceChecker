@@ -20,8 +20,9 @@ class ClientsController < ApplicationController
     end
     render json: {
       requested_day => {
-        # booleans
+        # boolean
         'meetsMinimumPresence' => @eligibility.minimum_presence,
+        # boolean
         'meetsFiveYearPresence' => @eligibility.five_year_presence,
         # hash of booleans e.g. {'2019-06-07': true.. }
         'last5Years' => @eligibility.mimimum_presence_by_rolling_year,
