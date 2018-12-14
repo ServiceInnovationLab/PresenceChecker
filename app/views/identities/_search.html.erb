@@ -1,9 +1,0 @@
-<%= form_tag(identities_path, :method => "get", id: "search-form") do %>
-  <div class="well">
-    <label>
-      <span class="heading">Passport No.</span>
-      <%= text_field_tag :serial_number, params[:serial_number] %>
-      <%= submit_tag "Search", class: 'btn success' %>
-    </label>
-  </div>
-<% end %>
