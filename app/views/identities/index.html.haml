@@ -1,0 +1,31 @@
+%body
+  %header.main
+    %h1 Presence results
+  = render partial: 'search'
+  %h1 Identities
+  - if @identities.size.positive?
+    %table.table
+      %thead
+        %tr
+          %th Issuing State
+          %th Serial Number
+          %th Family name
+          %th Given names
+          %th Country of birth
+          %th{:colspan => "3"}
+      %tbody
+        - @identities.each do |identity|
+          %tr
+            %td= identity.issuing_state.name
+            %td= identity.serial_number
+            %td= identity.family_name
+            %td
+              = identity.first_name
+              = identity.second_name
+              = identity.third_name
+            %td= identity.country_of_birth.name
+            %td
+              = link_to 'Show', client_path(identity.client)
+  - else
+    No records found
+  %br
