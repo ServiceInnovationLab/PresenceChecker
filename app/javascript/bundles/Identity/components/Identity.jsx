@@ -6,7 +6,8 @@ export default class Identity extends React.Component {
   state = { isCollapsed: true };
 
   static propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    identities: PropTypes.array
   };
 
   render() {
