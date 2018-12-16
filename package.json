@@ -26,7 +26,7 @@
     "yarn": ">= 0.25.2"
   },
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --all --verbose --coverage --forceExit",
     "test-watch": "jest --watch"
   },
   "jest": {
