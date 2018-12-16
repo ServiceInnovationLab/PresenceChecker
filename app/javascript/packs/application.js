@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import { format, eachDay, addDays } from 'date-fns';
+import "isomorphic-fetch";
 
 import { getCSRF } from '../utilities/utilities';
 
@@ -9,7 +10,7 @@ import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
 import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
-class ShowClient extends React.Component {
+export default class ShowClient extends React.Component {
   state = {
     loading: false,
     backgroundLoading: false,
