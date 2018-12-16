@@ -1,5 +1,7 @@
 {
   "presets": [
+    "@babel/preset-react",
+    "@babel/preset-env",
     [
       "env",
       {
@@ -13,6 +15,22 @@
     ],
     "react"
   ],
+  "env": {
+    "test": {
+      "presets": [["env"], "react"],
+      "plugins": [
+        "@babel/plugin-transform-modules-commonjs",
+        "syntax-dynamic-import",
+        "transform-object-rest-spread",
+        [
+          "transform-class-properties",
+          {
+            "spec": true
+          }
+        ]
+      ]
+    }
+  },
   "plugins": [
     "syntax-dynamic-import",
     "transform-object-rest-spread",
