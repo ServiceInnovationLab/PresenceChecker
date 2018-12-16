@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { sum } from 'lodash';
+import { sum, map } from 'lodash';
 import Year from './Year';
 import { format, subYears, addDays } from 'date-fns';
 
 export default class PresenceTable extends React.Component {
   static propTypes = {
     isEligible: PropTypes.bool,
-    totalDays: PropTypes.arrayOf(PropTypes.number),
-    years: PropTypes.arrayOf(PropTypes.bool),
+    totalDays: PropTypes.object,
+    years: PropTypes.object,
     loading: PropTypes.bool
   };
 
@@ -29,34 +29,36 @@ export default class PresenceTable extends React.Component {
 
     return (
       <header className={`presence-table-header ${stateClass}`}>
-        <span>Total days in NZ: {sum(totalDays)}</span>
+      <span>Total days in New Zealand: {sum(map(totalDays, eachYear => eachYear))}</span>
         <i className={`fas fa-${iconClass}`} />
       </header>
     );
   };
 
-  startDate = index => {
+  startDate = yearNum => {
     const { selectedDate } = this.props;
-    return format(addDays(subYears(selectedDate, index + 1), 1), 'DD MMM YYYY');
+    return format(addDays(subYears(selectedDate, yearNum), 1), 'DD MMM YYYY');
   };
 
-  endingDate = index => {
+  endingDate = yearNum => {
     const { selectedDate } = this.props;
-    return format(subYears(selectedDate, index), 'DD MMM YYYY');
+    return format(subYears(selectedDate, yearNum - 1), 'DD MMM YYYY');
   };
 
   render() {
     const { years, totalDays, loading } = this.props;
-    let formattedYears = years.map((isEligible, index) => {
+    let yearNum = 6
+    let formattedYears = map(years, (isEligible, yearEndDate) => {
+      yearNum --
       return {
-        index,
+        yearNum,
         isEligible,
-        yearNumber: years.length - index,
-        daysPresent: totalDays[index],
-        startDate: this.startDate(index),
-        endingDate: this.endingDate(index)
+        yearNumber: yearNum,
+        daysPresent: totalDays[yearEndDate],
+        startDate: this.startDate(yearNum),
+        endingDate: this.endingDate(yearNum)
       };
-    });
+    }).reverse()
 
     return (
       <div className="results">
@@ -64,7 +66,7 @@ export default class PresenceTable extends React.Component {
         {formattedYears && !loading && (
           <div className="presence-table">
             {formattedYears.map(year => (
-              <Year key={`year_${year.index}`} {...year} />
+              <Year key={`year_${year.yearNum}`} {...year} />
             ))}
           </div>
         )}
