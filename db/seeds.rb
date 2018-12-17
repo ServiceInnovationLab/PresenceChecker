@@ -133,5 +133,4 @@ end
 
   FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
   FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
-
 end
