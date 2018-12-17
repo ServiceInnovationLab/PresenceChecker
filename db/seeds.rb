@@ -4,9 +4,6 @@
   email = "#{name}@dia.govt.nz"
   User.invite!(email: email) unless User.find_by(email: email)
 end
-['mischa.saunders@ackama.com', 'ianzltd@gmail.com'].each do |email|
-  User.invite!(email: email) unless User.find_by(email: email)
-end
 
 # 5.times do
 #   client = FactoryBot.find_or_create_by :client
@@ -107,13 +104,13 @@ Movement.find_or_create_by!(identity_id: identity_4.id, direction: 'departure', 
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: 'arrival', carrier_date_time: 40.days.ago)
 Movement.find_or_create_by!(identity_id: identity_4.id, direction: 'departure', carrier_date_time: 30.days.ago)
 
-5.times do
+2.times do
   # Arrived and never left
   identity = FactoryBot.create :identity
   FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
 end
 
-4.times do
+2.times do
   # arrived, had onl one holiday
   identity = FactoryBot.create :identity
   FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
@@ -124,4 +121,17 @@ end
 
   FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
   FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
+end
+
+# took a really long holiday during
+2.times do
+  identity = FactoryBot.create :identity
+  FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+
+  holiday_start = 140.weeks.ago
+  holiday_end = 75.weeks.ago
+
+  FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
+  FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
+
 end
