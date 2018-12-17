@@ -12,10 +12,11 @@ before_install:
 install:
   - bundle install
   - yarn install
+  - yarn add jest
 script:
   - yarn test
-  # - RAILS_ENV=test bundle exec rake db:create db:migrate
-  # - bundle exec rspec
+  - RAILS_ENV=test bundle exec rake db:create db:migrate
+  - bundle exec rspec
 after_script:
 - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -t simplecov --id $CC_TEST_REPORTER_ID"
 deploy:
