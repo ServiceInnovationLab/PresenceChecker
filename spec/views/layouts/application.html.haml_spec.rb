@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'layouts/application', type: :view do
-
   include Devise::Test::ControllerHelpers
 
   describe 'application view' do
