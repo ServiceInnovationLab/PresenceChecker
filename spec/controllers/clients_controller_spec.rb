@@ -25,42 +25,37 @@ RSpec.describe ClientsController, type: :controller do
     end
 
     describe 'get eligibility' do
+      let(:day) { '2019-01-01' }
+
       let(:identity) { FactoryBot.create :identity, client: client }
-      before do
-        Timecop.freeze(Time.local(2019))
+      before { FactoryBot.create :arrival, identity: identity, carrier_date_time: '2011-12-31' }
 
-        FactoryBot.create :arrival, identity: identity, carrier_date_time: '2011-12-31'
-      end
-
-      after do
-        Timecop.return
-      end
-
-      subject { JSON.parse(response.body)['2019-01-01'] }
+      subject { JSON.parse(response.body)[day] }
 
       it { expect(response).to have_http_status(:ok) }
 
       context 'with no holidays data' do
-        before do
-          get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
-        end
+        before { get :eligibility, format: :json, params: { client_id: client.to_param, day: day } }
+
         it { expect(subject['meetsMinimumPresence']).to eq(true) }
-        it { expect(subject['last5Years']).to eq({
-          "2019-01-01" => true,
-          "2018-01-01" => true,
-          "2017-01-01" => true,
-          "2016-01-01" => true,
-          "2015-01-01" => true
-          })
-        }
-        it { expect(subject['daysInNZ']).to eq({
-          "2019-01-01" => 365,
-          "2018-01-01" => 365,
-          "2017-01-01" => 366,
-          "2016-01-01" => 365,
-          "2015-01-01" => 365
-          })
-        }
+        it do
+          expect(subject['last5Years']).to eq(
+            '2019-01-01' => true,
+            '2018-01-01' => true,
+            '2017-01-01' => true,
+            '2016-01-01' => true,
+            '2015-01-01' => true
+          )
+        end
+        it do
+          expect(subject['daysInNZ']).to eq(
+            '2019-01-01' => 365,
+            '2018-01-01' => 365,
+            '2017-01-01' => 366,
+            '2016-01-01' => 365,
+            '2015-01-01' => 365
+          )
+        end
       end
 
       context 'person with a one year absence' do
@@ -70,23 +65,25 @@ RSpec.describe ClientsController, type: :controller do
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(false) }
-        it { expect(subject['last5Years']).to eq({
-          "2019-01-01" => true,
-          "2018-01-01" => true,
-          "2017-01-01" => true,
-          "2016-01-01" => true,
-          "2015-01-01" => false
-          })
-        }
+        it do
+          expect(subject['last5Years']).to eq(
+            '2019-01-01' => true,
+            '2018-01-01' => true,
+            '2017-01-01' => true,
+            '2016-01-01' => true,
+            '2015-01-01' => false
+          )
+        end
         # there's a 2, the day they left and the day they returned both count
-        it { expect(subject['daysInNZ']).to eq({
-          "2019-01-01" => 365,
-          "2018-01-01" => 365,
-          "2017-01-01" => 366,
-          "2016-01-01" => 365,
-          "2015-01-01" => 2
-          })
-        }
+        it do
+          expect(subject['daysInNZ']).to eq(
+            '2019-01-01' => 365,
+            '2018-01-01' => 365,
+            '2017-01-01' => 366,
+            '2016-01-01' => 365,
+            '2015-01-01' => 2
+          )
+        end
       end
 
       context 'person with days absent' do
@@ -100,22 +97,23 @@ RSpec.describe ClientsController, type: :controller do
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(true) }
-        it { expect(subject['last5Years']).to eq({
-          "2019-01-01" => true,
-          "2018-01-01" => true,
-          "2017-01-01" => true,
-          "2016-01-01" => true,
-          "2015-01-01" => true
-          })
+        it {
+          expect(subject['last5Years']).to eq(
+            '2019-01-01' => true,
+            '2018-01-01' => true,
+            '2017-01-01' => true,
+            '2016-01-01' => true,
+            '2015-01-01' => true
+          )
         }
-        # there's a 2, the day they left and the day they returned both count
-        it { expect(subject['daysInNZ']).to eq({
-          "2019-01-01" => 363,
-          "2018-01-01" => 266,
-          "2017-01-01" => 366,
-          "2016-01-01" => 365,
-          "2015-01-01" => 365
-          })
+        it {
+          expect(subject['daysInNZ']).to eq(
+            '2019-01-01' => 363,
+            '2018-01-01' => 266,
+            '2017-01-01' => 366,
+            '2016-01-01' => 365,
+            '2015-01-01' => 365
+          )
         }
       end
     end

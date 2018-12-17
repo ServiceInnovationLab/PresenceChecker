@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_210736) do
+ActiveRecord::Schema.define(version: 2018_12_13_000738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(version: 2018_12_06_210736) do
     t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "eligibilities", force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.date "day", null: false
+    t.json "calculation_data", null: false
+    t.boolean "minimum_presence", null: false
+    t.boolean "each_year_presence", null: false
+    t.boolean "five_year_presence", null: false
+    t.json "present_days_by_rolling_year", null: false
+    t.json "mimimum_presence_by_rolling_year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id", "day"], name: "index_eligibilities_on_client_id_and_day", unique: true
+    t.index ["client_id"], name: "index_eligibilities_on_client_id"
   end
 
   create_table "identities", force: :cascade do |t|
@@ -81,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_210736) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "eligibilities", "clients"
   add_foreign_key "identities", "countries", column: "country_of_birth_id"
   add_foreign_key "identities", "countries", column: "issuing_state_id"
 end
