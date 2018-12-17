@@ -57,7 +57,7 @@ RSpec.describe EligibilityService, type: :model do
     context 'when not present in nz' do
       before { service.run! }
 
-      it "Adds up the previous 5 years to all be zero" do
+      it 'Adds up the previous 5 years to all be zero' do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 0, '2016-06-01' => 0, '2017-06-01' => 0, '2018-06-01' => 0, '2019-06-01' => 0)
       end
       it { expect(service.meets_minimum_presence_requirements[day]).to eq(false) }
@@ -70,7 +70,7 @@ RSpec.describe EligibilityService, type: :model do
         service.run!
       end
 
-      it "Adds up the previous 5 years to all be present" do
+      it 'Adds up the previous 5 years to all be present' do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 366, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
       end
       it { expect(service.meets_minimum_presence_requirements[day]).to eq(true) }
@@ -85,7 +85,7 @@ RSpec.describe EligibilityService, type: :model do
         service.run!
       end
 
-      it "works out the absence for 4 months" do
+      it 'works out the absence for 4 months' do
         expect(service.days_by_rolling_year).to eq('2015-06-01' => 365, '2016-06-01' => 276, '2017-06-01' => 365, '2018-06-01' => 365, '2019-06-01' => 365)
       end
       it { expect(service.meets_minimum_presence_requirements[day]).to eq(true) }

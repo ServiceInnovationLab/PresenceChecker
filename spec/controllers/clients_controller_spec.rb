@@ -45,8 +45,22 @@ RSpec.describe ClientsController, type: :controller do
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(true) }
-        it { expect(subject['last5Years']).to eq([true, true, true, true, true]) }
-        it { expect(subject['daysInNZ']).to eq([365, 365, 366, 365, 365]) }
+        it { expect(subject['last5Years']).to eq({
+          "2019-01-01" => true,
+          "2018-01-01" => true,
+          "2017-01-01" => true,
+          "2016-01-01" => true,
+          "2015-01-01" => true
+          })
+        }
+        it { expect(subject['daysInNZ']).to eq({
+          "2019-01-01" => 365,
+          "2018-01-01" => 365,
+          "2017-01-01" => 366,
+          "2016-01-01" => 365,
+          "2015-01-01" => 365
+          })
+        }
       end
 
       context 'person with a one year absence' do
@@ -56,9 +70,23 @@ RSpec.describe ClientsController, type: :controller do
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(false) }
-        it { expect(subject['last5Years']).to eq([false, true, true, true, true]) }
+        it { expect(subject['last5Years']).to eq({
+          "2019-01-01" => true,
+          "2018-01-01" => true,
+          "2017-01-01" => true,
+          "2016-01-01" => true,
+          "2015-01-01" => false
+          })
+        }
         # there's a 2, the day they left and the day they returned both count
-        it { expect(subject['daysInNZ']).to eq([2, 365, 366, 365, 365]) }
+        it { expect(subject['daysInNZ']).to eq({
+          "2019-01-01" => 365,
+          "2018-01-01" => 365,
+          "2017-01-01" => 366,
+          "2016-01-01" => 365,
+          "2015-01-01" => 2
+          })
+        }
       end
 
       context 'person with days absent' do
@@ -72,8 +100,23 @@ RSpec.describe ClientsController, type: :controller do
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
         it { expect(subject['meetsMinimumPresence']).to eq(true) }
-        it { expect(subject['last5Years']).to eq([true, true, true, true, true]) }
-        it { expect(subject['daysInNZ']).to eq([365, 365, 366, 266, 363]) }
+        it { expect(subject['last5Years']).to eq({
+          "2019-01-01" => true,
+          "2018-01-01" => true,
+          "2017-01-01" => true,
+          "2016-01-01" => true,
+          "2015-01-01" => true
+          })
+        }
+        # there's a 2, the day they left and the day they returned both count
+        it { expect(subject['daysInNZ']).to eq({
+          "2019-01-01" => 363,
+          "2018-01-01" => 266,
+          "2017-01-01" => 366,
+          "2016-01-01" => 365,
+          "2015-01-01" => 365
+          })
+        }
       end
     end
   end
