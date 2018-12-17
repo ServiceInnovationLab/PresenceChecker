@@ -12,7 +12,6 @@ before_install:
 install:
   - bundle install
   - yarn install
-  - yarn add jest
 script:
   - yarn test
   - RAILS_ENV=test bundle exec rake db:create db:migrate
