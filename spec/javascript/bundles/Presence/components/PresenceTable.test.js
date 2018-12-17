@@ -9,8 +9,8 @@ configure({ adapter: new Adapter() });
 describe('<PresenceTable />', () => {
   let props = {
     isEligible: true,
-    totalDays: [0],
-    years: [true],
+    totalDays: {},
+    years: {},
     loading: false
   };
 

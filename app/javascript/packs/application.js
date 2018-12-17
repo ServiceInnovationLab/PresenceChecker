@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
 import { format, eachDay, addDays } from 'date-fns';
-import "isomorphic-fetch";
+import 'isomorphic-fetch';
 
-import { getCSRF } from '../utilities/utilities';
+import { getCSRF, databaseURL } from '../utilities/utilities';
 
 import Identity from '../bundles/Identity/components/Identity';
 import PresenceDates from '../bundles/Presence/components/PresenceDates';
@@ -27,10 +27,8 @@ export default class ShowClient extends React.Component {
 
   checkSelectedDate = selectedDate => {
     const { databaseId } = this.props;
-    let url = `/clients/${databaseId}/eligibility/${format(
-      selectedDate,
-      'YYYY-MM-DD'
-    )}`;
+    const formattedDate = format(selectedDate, 'YYYY-MM-DD');
+    const url = `${databaseURL}/clients/${databaseId}/eligibility/${formattedDate}`;
 
     this.setState({
       loading: true
@@ -95,10 +93,8 @@ export default class ShowClient extends React.Component {
     });
 
     for (let day = 0, l = loadingNumber; day < l; day++) {
-      const url = `/clients/${databaseId}/eligibility/${format(
-        nextWeek[day],
-        'YYYY-MM-DD'
-      )}`;
+      const formattedDate = format(nextWeek[day], 'YYYY-MM-DD');
+      const url = `${databaseURL}/clients/${databaseId}/eligibility/${formattedDate}`;
 
       fetch(url, {
         method: 'GET',

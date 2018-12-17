@@ -1,4 +1,4 @@
-import { getCSRF, firstCharCap } from "../../../app/javascript/utilities/utilities";
+import { getCSRF, firstCharCap, databaseURL } from "../../../app/javascript/utilities/utilities";
 
 describe("getCSRF", () => {
   xit("is defined correctly", () => {
@@ -39,5 +39,15 @@ describe("firstCharCap", () => {
 
   it("doesn't effect a phrase that's already correct", () => {
     expect(firstCharCap(exampleStrings.alreadyCorrect)).toBe(exampleStrings.alreadyCorrect);
+  });
+});
+
+describe("databaseURL", () => {
+  it("is defined correctly", () => {
+    // Currently, this doesn't have a good way to be tested as JavaScript
+    // doesn't have a good way to render that Rails view. Not sure what the
+    // implementation should look like.
+    expect(databaseURL).toBeDefined();
+    expect(databaseURL()).toBe('http://localhost:3000');
   });
 });

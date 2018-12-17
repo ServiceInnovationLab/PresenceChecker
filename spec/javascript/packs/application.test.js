@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { format } from 'date-fns';
+import { format, databaseURL } from 'date-fns';
 
 import ShowClient from '../../../app/javascript/packs/application';
 
@@ -40,10 +40,8 @@ describe('<ShowClient />', () => {
     describe('checkSelectedDate', () => {
       const component = shallow(<ShowClient {...props} />);
       const date = new Date();
-      const url = `/clients/${props.databaseId}/eligibility/${format(
-        date,
-        'YYYY-MM-DD'
-      )}`;
+      const formattedDate = format(date, 'YYYY-MM-DD');
+      const url = `${databaseURL}/clients/${props.databaseId}/eligibility/${formattedDate}`;
 
       it('checks date passed', () => {
         const spy = jest.spyOn(component.instance(), 'setState');
