@@ -10,7 +10,7 @@ describe('<Identity />', () => {
   let props = {
     id: 1,
     identities: []
-  }
+  };
 
   it('renders without error', () => {
     shallow(<Identity {...props} />);
