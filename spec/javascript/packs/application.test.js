@@ -128,7 +128,7 @@ describe('<ShowClient />', () => {
           component.instance().appendEligibleDay(date);
         }).not.toThrow();
         expect(spy).toHaveBeenCalledWith({
-          futureEligibility: [ date ]
+          futureEligibility: [date]
         });
       });
     });
