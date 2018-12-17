@@ -5,7 +5,7 @@ namespace :clients do
 
   task calculate: :environment do
     (0..366).each do |n|
-      day = (Date.today + n).strftime('%Y-%m-%d')
+      day = (Date.today + n).strftime(EligibilityService.date_format)
       Client.all.order(:id).each do |client|
         next if Eligibility.where(client: client, day: day).size.positive?
 

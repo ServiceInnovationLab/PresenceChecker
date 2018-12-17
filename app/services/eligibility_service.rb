@@ -13,7 +13,7 @@ class EligibilityService
     @response = calculate(query)
 
     (0..(@number_of_days - 1)).each do |n|
-      day = (Date.parse(@day) + n).strftime('%Y-%m-%d')
+      day = (Date.parse(@day) + n).strftime(EligibilityService.date_format)
       person_name = "ruby_#{day}"
 
       @eligibility = Eligibility.find_or_initialize_by(client: @client, day: day)
@@ -49,7 +49,7 @@ class EligibilityService
     all_persons = {}
     all_names = []
     (0..@number_of_days).each do |n|
-      day = (Date.parse(@day) + n).strftime('%Y-%m-%d')
+      day = (Date.parse(@day) + n).strftime(EligibilityService.date_format)
       person_name = "ruby_#{day}"
       all_names << person_name
       all_persons[person_name] = {
