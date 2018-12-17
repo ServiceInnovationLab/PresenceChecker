@@ -37,8 +37,6 @@ class EligibilityService
     @eligibility
   end
 
-  def days_to_iterate; end
-
   def person_result(person_name, key)
     @response['persons'][person_name][key]
   end
