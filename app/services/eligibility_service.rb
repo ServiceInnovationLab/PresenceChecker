@@ -22,10 +22,6 @@ class EligibilityService
     @eligibility
   end
 
-  def person_result(person_name, key)
-    @response['persons'][person_name][key]
-  end
-
   private
 
   def query
