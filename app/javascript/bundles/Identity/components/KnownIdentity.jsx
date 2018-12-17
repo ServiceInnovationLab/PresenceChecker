@@ -4,10 +4,6 @@ import React from 'react';
 import Table from '../../../components/Table';
 
 export default class KnownIdentity extends React.Component {
-  static propTypes = {
-    identities: PropTypes.array
-  };
-
   render() {
     const {
       serial_number,

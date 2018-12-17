@@ -13,34 +13,13 @@ class EligibilityService
     @response = calculate(query)
 
     (0..(@number_of_days - 1)).each do |n|
-      day = (Date.parse(@day) + n).strftime('%Y-%m-%d')
+      day = (Date.parse(@day) + n).strftime(EligibilityService.date_format)
       person_name = "ruby_#{day}"
-
       @eligibility = Eligibility.find_or_initialize_by(client: @client, day: day)
-
-      @eligibility.calculation_data = @response['persons'][person_name]
-
-      # booleans
-      @eligibility.minimum_presence = person_result(person_name, 'citizenship__meets_minimum_presence_requirements')[day]
-      @eligibility.five_year_presence = person_result(person_name, 'citizenship__meets_5_year_presence_requirement')[day]
-      @eligibility.each_year_presence = person_result(person_name, 'citizenship__meets_each_year_minimum_presence_requirements')[day]
-
-      # hash for each rolling year of five
-      @eligibility.present_days_by_rolling_year = person_result person_name, 'days_present_in_new_zealand_in_preceeding_year'
-      @eligibility.mimimum_presence_by_rolling_year = person_result person_name, 'citizenship__meets_preceeding_single_year_minimum_presence_requirement'
-
-      @eligibility.save!
-
-      Rails.logger.info @eligibility
+      @eligibility.parse_and_save!(@response['persons'][person_name])
     end
 
     @eligibility
-  end
-
-  def days_to_iterate; end
-
-  def person_result(person_name, key)
-    @response['persons'][person_name][key]
   end
 
   private
@@ -49,7 +28,7 @@ class EligibilityService
     all_persons = {}
     all_names = []
     (0..@number_of_days).each do |n|
-      day = (Date.parse(@day) + n).strftime('%Y-%m-%d')
+      day = (Date.parse(@day) + n).strftime(EligibilityService.date_format)
       person_name = "ruby_#{day}"
       all_names << person_name
       all_persons[person_name] = {
