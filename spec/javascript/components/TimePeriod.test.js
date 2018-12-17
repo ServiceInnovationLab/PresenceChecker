@@ -10,7 +10,7 @@ describe('<TimePeriod />', () => {
   let props = {
     periodName: "",
     days: []
-  }
+  };
 
   it('renders without error', () => {
     shallow(<TimePeriod {...props} />);
