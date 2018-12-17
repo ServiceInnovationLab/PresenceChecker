@@ -8,7 +8,7 @@ import Table from './Table';
 export default class TimePeriod extends React.Component {
   static propTypes = {
     periodName: PropTypes.string,
-    days: PropTypes.number
+    days: PropTypes.array
   };
 
   render() {
