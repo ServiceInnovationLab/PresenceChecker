@@ -1,12 +1,8 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { format } from 'date-fns';
 
 import ShowClient from '../../../app/javascript/packs/application';
-
-import { getCSRF, databaseURL } from '../../../app/javascript/utilities/utilities';
-import { doesNotReject } from 'assert';
 
 configure({ adapter: new Adapter() });
 
@@ -40,8 +36,6 @@ describe('<ShowClient />', () => {
     describe('checkSelectedDate', () => {
       const component = shallow(<ShowClient {...props} />);
       const date = new Date();
-      const formattedDate = format(date, 'YYYY-MM-DD');
-      const url = `${databaseURL()}/clients/${props.databaseId}/eligibility/${formattedDate}`;
 
       it('checks date passed', () => {
         const spy = jest.spyOn(component.instance(), 'setState');
@@ -51,28 +45,6 @@ describe('<ShowClient />', () => {
           component.instance().componentDidMount(date);
         }).not.toThrow();
         expect(spy).toHaveBeenCalledWith({ loading: true });
-      });
-
-      describe('fetch behavior', () => {
-        it('responds successfully', () => {
-          fetch(url, {
-            method: 'GET',
-            mode: 'same-origin',
-            credentials: 'same-origin',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': getCSRF()
-            }
-          })
-            .then(result => {
-              return result.json();
-            })
-            .then(response => {
-              expect(response);
-              expect(response.error).toBeUndefined();
-              doesNotReject();
-            });
-        });
       });
     });
 
