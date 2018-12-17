@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'layouts/_header', type: :view do
-
   include Devise::Test::ControllerHelpers
 
   describe 'header view' do
