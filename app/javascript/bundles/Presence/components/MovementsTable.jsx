@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
 import { firstCharCap } from '../../../utilities/utilities';
 
 import Table from '../../../components/Table';
 
-class MovementsTable extends React.Component {
+export default class MovementsTable extends React.Component {
+  static propTypes = {
+    movements: PropTypes.array
+  };
+
   render() {
     const { movements } = this.props;
 
@@ -33,5 +38,3 @@ class MovementsTable extends React.Component {
     );
   }
 }
-
-export default MovementsTable;
