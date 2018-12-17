@@ -6,15 +6,11 @@ class Movement < ApplicationRecord
   scope :departure, -> { where(direction: 'departure') }
 
   def day
-    carrier_date_time.to_date.strftime(date_format)
+    carrier_date_time.to_date.strftime(EligibilityService.date_format)
   end
 
   def next_day
-    (carrier_date_time.to_date + 1).strftime(date_format)
-  end
-
-  def date_format
-    '%Y-%m-%d'
+    (carrier_date_time.to_date + 1).strftime(EligibilityService.date_format)
   end
 
   def only_absent_for_same_day_or_next?

@@ -3,6 +3,6 @@
 <%= react_component("ShowClient", props: {
   databaseId: @client.id,
   clientId: @client.im_client_id,
-  movements: @movements,
+  movements: @client.movements.order(carrier_date_time: :desc),
   identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name])
 }) %>
