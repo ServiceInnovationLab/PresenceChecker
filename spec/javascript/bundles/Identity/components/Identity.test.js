@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 
 describe('<Identity />', () => {
   let props = {
-    id: "",
+    id: 1,
     identities: []
   }
 

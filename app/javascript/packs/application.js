@@ -16,8 +16,8 @@ export default class ShowClient extends React.Component {
     backgroundLoading: false,
     selectedDate: new Date(),
     meetsMinimumPresence: false,
-    daysInNZ: [],
-    last5Years: [],
+    daysInNZ: {},
+    last5Years: {},
     futureEligibility: []
   };
 
@@ -28,7 +28,7 @@ export default class ShowClient extends React.Component {
   checkSelectedDate = selectedDate => {
     const { databaseId } = this.props;
     const formattedDate = format(selectedDate, 'YYYY-MM-DD');
-    const url = `${databaseURL}/clients/${databaseId}/eligibility/${formattedDate}`;
+    const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
     this.setState({
       loading: true
@@ -94,7 +94,7 @@ export default class ShowClient extends React.Component {
 
     for (let day = 0, l = loadingNumber; day < l; day++) {
       const formattedDate = format(nextWeek[day], 'YYYY-MM-DD');
-      const url = `${databaseURL}/clients/${databaseId}/eligibility/${formattedDate}`;
+      const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
       fetch(url, {
         method: 'GET',
