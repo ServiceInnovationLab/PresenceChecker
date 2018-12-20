@@ -59,8 +59,8 @@ RSpec.describe EligibilityService, type: :model do
     subject { service.presence_count(client, day) }
 
     it 'saves eligiblity only once' do
-      expect { service.run! }.to change { Eligibility.count }.by(1)
-      expect { service.run! }.not_to change { Eligibility.count }
+      expect { service.run! }.to change(Eligibility, :count).by(1)
+      expect { service.run! }.not_to change(Eligibility, :count)
     end
 
     subject { Eligibility.last }
