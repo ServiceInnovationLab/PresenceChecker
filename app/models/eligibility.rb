@@ -10,7 +10,7 @@ class Eligibility < ApplicationRecord
   validates :mimimum_presence_by_rolling_year, presence: true
 
   def parse_and_save!(of_response_data)
-      self.calculation_data = of_response_data
+    self.calculation_data = of_response_data
 
       # booleans
       self.minimum_presence = calculation_data['citizenship__meets_minimum_presence_requirements'][day_in_of_format]
