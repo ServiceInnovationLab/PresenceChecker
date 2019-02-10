@@ -7,7 +7,7 @@ import Year from '../../../../../app/javascript/bundles/Presence/components/Year
 configure({ adapter: new Adapter() });
 
 describe('<Year />', () => {
-  let props = {
+  const props = {
     yearNumber: 0,
     daysPresent: 0,
     isEligible: true,

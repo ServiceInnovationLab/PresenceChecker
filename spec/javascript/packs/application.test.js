@@ -7,7 +7,7 @@ import ShowClient from '../../../app/javascript/packs/application';
 configure({ adapter: new Adapter() });
 
 describe('<ShowClient />', () => {
-  let props = {
+  const props = {
     databaseId: 1,
     clientId: 1,
     movements: [],

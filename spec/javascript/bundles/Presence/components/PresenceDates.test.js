@@ -7,7 +7,7 @@ import PresenceDates from '../../../../../app/javascript/bundles/Presence/compon
 configure({ adapter: new Adapter() });
 
 describe('<PresenceDates />', () => {
-  let props = {
+  const props = {
     isEligible: true,
     onDateChange: jest.fn(),
     highlightDates: [],

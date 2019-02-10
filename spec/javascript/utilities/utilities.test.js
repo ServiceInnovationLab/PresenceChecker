@@ -9,8 +9,8 @@ describe('getCSRF', () => {
     // Currently, this doesn't have a good way to be tested as JavaScript
     // doesn't have a good way to render that Rails view. Not sure what the
     // implementation should look like.
-    let element = document.querySelector('meta[name="csrf-token"]');
-    let csrfToken = element.getAttribute('content');
+    const element = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = element.getAttribute('content');
 
     expect(getCSRF).toBeDefined();
     expect(getCSRF()).toBe(csrfToken);
@@ -18,7 +18,7 @@ describe('getCSRF', () => {
 });
 
 describe('firstCharCap', () => {
-  let exampleStrings = {
+  const exampleStrings = {
     singleWord: 'test',
     withSpaces: 'lorem ipsum',
     allCaps: 'DOES THIS WORK?',

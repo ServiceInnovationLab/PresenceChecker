@@ -7,7 +7,7 @@ import Identity from '../../../../../app/javascript/bundles/Identity/components/
 configure({ adapter: new Adapter() });
 
 describe('<Identity />', () => {
-  let props = {
+  const props = {
     id: 1,
     identities: [],
   };

@@ -7,7 +7,7 @@ import PresenceDebugger from '../../../app/javascript/components/PresenceDebugge
 configure({ adapter: new Adapter() });
 
 describe('<PresenceDebugger />', () => {
-  let props = {
+  const props = {
     days_present: {},
   };
 

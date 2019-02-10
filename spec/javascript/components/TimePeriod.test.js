@@ -7,7 +7,7 @@ import TimePeriod from '../../../app/javascript/components/TimePeriod';
 configure({ adapter: new Adapter() });
 
 describe('<TimePeriod />', () => {
-  let props = {
+  const props = {
     periodName: '',
     days: [],
   };

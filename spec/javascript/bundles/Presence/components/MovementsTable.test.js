@@ -7,7 +7,7 @@ import MovementsTable from '../../../../../app/javascript/bundles/Presence/compo
 configure({ adapter: new Adapter() });
 
 describe('<MovementsTable />', () => {
-  let props = {
+  const props = {
     movements: [],
   };
 

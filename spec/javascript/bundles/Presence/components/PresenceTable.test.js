@@ -7,7 +7,7 @@ import PresenceTable from '../../../../../app/javascript/bundles/Presence/compon
 configure({ adapter: new Adapter() });
 
 describe('<PresenceTable />', () => {
-  let props = {
+  const props = {
     isEligible: true,
     totalDays: {},
     years: {},
