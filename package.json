@@ -9,16 +9,16 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
-    "react": "^16.6.3",
+    "react": "^16.8.1",
     "react-datepicker": "^2.0.0",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.8.1",
     "react-on-rails": "11.1.8"
   },
   "devDependencies": {
     "jest": "^23.6.0",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-adapter-react-16": "^1.9.1",
     "jest-enzyme": "^7.0.1",
     "regenerator-runtime": "^0.13.1",
     "webpack-dev-server": "2.11.2"
