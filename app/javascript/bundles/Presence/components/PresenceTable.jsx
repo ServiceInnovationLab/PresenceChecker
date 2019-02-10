@@ -9,7 +9,7 @@ export default class PresenceTable extends React.Component {
     isEligible: PropTypes.bool,
     totalDays: PropTypes.object,
     years: PropTypes.object,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
   };
 
   header = () => {
@@ -29,7 +29,9 @@ export default class PresenceTable extends React.Component {
 
     return (
       <header className={`presence-table-header ${stateClass}`}>
-      <span>Total days in New Zealand: {sum(map(totalDays, eachYear => eachYear))}</span>
+        <span>
+          Total days in New Zealand: {sum(map(totalDays, eachYear => eachYear))}
+        </span>
         <i className={`fas fa-${iconClass}`} />
       </header>
     );
@@ -47,18 +49,18 @@ export default class PresenceTable extends React.Component {
 
   render() {
     const { years, totalDays, loading } = this.props;
-    let yearNum = 6
+    let yearNum = 6;
     let formattedYears = map(years, (isEligible, yearEndDate) => {
-      yearNum --
+      yearNum--;
       return {
         yearNum,
         isEligible,
         yearNumber: yearNum,
         daysPresent: totalDays[yearEndDate],
         startDate: this.startDate(yearNum),
-        endingDate: this.endingDate(yearNum)
+        endingDate: this.endingDate(yearNum),
       };
-    }).reverse()
+    }).reverse();
 
     return (
       <div className="results">

@@ -18,7 +18,7 @@ export default class ShowClient extends React.Component {
     meetsMinimumPresence: false,
     daysInNZ: {},
     last5Years: {},
-    futureEligibility: []
+    futureEligibility: [],
   };
 
   componentDidMount = () => {
@@ -31,7 +31,7 @@ export default class ShowClient extends React.Component {
     const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
     this.setState({
-      loading: true
+      loading: true,
     });
 
     fetch(url, {
@@ -40,19 +40,19 @@ export default class ShowClient extends React.Component {
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-Token': getCSRF()
-      }
+        'X-CSRF-Token': getCSRF(),
+      },
     })
       .then(result => {
         return result.json();
       })
       .then(response =>
-        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')])
+        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')]),
       )
       .catch(error => {
         console.error('Server error:', error);
         this.setState({
-          loading: false
+          loading: false,
         });
       });
   };
@@ -62,7 +62,7 @@ export default class ShowClient extends React.Component {
 
     this.setState({
       selectedDate: newDate,
-      meetsMinimumPresence: false
+      meetsMinimumPresence: false,
     });
 
     this.checkSelectedDate(newDate);
@@ -73,7 +73,7 @@ export default class ShowClient extends React.Component {
       loading: false,
       meetsMinimumPresence: response.meetsMinimumPresence,
       daysInNZ: response.daysInNZ,
-      last5Years: response.last5Years
+      last5Years: response.last5Years,
     });
 
     this.checkNextWeek();
@@ -84,12 +84,12 @@ export default class ShowClient extends React.Component {
     const { selectedDate } = this.state;
     const nextWeek = eachDay(
       addDays(selectedDate, 1),
-      addDays(selectedDate, 8)
+      addDays(selectedDate, 8),
     );
     let loadingNumber = nextWeek.length;
 
     this.setState({
-      backgroundLoading: true
+      backgroundLoading: true,
     });
 
     for (let day = 0, l = loadingNumber; day < l; day++) {
@@ -102,8 +102,8 @@ export default class ShowClient extends React.Component {
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRF-Token': getCSRF()
-        }
+          'X-CSRF-Token': getCSRF(),
+        },
       })
         .then(result => {
           return result.json();
@@ -112,7 +112,7 @@ export default class ShowClient extends React.Component {
           loadingNumber--;
           if (loadingNumber === 0) {
             this.setState({
-              backgroundLoading: false
+              backgroundLoading: false,
             });
           }
           this.appendEligibleDay(response);
@@ -123,7 +123,7 @@ export default class ShowClient extends React.Component {
           loadingNumber--;
           if (loadingNumber === 0) {
             this.setState({
-              backgroundLoading: false
+              backgroundLoading: false,
             });
           }
         });
@@ -131,7 +131,7 @@ export default class ShowClient extends React.Component {
   };
 
   appendEligibleDay = day => {
-    const futureEligibility = [ ...this.state.futureEligibility ];
+    const futureEligibility = [...this.state.futureEligibility];
     futureEligibility.push(day);
     this.setState({ futureEligibility });
   };
@@ -142,8 +142,8 @@ export default class ShowClient extends React.Component {
 
     return [
       {
-        'is-within-range': eligibleDates
-      }
+        'is-within-range': eligibleDates,
+      },
     ];
   };
 
@@ -153,7 +153,7 @@ export default class ShowClient extends React.Component {
       meetsMinimumPresence,
       daysInNZ,
       last5Years,
-      loading
+      loading,
     } = this.state;
     const { clientId, identities, movements } = this.props;
 
@@ -191,5 +191,5 @@ export default class ShowClient extends React.Component {
 }
 
 ReactOnRails.register({
-  ShowClient
+  ShowClient,
 });

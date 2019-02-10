@@ -10,7 +10,7 @@ describe('<Year />', () => {
   let props = {
     yearNumber: 0,
     daysPresent: 0,
-    isEligible: true
+    isEligible: true,
   };
 
   it('renders without error', () => {

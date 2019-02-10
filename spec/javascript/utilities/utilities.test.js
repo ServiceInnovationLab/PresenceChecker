@@ -1,7 +1,11 @@
-import { getCSRF, firstCharCap, databaseURL } from "../../../app/javascript/utilities/utilities";
+import {
+  getCSRF,
+  firstCharCap,
+  databaseURL,
+} from '../../../app/javascript/utilities/utilities';
 
-describe("getCSRF", () => {
-  xit("is defined correctly", () => {
+describe('getCSRF', () => {
+  xit('is defined correctly', () => {
     // Currently, this doesn't have a good way to be tested as JavaScript
     // doesn't have a good way to render that Rails view. Not sure what the
     // implementation should look like.
@@ -13,37 +17,39 @@ describe("getCSRF", () => {
   });
 });
 
-describe("firstCharCap", () => {
+describe('firstCharCap', () => {
   let exampleStrings = {
-    singleWord: "test",
-    withSpaces: "lorem ipsum",
-    allCaps: "DOES THIS WORK?",
-    alreadyCorrect: "Perfect"
+    singleWord: 'test',
+    withSpaces: 'lorem ipsum',
+    allCaps: 'DOES THIS WORK?',
+    alreadyCorrect: 'Perfect',
   };
 
-  it("is defined correctly", () => {
+  it('is defined correctly', () => {
     expect(firstCharCap).toBeDefined();
   });
 
-  it("corrects a single word", () => {
-    expect(firstCharCap(exampleStrings.singleWord)).toBe("Test");
+  it('corrects a single word', () => {
+    expect(firstCharCap(exampleStrings.singleWord)).toBe('Test');
   });
 
-  it("corrects phrases", () => {
-    expect(firstCharCap(exampleStrings.withSpaces)).toBe("Lorem ipsum");
+  it('corrects phrases', () => {
+    expect(firstCharCap(exampleStrings.withSpaces)).toBe('Lorem ipsum');
   });
 
-  it("works with all caps", () => {
+  it('works with all caps', () => {
     expect(firstCharCap(exampleStrings.allCaps)).toBe(exampleStrings.allCaps);
   });
 
   it("doesn't effect a phrase that's already correct", () => {
-    expect(firstCharCap(exampleStrings.alreadyCorrect)).toBe(exampleStrings.alreadyCorrect);
+    expect(firstCharCap(exampleStrings.alreadyCorrect)).toBe(
+      exampleStrings.alreadyCorrect,
+    );
   });
 });
 
-describe("databaseURL", () => {
-  it("is defined correctly", () => {
+describe('databaseURL', () => {
+  it('is defined correctly', () => {
     // Currently, this doesn't have a good way to be tested as JavaScript
     // doesn't have a good way to render that Rails view. Not sure what the
     // implementation should look like.

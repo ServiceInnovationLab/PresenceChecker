@@ -8,7 +8,7 @@ import Table from '../../../components/Table';
 
 export default class MovementsTable extends React.Component {
   static propTypes = {
-    movements: PropTypes.array
+    movements: PropTypes.array,
   };
 
   render() {
