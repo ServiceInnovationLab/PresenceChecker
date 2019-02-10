@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 
 describe('<MovementsTable />', () => {
   let props = {
-    movements: []
+    movements: [],
   };
 
   it('renders without error', () => {

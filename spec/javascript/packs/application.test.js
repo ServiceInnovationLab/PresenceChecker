@@ -11,7 +11,7 @@ describe('<ShowClient />', () => {
     databaseId: 1,
     clientId: 1,
     movements: [],
-    identities: []
+    identities: [],
   };
 
   it('renders without error', () => {
@@ -61,7 +61,7 @@ describe('<ShowClient />', () => {
         }).not.toThrow();
         expect(spy).toHaveBeenCalledWith({
           selectedDate: date,
-          meetsMinimumPresence: false
+          meetsMinimumPresence: false,
         });
       });
 
@@ -81,7 +81,7 @@ describe('<ShowClient />', () => {
       const response = {
         meetsMinimumPresence: true,
         daysInNZ: [],
-        last5Years: []
+        last5Years: [],
       };
 
       it('sets state properly', () => {
@@ -95,7 +95,7 @@ describe('<ShowClient />', () => {
           loading: false,
           meetsMinimumPresence: response.meetsMinimumPresence,
           daysInNZ: response.daysInNZ,
-          last5Years: response.last5Years
+          last5Years: response.last5Years,
         });
       });
 
@@ -128,7 +128,7 @@ describe('<ShowClient />', () => {
           component.instance().appendEligibleDay(date);
         }).not.toThrow();
         expect(spy).toHaveBeenCalledWith({
-          futureEligibility: [date]
+          futureEligibility: [date],
         });
       });
     });
@@ -142,8 +142,8 @@ describe('<ShowClient />', () => {
         }).not.toThrow();
         expect(component.instance().highlightDates()).toMatchObject([
           {
-            'is-within-range': []
-          }
+            'is-within-range': [],
+          },
         ]);
       });
     });
