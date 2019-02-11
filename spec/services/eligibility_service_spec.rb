@@ -30,6 +30,7 @@ RSpec.describe EligibilityService, type: :model do
         FactoryBot.create :departure, carrier_date_time: '2016-04-01', identity: identity
         FactoryBot.create :arrival, carrier_date_time: '2016-04-02', identity: identity
       end
+
       it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-02' => true) }
     end
 
@@ -39,14 +40,17 @@ RSpec.describe EligibilityService, type: :model do
         FactoryBot.create :departure, carrier_date_time: '2016-04-01', identity: identity
         FactoryBot.create :arrival, carrier_date_time: '2016-04-01', identity: identity
       end
+
       it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-01' => true) }
     end
+
     context 'when returning to NZ with one day absence' do
       before do
         FactoryBot.create :arrival, carrier_date_time: '2011-01-01', identity: identity
         FactoryBot.create :departure, carrier_date_time: '2016-04-01', identity: identity
         FactoryBot.create :arrival, carrier_date_time: '2016-04-03', identity: identity
       end
+
       it { expect(service.send(:presence_values)).to eq('2011-01-01' => true, '2016-04-02' => false, '2016-04-03' => true) }
     end
   end
@@ -55,8 +59,8 @@ RSpec.describe EligibilityService, type: :model do
     subject { service.presence_count(client, day) }
 
     it 'saves eligiblity only once' do
-      expect { service.run! }.to change { Eligibility.count }.by(1)
-      expect { service.run! }.not_to change { Eligibility.count }
+      expect { service.run! }.to change(Eligibility, :count).by(1)
+      expect { service.run! }.not_to change(Eligibility, :count)
     end
 
     subject { Eligibility.last }

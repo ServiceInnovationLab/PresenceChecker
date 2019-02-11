@@ -28,6 +28,7 @@ RSpec.describe ClientsController, type: :controller do
       let(:day) { '2019-01-01' }
 
       let(:identity) { FactoryBot.create :identity, client: client }
+
       before { FactoryBot.create :arrival, identity: identity, carrier_date_time: '2011-12-31' }
 
       subject { JSON.parse(response.body)[day] }
@@ -64,6 +65,7 @@ RSpec.describe ClientsController, type: :controller do
           FactoryBot.create :arrival, identity: identity, carrier_date_time: '2014-12-31'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
+
         it { expect(subject['meetsMinimumPresence']).to eq(false) }
         it do
           expect(subject['last5Years']).to eq(
@@ -96,6 +98,7 @@ RSpec.describe ClientsController, type: :controller do
           FactoryBot.create :arrival, identity: identity, carrier_date_time: '2018-12-24'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
+
         it { expect(subject['meetsMinimumPresence']).to eq(true) }
         it {
           expect(subject['last5Years']).to eq(

@@ -33,11 +33,11 @@ export default class KnownIdentity extends React.Component {
           <Table>
             <TableRow headerLabel="Gender">{gender}</TableRow>
             <TableRow headerLabel="Country of birth">
-            {country_of_birth_name}
+              {country_of_birth_name}
             </TableRow>
             <TableRow headerLabel="Nationality">{nationality}</TableRow>
             <TableRow headerLabel="Issuing state">
-            {issuing_state_name}
+              {issuing_state_name}
             </TableRow>
             <TableRow headerLabel="&nbsp;">&nbsp;</TableRow>
           </Table>
