@@ -47,7 +47,7 @@ export default class ShowClient extends React.Component {
         return result.json();
       })
       .then(response =>
-        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')]),
+        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')])
       )
       .catch(error => {
         console.error('Server error:', error);
@@ -84,7 +84,7 @@ export default class ShowClient extends React.Component {
     const { selectedDate } = this.state;
     const nextWeek = eachDay(
       addDays(selectedDate, 1),
-      addDays(selectedDate, 8),
+      addDays(selectedDate, 8)
     );
     let loadingNumber = nextWeek.length;
 
