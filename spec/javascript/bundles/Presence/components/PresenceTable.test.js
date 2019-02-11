@@ -11,7 +11,7 @@ describe('<PresenceTable />', () => {
     isEligible: true,
     totalDays: {},
     years: {},
-    loading: false
+    loading: false,
   };
 
   it('renders without error', () => {

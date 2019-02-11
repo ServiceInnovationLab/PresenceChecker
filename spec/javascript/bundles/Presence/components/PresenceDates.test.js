@@ -11,7 +11,7 @@ describe('<PresenceDates />', () => {
     isEligible: true,
     onDateChange: jest.fn(),
     highlightDates: [],
-    loading: false
+    loading: false,
   };
 
   it('renders without error', () => {

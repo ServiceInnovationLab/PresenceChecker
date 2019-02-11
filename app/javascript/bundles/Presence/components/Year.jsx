@@ -8,7 +8,7 @@ export default class Year extends React.Component {
   static propTypes = {
     yearNumber: PropTypes.number,
     daysPresent: PropTypes.number,
-    isEligible: PropTypes.bool
+    isEligible: PropTypes.bool,
   };
 
   render() {
@@ -17,7 +17,7 @@ export default class Year extends React.Component {
       endingDate,
       yearNumber,
       daysPresent,
-      isEligible
+      isEligible,
     } = this.props;
     const errorClass = isEligible ? '' : 'has-error';
     const iconClass = isEligible ? 'check' : 'times';

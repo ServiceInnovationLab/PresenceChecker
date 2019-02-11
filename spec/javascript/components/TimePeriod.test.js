@@ -8,8 +8,8 @@ configure({ adapter: new Adapter() });
 
 describe('<TimePeriod />', () => {
   let props = {
-    periodName: "",
-    days: []
+    periodName: '',
+    days: [],
   };
 
   it('renders without error', () => {

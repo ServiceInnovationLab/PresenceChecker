@@ -14,7 +14,7 @@ export default class KnownIdentity extends React.Component {
       country_of_birth_name,
       issuing_state_name,
       nationality,
-      gender
+      gender,
     } = this.props;
     return (
       <div className="parent identities">
@@ -47,7 +47,7 @@ export default class KnownIdentity extends React.Component {
   }
 }
 
-const TableRow = (props) => (
+const TableRow = props => (
   <tr>
     <th scope="row">{props.headerLabel}</th>
     <td>{props.children}</td>

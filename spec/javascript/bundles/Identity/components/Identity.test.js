@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe('<Identity />', () => {
   let props = {
     id: 1,
-    identities: []
+    identities: [],
   };
 
   it('renders without error', () => {
