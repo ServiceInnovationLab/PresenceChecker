@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe('<TimePeriod />', () => {
   let props = {
     periodName: '',
-    days: []
+    days: [],
   };
 
   it('renders without error', () => {
