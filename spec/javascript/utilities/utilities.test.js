@@ -1,4 +1,8 @@
-import { getCSRF, firstCharCap, databaseURL } from '../../../app/javascript/utilities/utilities';
+import {
+  getCSRF,
+  firstCharCap,
+  databaseURL,
+} from '../../../app/javascript/utilities/utilities';
 
 describe('getCSRF', () => {
   xit('is defined correctly', () => {
@@ -18,7 +22,7 @@ describe('firstCharCap', () => {
     singleWord: 'test',
     withSpaces: 'lorem ipsum',
     allCaps: 'DOES THIS WORK?',
-    alreadyCorrect: 'Perfect'
+    alreadyCorrect: 'Perfect',
   };
 
   it('is defined correctly', () => {
@@ -38,7 +42,9 @@ describe('firstCharCap', () => {
   });
 
   it("doesn't effect a phrase that's already correct", () => {
-    expect(firstCharCap(exampleStrings.alreadyCorrect)).toBe(exampleStrings.alreadyCorrect);
+    expect(firstCharCap(exampleStrings.alreadyCorrect)).toBe(
+      exampleStrings.alreadyCorrect,
+    );
   });
 });
 

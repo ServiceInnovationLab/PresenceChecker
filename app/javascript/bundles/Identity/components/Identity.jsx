@@ -6,8 +6,8 @@ export default class Identity extends React.Component {
   state = { isCollapsed: true };
 
   static propTypes = {
-    id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
-    identities: PropTypes.array
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    identities: PropTypes.array,
   };
 
   render() {
@@ -22,15 +22,16 @@ export default class Identity extends React.Component {
             <button
               onClick={() =>
                 this.setState({
-                  isCollapsed: !this.state.isCollapsed
-                })}
+                  isCollapsed: !this.state.isCollapsed,
+                })
+              }
               className={`toggle-button u-clear-button-defaults u-use-pointer ${closedClassName}`}
             >
               <span>Known Identities</span>
               <i
-                className={`fas fa-chevron-${this.state.isCollapsed
-                  ? 'down'
-                  : 'up'}`}
+                className={`fas fa-chevron-${
+                  this.state.isCollapsed ? 'down' : 'up'
+                }`}
               />
             </button>
             <div className={`results-items ${closedClassName}`}>

@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 
 describe('<PresenceDebugger />', () => {
   let props = {
-    days_present: {}
+    days_present: {},
   };
 
   it('renders without error', () => {

@@ -8,7 +8,7 @@ export default class PresenceDates extends React.Component {
     isEligible: PropTypes.bool,
     onDateChange: PropTypes.func,
     highlightDates: PropTypes.array,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
   };
 
   header = stateClass => {
@@ -41,7 +41,7 @@ export default class PresenceDates extends React.Component {
       selectedDate,
       onDateChange,
       highlightDates,
-      loading
+      loading,
     } = this.props;
     const date = format(selectedDate, 'D MMMM YYYY');
     let stateClass = '';
