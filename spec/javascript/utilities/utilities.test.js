@@ -43,7 +43,7 @@ describe('firstCharCap', () => {
 
   it("doesn't effect a phrase that's already correct", () => {
     expect(firstCharCap(exampleStrings.alreadyCorrect)).toBe(
-      exampleStrings.alreadyCorrect,
+      exampleStrings.alreadyCorrect
     );
   });
 });
