@@ -5,76 +5,31 @@
   User.invite!(email: email) unless User.find_by(email: email)
 end
 
-# James Jones
-# Gender change from Male to Female
-# Total days in NZ meets criteria (1492 of 1250)
-# Is only eligible between June 8th and September 27
-
-client_2 = FactoryBot.create :client, im_client_id: '123456', file_number: '2'
-identity_3 = FactoryBot.create :identity, client_id: client_2.id, family_name: 'Jones', first_name: 'James', gender: 'Male'
-identity_4 = FactoryBot.create :identity, client_id: client_2.id, family_name: 'Jones', first_name: 'Jaymie', gender: 'Female'
-FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 312.weeks.ago
-FactoryBot.create :departure, identity: identity_3, carrier_date_time: 300.weeks.ago
-FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 280.weeks.ago
-
-FactoryBot.create :departure, identity: identity_4, carrier_date_time: 156.weeks.ago
-FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 148.weeks.ago
-FactoryBot.create :departure, identity: identity_4, carrier_date_time: 90.weeks.ago
-FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 70.weeks.ago
-
-# Arrived and never left
-# Eligible
-identity = FactoryBot.create :identity, family_name: 'Okay', first_name: 'Simply'
-FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
-
-# Arrived, had only one holiday
-# Eligible
-identity = FactoryBot.create :identity, family_name: 'Holiday', first_name: 'Short'
-FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
-
-holiday_length =  Random.rand(10...42)
-holiday_start = Random.rand(50...100)
-holiday_end = holiday_start - holiday_length
-
-FactoryBot.create :departure, carrier_date_time: holiday_start.weeks.ago, identity: identity
-FactoryBot.create :arrival, carrier_date_time: holiday_end.weeks.ago, identity: identity
-
-# Took a really long holiday during
-# Not Eligible
-identity = FactoryBot.create :identity, family_name: 'Holiday', first_name: 'Too', second_name: 'Long'
-FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
-
-holiday_start = 140.weeks.ago
-holiday_end = 75.weeks.ago
-
-FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
-FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
-
 ####### Test scenario #1 #######
 # Customer travels in and out of NZ as a Flight Attendant.
 # There are cases when an attendant doesn’t register as coming in or out of the country.
 # For example records can show that they depart, then depart again, without arriving in between. 
-# *Hazel said: This is out of scope.
 # This would also be at the discretion of the minister.
 # However lets run the data through the system and see if we can break it
-# Expected results
+
+####### Expected Results #######
 # Alert message to prompt a query into this person travel reasons.
 # Suggested reasons being that the person may be a flight attendant/pilot.
 
-identity = FactoryBot.create :identity, family_name: 'Attendant', first_name: 'Flight', second_name: '', third_name: ''
-FactoryBot.create :arrival, carrier_date_time: '20 Jan 2013', identity: identity
-FactoryBot.create :departure, carrier_date_time: '9 Mar 2014', identity: identity
-FactoryBot.create :departure, carrier_date_time: '20 Jan 2014', identity: identity
-FactoryBot.create :arrival, carrier_date_time: '9 Mar 2015', identity: identity
-FactoryBot.create :departure, carrier_date_time: '20 Jan 2015', identity: identity
-FactoryBot.create :departure, carrier_date_time: '9 Mar 2016', identity: identity
-FactoryBot.create :arrival, carrier_date_time: '15 Mar 2016', identity: identity
-FactoryBot.create :departure, carrier_date_time: '26 Aug 2016', identity: identity
-FactoryBot.create :arrival, carrier_date_time: '30 Aug 2015', identity: identity
-FactoryBot.create :departure, carrier_date_time: '1 Nov 2016', identity: identity
-FactoryBot.create :departure, carrier_date_time: '16 Nov 2016', identity: identity
-FactoryBot.create :departure, carrier_date_time: '26 May 2017', identity: identity
-FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity
+# identity = FactoryBot.create :identity, family_name: 'Attendant', first_name: 'Flight', second_name: '', third_name: ''
+# FactoryBot.create :arrival, carrier_date_time: '20 Jan 2013', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '9 Mar 2014', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '20 Jan 2014', identity: identity
+# FactoryBot.create :arrival, carrier_date_time: '9 Mar 2015', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '20 Jan 2015', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '9 Mar 2016', identity: identity
+# FactoryBot.create :arrival, carrier_date_time: '15 Mar 2016', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '26 Aug 2016', identity: identity
+# FactoryBot.create :arrival, carrier_date_time: '30 Aug 2015', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '1 Nov 2016', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '16 Nov 2016', identity: identity
+# FactoryBot.create :departure, carrier_date_time: '26 May 2017', identity: identity
+# FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity
 
 ####### Test scenario #2 #######
 # Travel to one of the countries counted as NZ (Cook Islands, Niue, Tokelau & Antarctica).
@@ -108,13 +63,14 @@ FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity
 
 # *Hazel says: There are rules that come from Legislation that can be automated. This is the Rules part of the engine model.
 # This is the first piece of work to be done on the project
+
 ####### Expected results #######
 # There is a flag raised in the system to show that these countries have been involved in the movements.
 
-
-####### Test scenario #4 #######
+###### Test scenario #4 #######
 # Customer has three passports and exits NZ on one, and returns to NZ on another.
 # On the passports they have different names.
+
 ##### Expected results ####
 # If there is the same Client ID number grouping these three identities, the departure and arrival dates should be consolidated into the movements table.
 
@@ -176,7 +132,6 @@ FactoryBot.create :arrival, carrier_date_time: '12 Aug 2018', identity: identity
 
 ####### Test scenario #6  ######
 # Customers are away for periods of time while working for the Crown / Military / Govt. 
-# *Hazel says: There are rules that come from Legislation that can be automated. This is the Rules part of the engine model. This is the first piece of work to be done on the project
 
 ####### Expected results ######
 # # There is a flag raised in the system to show that this person is traveling for Crown / Military / Govt reasons (need to discuss further, may be out of scope for this piece of work)
@@ -184,14 +139,15 @@ FactoryBot.create :arrival, carrier_date_time: '12 Aug 2018', identity: identity
 ####### Test scenario #7  ######
 # Customers are away for periods of time while their partner/parent is working for the Crown / Military / Govt
 
-# *Hazel says: There are rules that come from Legislation that can be automated. This is the Rules part of the engine model. This is the first piece of work to be done on the project
 ######## Expected results #######
 # There is a flag raised in the system to show that this person is a partner or child of a person who is traveling for Crown / Military / Govt reasons (need to discuss further, may be out of scope for this piece of work)
 
 ####### Test scenario #8 #######
 # Customers are away for periods of time but still meet presence requirements on the 5th November 2018
+
 ##### Expected results #####
-# Applicant still meets presence requirements  (these dates were tested in Bruteforce)
+# Applicant still meets presence requirements on the 5th November 2018 
+# (these dates were tested in Bruteforce)
 
 identity = FactoryBot.create :identity, family_name: 'Criteria', first_name: 'Meets', second_name: '', third_name: ''
 
@@ -215,10 +171,12 @@ FactoryBot.create :arrival, carrier_date_time: '20 May 2018', identity: identity
 FactoryBot.create :departure, carrier_date_time: '1 Aug 2018', identity: identity
 FactoryBot.create :arrival, carrier_date_time: '5 Aug 2018', identity: identity
 
-####### Test scenario #8 #######
+####### Test scenario #9 #######
 # Customers are away for periods of time and don’t meet presence requirements on the 5th November 2018
+
 ##### Expected results #####
-# Applicant doesn’t meet presence requirements (these dates were tested in Bruteforce)
+# Applicant doesn’t meet presence requirements on the 5th November 2018
+#(these dates were tested in Bruteforce)
 
 identity = FactoryBot.create :identity, family_name: 'Criteria', first_name: 'Does', second_name: 'Not', third_name: 'Meet'
 
@@ -241,3 +199,61 @@ FactoryBot.create :departure, carrier_date_time: '26 May 2018', identity: identi
 FactoryBot.create :arrival, carrier_date_time: '1 Jun 2018', identity: identity
 FactoryBot.create :departure, carrier_date_time: '19 Aug 2018', identity: identity
 FactoryBot.create :arrival, carrier_date_time: '24 Aug 2018', identity: identity
+
+####### Test scenario #10 #######
+# Gender change from Male to Female
+# Multiple 20 week vacations during preceeding 5 years
+# Total days in NZ meets criteria (1492 of 1250)
+
+##### Expected results #####
+#Only eligible between June 8th and September 27
+
+client_2 = FactoryBot.create :client, im_client_id: '123456', file_number: '2'
+identity_3 = FactoryBot.create :identity, client_id: client_2.id, family_name: 'Jones', first_name: 'James', second_name: '', third_name: '', gender: 'Male'
+identity_4 = FactoryBot.create :identity, client_id: client_2.id, family_name: 'Jones', first_name: 'Jaymie', second_name: '', third_name: '', gender: 'Female'
+FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 312.weeks.ago
+FactoryBot.create :departure, identity: identity_3, carrier_date_time: 300.weeks.ago
+FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 280.weeks.ago
+
+FactoryBot.create :departure, identity: identity_4, carrier_date_time: 156.weeks.ago
+FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 148.weeks.ago
+FactoryBot.create :departure, identity: identity_4, carrier_date_time: 90.weeks.ago
+FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 70.weeks.ago
+
+####### Test scenario #11 #######
+# Arrived more than five years ago and never left
+
+##### Expected results #####
+# Eligible
+identity = FactoryBot.create :identity, family_name: 'Okay', first_name: 'Simply', second_name: '', third_name: ''
+FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+
+####### Test scenario #12 #######
+# Arrived more than five years ago and never left
+# Only one period overseas which was short enough to meet presence criteria
+
+##### Expected results #####
+# Eligible
+identity = FactoryBot.create :identity, family_name: 'Holiday', first_name: 'Short', second_name: '', third_name: ''
+FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+
+holiday_length =  Random.rand(10...42)
+holiday_start = Random.rand(50...100)
+holiday_end = holiday_start - holiday_length
+
+FactoryBot.create :departure, carrier_date_time: holiday_start.weeks.ago, identity: identity
+FactoryBot.create :arrival, carrier_date_time: holiday_end.weeks.ago, identity: identity
+
+####### Test scenario #13 #######
+# Was overseas for more than 1 year during preceeding 5 years
+
+##### Expected results #####
+# Not Eligible
+identity = FactoryBot.create :identity, family_name: 'Holiday', first_name: 'Too', second_name: 'Long', third_name: ''
+FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+
+holiday_start = 140.weeks.ago
+holiday_end = 75.weeks.ago
+
+FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
+FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
