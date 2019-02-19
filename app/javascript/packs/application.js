@@ -16,6 +16,7 @@ export default class ShowClient extends React.Component {
     backgroundLoading: false,
     selectedDate: new Date(),
     meetsMinimumPresence: false,
+    meetsFiveYearPresence: false,
     daysInNZ: {},
     last5Years: {},
     futureEligibility: [],
@@ -74,6 +75,7 @@ export default class ShowClient extends React.Component {
       meetsMinimumPresence: response.meetsMinimumPresence,
       daysInNZ: response.daysInNZ,
       last5Years: response.last5Years,
+      meetsFiveYearPresence: response.meetsFiveYearPresence 
     });
 
     this.checkNextWeek();
@@ -151,6 +153,7 @@ export default class ShowClient extends React.Component {
     const {
       selectedDate,
       meetsMinimumPresence,
+      meetsFiveYearPresence,
       daysInNZ,
       last5Years,
       loading,
@@ -175,7 +178,7 @@ export default class ShowClient extends React.Component {
           </div>
           <div className="results dates-wrapper-right">
             <PresenceTable
-              isEligible={meetsMinimumPresence}
+              isEligible={meetsFiveYearPresence}
               totalDays={daysInNZ}
               years={last5Years}
               selectedDate={selectedDate}
