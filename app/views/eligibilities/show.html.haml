@@ -21,7 +21,7 @@
         %li{class: "list-group-item-#{success_class(@eligibility.each_year_presence)}" }
           %i.far.ml-1{class: @eligibility.each_year_presence ? 'fa-grin' : 'fa-frown'}
           (ii) for at least 240 days in each of those 5 years,—
-          %p being days during which the applicant was entitled in terms of the Immigration Act 2009 to be in New Zealand indefinitely:
+        %p being days during which the applicant was entitled in terms of the Immigration Act 2009 to be in New Zealand indefinitely:
 
 
 .card-deck
@@ -46,7 +46,7 @@
           %span.badge.badge-primary.badge-pill
             = @eligibility.present_days_by_rolling_year[year]
             days
-          present in year ending
+          during year immediately preceding
           %strong= year
 
 .card

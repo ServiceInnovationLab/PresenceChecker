@@ -4,15 +4,16 @@ class EligibilitiesController < ApplicationController
     @day = params[:day]
     @eligibility = @client.eligible_on_day(@day)
 
+    date_format = '%Y-%m-%d'
     @movements = []
-    @client.movements.each do |m|
+    @client.movements.order(:carrier_date_time).each do |m|
       @movements << [
-          m.direction,
-          m.carrier_date_time.strftime('%Y-%m-%d'),
-          m.carrier_date_time.strftime('%Y-%m-%d')
+          m.direction == 'arrival' ? 'present' : 'absent',
+          m.carrier_date_time.strftime(date_format),
+          m.presence_status_end&.strftime(date_format) || Date.new.strftime(date_format)
         ]
     end
-    
+
     respond_to do |format|
       format.html
       format.json do
