@@ -3,6 +3,10 @@
   <%= render 'eligibilities/card', eligibility: @client.eligible_on_day(date), date: date %>
 <% end %>
 
+<div class="card">
+  <h4>Movements</h4>
+  <%= timeline @movements, adapter: "google" %>
+</div>div>
 
 <% #= react_component("ShowClient", props: {
   #databaseId: @client.id,

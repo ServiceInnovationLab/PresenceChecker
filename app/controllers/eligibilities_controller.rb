@@ -3,6 +3,15 @@ class EligibilitiesController < ApplicationController
     @client = Client.find params[:client_id]
     @day = params[:day]
     @eligibility = @client.eligible_on_day(@day)
+
+    @movements = []
+    @client.movements.each do |m|
+      @movements << [
+          m.direction,
+          m.carrier_date_time.strftime('%Y-%m-%d'),
+          m.carrier_date_time.strftime('%Y-%m-%d')
+        ]
+    end
     
     respond_to do |format|
       format.html

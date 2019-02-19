@@ -17,4 +17,7 @@
 //= require popper
 //= require bootstrap
 //= require material
+//= require Chart.bundle
+//= require chartkick
+//= require chartkick
 //= require_tree .

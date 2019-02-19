@@ -32,7 +32,8 @@
         %i.far.mr-4.pr-3{class: @eligibility.five_year_presence ? 'fa-grin': 'fa-frown'}
         %span.badge.badge-primary.badge-pill
           = @eligibility.sum_over_5_years
-        days in New Zealand
+          days
+        present in New Zealand
   .card
     %h4.text-center For each Year
     %ul.list-group
@@ -45,5 +46,9 @@
           %span.badge.badge-primary.badge-pill
             = @eligibility.present_days_by_rolling_year[year]
             days
-          year ending
-          = year
+          present in year ending
+          %strong= year
+
+.card
+  %h4 Movements
+  = timeline @movements, adapter: "google"

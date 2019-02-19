@@ -7,7 +7,16 @@ class ClientsController < ApplicationController
     @clients = Client.joins(:identity).where(serial_number: params[:serial_number])
   end
 
-  def show; end
+  def show
+    @movements = []
+    @client.movements.each do |m|
+      @movements << [
+          m.direction,
+          m.carrier_date_time.strftime('%Y-%m-%d'),
+          m.carrier_date_time.strftime('%Y-%m-%d')
+        ]
+    end
+  end
 
 
 
