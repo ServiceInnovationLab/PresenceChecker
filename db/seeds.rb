@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-['brenda.wallace', 'dana.iti'].each do |name|
-  email = "#{name}@dia.govt.nz"
-  User.invite!(email: email) unless User.find_by(email: email)
-end
+# ['brenda.wallace', 'dana.iti'].each do |name|
+#   email = "#{name}@dia.govt.nz"
+#   User.invite!(email: email) unless User.find_by(email: email)
+# end
 
 ####### Test scenario #1 #######
 # Customer travels in and out of NZ as a Flight Attendant.
