@@ -20,14 +20,16 @@ class ClientsController < ApplicationController
     end
     render json: {
       requested_day => {
-        # boolean
         'meetsMinimumPresence' => @eligibility.minimum_presence,
-        # boolean
+        # boolean (root)
         'meetsFiveYearPresence' => @eligibility.five_year_presence,
-        # hash of booleans e.g. {'2019-06-07': true.. }
-        'last5Years' => @eligibility.mimimum_presence_by_rolling_year,
-        # hash of integers e.g. {'2019-06-07': 365.. }
-        'daysInNZ' => @eligibility.present_days_by_rolling_year
+        # boolean (child of root | parent of present_days_by_rolling_year)
+        'daysInNZ' => @eligibility.present_days_by_rolling_year,
+        # hash of integers e.g. {'2019-06-07': 365.. } (child of five_year_presence)
+        'eachYearPresence' => @eligibility.each_year_presence,
+        # boolean (child of root | parent of mimimum_presence_by_rolling_year)
+        'last5Years' => @eligibility.mimimum_presence_by_rolling_year
+        # hash of booleans e.g. {'2019-06-07': true.. } (child of each_year_presence)
       }
     }
   end
