@@ -50,6 +50,12 @@ gem 'httparty'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-rails'
+gem 'bootstrap',     '4.1.1'
+gem 'material-sass', '4.1.1'
+gem 'material_icons'
+gem "simple_calendar", "~> 2.0"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'mini_racer', platforms: :ruby

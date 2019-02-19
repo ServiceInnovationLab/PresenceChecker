@@ -1,61 +1,52 @@
 # frozen_string_literal: true
 
 class EligibilityService
-  def initialize(client, day, number_of_days = 30)
+  def initialize(client, day)
     @client = client
     @day = day
-
-    # How many days to calculate in one Open Fisca request
-    @number_of_days = number_of_days
   end
 
   def run!
     @response = calculate(query)
-
-    (0..(@number_of_days - 1)).each do |n|
-      day = (Date.parse(@day) + n).strftime(EligibilityService.date_format)
-      person_name = "ruby_#{day}"
-      @eligibility = Eligibility.find_or_initialize_by(client: @client, day: day)
-      @eligibility.parse_and_save!(@response['persons'][person_name])
-    end
-
+    @eligibility = Eligibility.find_or_initialize_by(client: @client, day: @day)
+    @eligibility.parse_and_save!(@response['persons'][person_name])
     @eligibility
   end
 
   private
 
-  def query
-    all_persons = {}
-    all_names = []
-    (0..@number_of_days).each do |n|
-      day = (Date.parse(@day) + n).strftime(EligibilityService.date_format)
-      person_name = "ruby_#{day}"
-      all_names << person_name
-      all_persons[person_name] = {
-        # The values from the future that we want calculated
-        'citizenship__meets_minimum_presence_requirements' => future_days_of_nulls(day),
-        'citizenship__meets_each_year_minimum_presence_requirements' => future_days_of_nulls(day),
-        'citizenship__meets_5_year_presence_requirement' => future_days_of_nulls(day),
-        # the values from past that we want calculated
-        'days_present_in_new_zealand_in_preceeding_year' => five_past_years_of_nulls(day),
-        'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => five_past_years_of_nulls(day),
-        # our input, the presence in NZ
-        'present_in_new_zealand' => presence_values
-      }
-    end
+  def person_name
+    "ruby"
+  end
 
-    # Open Fisca will calculate and return the value of a variable, if you pass it in as null.
+  def query
+    day = @day.strftime(EligibilityService.date_format)
+
+    # Open Fisca will calculate and return the value of a variable,
+    # if you pass it in as null.
     {
-      'persons' => all_persons,
+      'persons' => {
+        person_name => {
+          # The values from the future that we want calculated
+          'citizenship__meets_minimum_presence_requirements' => future_days_of_nulls(day),
+          'citizenship__meets_each_year_minimum_presence_requirements' => future_days_of_nulls(day),
+          'citizenship__meets_5_year_presence_requirement' => future_days_of_nulls(day),
+          # the values from past that we want calculated
+          'days_present_in_new_zealand_in_preceeding_year' => five_past_years_of_nulls(day),
+          'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => five_past_years_of_nulls(day),
+          # our input, the presence in NZ
+          'present_in_new_zealand' => presence_values
+        }
+      },
       # boiler plate that open fisca needs
       'families' => {
         'happy' => {
-          'others': all_names
+          'others': ['ruby']
         }
       },
       'titled_properties' => {
         'home' => {
-          'others' => all_names
+          'others' => ['ruby']
         }
       }
     }

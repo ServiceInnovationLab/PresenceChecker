@@ -3,7 +3,8 @@
 
 @import "./react-datepicker-cssmodules.min.css";
 @import "./react-datepicker.min.css";
-
+@import "material";
+@import 'simple_calendar';
 @import "./lists";
 @import "./components";
 @import "./utils";
@@ -11,4 +12,8 @@
 *,
 a {
   text-decoration: none;
+}
+.calendar-title {
+  text-align: center;
+  font-size: 300%
 }

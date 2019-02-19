@@ -2,7 +2,8 @@
 
 Rails.application.routes.draw do
   resources :clients, only: %i[index show] do
-    get 'eligibility/:day', to: 'clients#eligibility', constraints: { format: 'json' }
+    resources :eligibilities
+    # get 'eligibility/:day', to: 'clients#eligibility'
   end
   resources :identities
   devise_for :users

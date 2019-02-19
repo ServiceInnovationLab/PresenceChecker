@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
+<%= month_calendar do |date| %>
+  <%= render 'eligibilities/card', eligibility: @client.eligible_on_day(date), date: date %>
+<% end %>
 
-<%= react_component("ShowClient", props: {
-  databaseId: @client.id,
-  clientId: @client.im_client_id,
-  movements: @client.movements.order(carrier_date_time: :desc),
-  identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name])
-}) %>
+
+<% #= react_component("ShowClient", props: {
+  #databaseId: @client.id,
+  #clientId: @client.im_client_id,
+  #movements: @client.movements.order(carrier_date_time: :desc),
+  #identities: @client.identities.as_json(methods: [:country_of_birth_name, :issuing_state_name])
+#})
+%>

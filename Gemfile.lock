@@ -48,10 +48,16 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
+    autoprefixer-rails (9.4.7)
+      execjs
     bcrypt (3.1.12)
     bindex (0.5.0)
     bootsnap (1.4.0)
       msgpack (~> 1.0)
+    bootstrap (4.1.1)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
     capybara (3.13.2)
@@ -117,6 +123,10 @@ GEM
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jquery-rails (4.3.3)
+      rails-dom-testing (>= 1, < 3)
+      railties (>= 4.2.0)
+      thor (>= 0.14, < 2.0)
     json (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -134,6 +144,11 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
+    material-sass (4.1.1)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.5.2)
+    material_icons (2.2.1)
+      railties (>= 3.2)
     method_source (0.9.2)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
@@ -155,6 +170,7 @@ GEM
     parser (2.6.0.0)
       ast (~> 2.4.0)
     pg (1.1.4)
+    popper_js (1.14.5)
     powerpack (0.1.2)
     public_suffix (3.0.3)
     puma (3.12.0)
@@ -251,6 +267,8 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    simple_calendar (2.3.0)
+      rails (>= 3.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -303,6 +321,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  bootstrap (= 4.1.1)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -315,8 +334,11 @@ DEPENDENCIES
   haml
   httparty
   jbuilder (~> 2.5)
+  jquery-rails
   letter_opener
   listen (>= 3.0.5, < 3.2)
+  material-sass (= 4.1.1)
+  material_icons
   mini_racer
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
@@ -328,6 +350,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   seed_dump
   selenium-webdriver
+  simple_calendar (~> 2.0)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)

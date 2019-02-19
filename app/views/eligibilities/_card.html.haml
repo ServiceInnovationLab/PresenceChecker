@@ -1,0 +1,35 @@
+.card
+  .card-body
+    %label.text-center= date.strftime('%d')
+    %h2.text-center
+      = link_to client_eligibility_path(client_id: eligibility.client_id, day: date) do
+        - case eligibility&.minimum_presence
+        - when(true)
+          %i.far.fa-thumbs-up
+        - when(false)
+          %i.fas.fa-times
+        - else
+          %i.fas.fa-question
+
+%details
+  %h4.text-center Over 5 years
+
+  %ul.list-group
+    %li.list-group-item.d-flex.justify-content-between.align-items-center{class: "list-group-item-#{success_class(eligibility.five_year_presence)}" }
+      = eligibility.sum_over_5_years
+      days
+      %i.far.ml-1{class: eligibility.five_year_presence == true ? 'fa-grin' : ''}
+
+  %h4.text-center For each Year
+  %ul.list-group
+    -# for at least 240 days in each of those 5 years
+    - eligibility.mimimum_presence_by_rolling_year.each do |year, passed|
+      -# %li.nav-item{ class: "text-#{success_class(passed)}" }
+      %li.list-group-item.d-flex.justify-content-between.align-items-center{class: "list-group-item-#{success_class(passed)}"}
+        .md-v-line
+        %i.far.mr-4.pr-3{class: passed ? 'fa-grin': 'fa-frown'}
+        = year
+        .md-v-line
+        %span.badge.badge-primary.badge-pill
+          = eligibility.present_days_by_rolling_year[year]
+  .text-center= link_to 'more info', client_eligibility_path(client_id: eligibility.client_id, day: date), class: 'btn btn-primary'
