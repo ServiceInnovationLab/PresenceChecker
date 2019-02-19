@@ -146,10 +146,11 @@ FactoryBot.create :arrival, carrier_date_time: '12 Aug 2018', identity: identity
 # Customers are away for periods of time but still meet presence requirements on the 5th November 2018
 
 ##### Expected results #####
-# Applicant still meets presence requirements on the 5th November 2018 
+# Applicant still meets presence requirements on the 5th November 2018
 # (these dates were tested in Bruteforce)
 
-identity = FactoryBot.create :identity, family_name: 'Criteria', first_name: 'Meets', second_name: '', third_name: ''
+client_1 = FactoryBot.create :client, im_client_id: '54321', file_number: '1'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Criteria', first_name: 'Meets', second_name: '', third_name: ''
 
 FactoryBot.create :arrival, carrier_date_time: '20 Jan 2013', identity: identity
 FactoryBot.create :departure, carrier_date_time: '10 Jan 2015', identity: identity
@@ -178,7 +179,8 @@ FactoryBot.create :arrival, carrier_date_time: '5 Aug 2018', identity: identity
 # Applicant doesn’t meet presence requirements on the 5th November 2018
 #(these dates were tested in Bruteforce)
 
-identity = FactoryBot.create :identity, family_name: 'Criteria', first_name: 'Does', second_name: 'Not', third_name: 'Meet'
+client_1 = FactoryBot.create :client, im_client_id: '56789', file_number: '1'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Criteria', first_name: 'Does', second_name: 'Not', third_name: 'Meet'
 
 FactoryBot.create :arrival, carrier_date_time: '20 Jan 2013', identity: identity
 FactoryBot.create :departure, carrier_date_time: '30 Jan 2015', identity: identity
@@ -208,9 +210,9 @@ FactoryBot.create :arrival, carrier_date_time: '24 Aug 2018', identity: identity
 ##### Expected results #####
 #Only eligible between June 8th and September 27
 
-client_2 = FactoryBot.create :client, im_client_id: '123456', file_number: '2'
-identity_3 = FactoryBot.create :identity, client_id: client_2.id, family_name: 'Jones', first_name: 'James', second_name: '', third_name: '', gender: 'Male'
-identity_4 = FactoryBot.create :identity, client_id: client_2.id, family_name: 'Jones', first_name: 'Jaymie', second_name: '', third_name: '', gender: 'Female'
+client_1 = FactoryBot.create :client, im_client_id: '581119', file_number: '2'
+identity_3 = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Jones', first_name: 'James', second_name: '', third_name: '', gender: 'Male'
+identity_4 = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Jones', first_name: 'Jaymie', second_name: '', third_name: '', gender: 'Female'
 FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 312.weeks.ago
 FactoryBot.create :departure, identity: identity_3, carrier_date_time: 300.weeks.ago
 FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 280.weeks.ago
@@ -225,31 +227,36 @@ FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 70.weeks.ag
 
 ##### Expected results #####
 # Eligible
-identity = FactoryBot.create :identity, family_name: 'Okay', first_name: 'Simply', second_name: '', third_name: ''
+client_1 = FactoryBot.create :client, im_client_id: '93251', file_number: '2'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Okay', first_name: 'Simply', second_name: '', third_name: ''
 FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
 
 ####### Test scenario #12 #######
-# Arrived more than five years ago and never left
+# Arrived more than five years ago
 # Only one period overseas which was short enough to meet presence criteria
 
 ##### Expected results #####
-# Eligible
-identity = FactoryBot.create :identity, family_name: 'Holiday', first_name: 'Short', second_name: '', third_name: ''
-FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+# Eligible before June 2, 2018 and each year after
+# between May 28 2019 and  June 2 2019 (inclusive)
+client_1 = FactoryBot.create :client, im_client_id: '821313', file_number: '2'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Holiday', first_name: 'Short', second_name: '', third_name: ''
+FactoryBot.create :arrival, carrier_date_time: '18 Feb 2013', identity: identity
 
-holiday_length =  Random.rand(10...42)
-holiday_start = Random.rand(50...100)
-holiday_end = holiday_start - holiday_length
-
-FactoryBot.create :departure, carrier_date_time: holiday_start.weeks.ago, identity: identity
-FactoryBot.create :arrival, carrier_date_time: holiday_end.weeks.ago, identity: identity
+FactoryBot.create :departure, carrier_date_time: '29 Jan 2018', identity: identity
+FactoryBot.create :arrival, carrier_date_time: '01 Oct 2018', identity: identity
+# holiday_length =  Random.rand(10...42)
+# holiday_start = Random.rand(50...100)
+# holiday_end = holiday_start - holiday_length
+# FactoryBot.create :departure, carrier_date_time: holiday_start.weeks.ago, identity: identity
+# FactoryBot.create :arrival, carrier_date_time: holiday_end.weeks.ago, identity: identity
 
 ####### Test scenario #13 #######
 # Was overseas for more than 1 year during preceeding 5 years
 
 ##### Expected results #####
 # Not Eligible
-identity = FactoryBot.create :identity, family_name: 'Holiday', first_name: 'Too', second_name: 'Long', third_name: ''
+client_1 = FactoryBot.create :client, im_client_id: '723123', file_number: '2'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Holiday', first_name: 'Too', second_name: 'Long', third_name: ''
 FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
 
 holiday_start = 140.weeks.ago
