@@ -244,6 +244,9 @@ FactoryBot.create :arrival, carrier_date_time: '18 Feb 2013', identity: identity
 
 FactoryBot.create :departure, carrier_date_time: '29 Jan 2018', identity: identity
 FactoryBot.create :arrival, carrier_date_time: '01 Oct 2018', identity: identity
+
+# We should have think about randomisation along these lines
+# Would complicate consistent testing across multiple seed instances
 # holiday_length =  Random.rand(10...42)
 # holiday_start = Random.rand(50...100)
 # holiday_end = holiday_start - holiday_length
