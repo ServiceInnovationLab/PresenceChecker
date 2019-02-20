@@ -75,7 +75,7 @@ export default class ShowClient extends React.Component {
       meetsMinimumPresence: response.meetsMinimumPresence,
       daysInNZ: response.daysInNZ,
       last5Years: response.last5Years,
-      meetsFiveYearPresence: response.meetsFiveYearPresence 
+      meetsFiveYearPresence: response.meetsFiveYearPresence,
     });
 
     this.checkNextWeek();
