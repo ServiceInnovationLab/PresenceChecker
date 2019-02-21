@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_000738) do
+ActiveRecord::Schema.define(version: 2019_02_21_015329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,7 +96,27 @@ ActiveRecord::Schema.define(version: 2018_12_13_000738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "visa_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "indefinite", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "visas", force: :cascade do |t|
+    t.date "start_date", null: false
+    t.date "expiry_date"
+    t.bigint "visa_type_id", null: false
+    t.bigint "identity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_visas_on_identity_id"
+    t.index ["visa_type_id"], name: "index_visas_on_visa_type_id"
+  end
+
   add_foreign_key "eligibilities", "clients"
   add_foreign_key "identities", "countries", column: "country_of_birth_id"
   add_foreign_key "identities", "countries", column: "issuing_state_id"
+  add_foreign_key "visas", "identities"
+  add_foreign_key "visas", "visa_types"
 end
