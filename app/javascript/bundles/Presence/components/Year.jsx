@@ -51,10 +51,10 @@ export default class Year extends React.Component {
             <h3>Year {startYear}</h3>
           </td>
           <td>
-
+            {daysPresent} button
           </td>
           <td>
-
+            <i className={`fas fa-${iconClass}`} />
           </td>
         </tr>
       </Table>
