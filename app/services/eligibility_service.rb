@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EligibilityService
+  ELIGIBLE_VISA_TYPES = ['P', 'A', 'R']
+
   def initialize(client, day, number_of_days = 30)
     @client = client
     @day = day
@@ -40,7 +42,9 @@ class EligibilityService
         'days_present_in_new_zealand_in_preceeding_year' => five_past_years_of_nulls(day),
         'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => five_past_years_of_nulls(day),
         # our input, the presence in NZ
-        'present_in_new_zealand' => presence_values
+        'present_in_new_zealand' => presence_values,
+        # our input, the periods when they had an eligible visa
+        'citizenship__TODO' => eligibility_values,
       }
     end
 
@@ -87,6 +91,20 @@ class EligibilityService
     end
 
     presence
+  end
+
+  def eligibility_values
+    eligibility = {}
+
+    @client.movements.order(:carrier_date_time).each do |movement|
+      if movement.direction == 'arrival'
+        eligibility[movement.day] = true if ELIGIBLE_VISA_TYPES.include?(movement.visa_type)
+      elsif movement.direction == 'departure'
+        eligibility[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
+      end
+    end
+byebug
+    eligibility
   end
 
   def years_before(day, num_years)
