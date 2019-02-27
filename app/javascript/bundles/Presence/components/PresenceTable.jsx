@@ -73,7 +73,7 @@ export default class PresenceTable extends React.Component {
         {this.header()}
         {formattedYears && !loading && (
           <div className="presence-table">
-            {formattedYears.map(year => (
+            {formattedYears.reverse().map(year => (
               <Year key={`year_${year.yearNum}`} {...year} />
             ))}
           </div>
