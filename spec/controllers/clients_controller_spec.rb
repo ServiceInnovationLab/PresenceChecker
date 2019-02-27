@@ -142,7 +142,6 @@ RSpec.describe ClientsController, type: :controller do
           )
         }
         it {
-          pending 'waiting for open-fisca pr'
           invalid_date = Date.new(2017, 10, 1)
           client = Client.find_by(im_client_id: '12345')
 
