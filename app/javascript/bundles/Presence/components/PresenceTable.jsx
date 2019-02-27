@@ -47,6 +47,11 @@ export default class PresenceTable extends React.Component {
     return format(subYears(selectedDate, yearNum - 1), 'DD MMM YYYY');
   };
 
+  startYear = yearNum => {
+    const { selectedDate } = this.props;
+    return format(subYears(selectedDate, yearNum - 1), 'YYYY');
+  }
+
   render() {
     const { years, totalDays, loading } = this.props;
     let yearNum = 6;
@@ -59,6 +64,7 @@ export default class PresenceTable extends React.Component {
         daysPresent: totalDays[yearEndDate],
         startDate: this.startDate(yearNum),
         endingDate: this.endingDate(yearNum),
+        startYear: this.startYear(yearNum),
       };
     }).reverse();
 

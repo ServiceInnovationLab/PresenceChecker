@@ -16,6 +16,7 @@ export default class Year extends React.Component {
       startDate,
       endingDate,
       yearNumber,
+      startYear,
       daysPresent,
       isEligible,
     } = this.props;
@@ -23,25 +24,38 @@ export default class Year extends React.Component {
     const iconClass = isEligible ? 'check' : 'times';
 
     return (
-      <Table className={`year-table is-text-center ${errorClass}`}>
+      // <Table className={`year-table is-text-center ${errorClass}`}>
+      //   <tr>
+      //     <td className="header-container has-bottom-border has-right-border">
+      //       <h3>Yr {yearNumber}</h3>
+      //     </td>
+      //     <td className="has-bottom-border">
+      //       {startDate} - {endingDate}
+      //     </td>
+      //     <td className={`icon-container has-bottom-border ${errorClass}`}>
+      //       <i className={`fas fa-${iconClass}`} />
+      //     </td>
+      //   </tr>
+      //   <tr>
+      //     <th
+      //       colSpan="3"
+      //       className="has-bottom-border is-light year-table__summary"
+      //     >
+      //       Days in New Zealand: {daysPresent}
+      //     </th>
+      //   </tr>
+      // </Table>
+      <Table>
         <tr>
-          <td className="header-container has-bottom-border has-right-border">
-            <h3>Yr {yearNumber}</h3>
+          <td>
+            <h3>Year {startYear}</h3>
           </td>
-          <td className="has-bottom-border">
-            {startDate} - {endingDate}
+          <td>
+
           </td>
-          <td className={`icon-container has-bottom-border ${errorClass}`}>
-            <i className={`fas fa-${iconClass}`} />
+          <td>
+
           </td>
-        </tr>
-        <tr>
-          <th
-            colSpan="3"
-            className="has-bottom-border is-light year-table__summary"
-          >
-            Days in New Zealand: {daysPresent}
-          </th>
         </tr>
       </Table>
     );
