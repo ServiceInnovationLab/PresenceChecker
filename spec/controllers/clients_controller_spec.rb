@@ -62,7 +62,7 @@ RSpec.describe ClientsController, type: :controller do
 
       context 'person with a one year absence' do
         before do
-          FactoryBot.create :departure, identity: identity, carrier_date_time: '2013-12-31'
+          FactoryBot.create :departure, identity: identity, carrier_date_time: '2014-01-01'
           FactoryBot.create :arrival, identity: identity, carrier_date_time: '2014-12-31'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
