@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class EligibilityService
-  ELIGIBLE_VISA_TYPES = ['P', 'A', 'R']
-
   def initialize(client, day, number_of_days = 30)
     @client = client
     @day = day
@@ -98,7 +96,7 @@ class EligibilityService
 
     @client.movements.order(:carrier_date_time).each do |movement|
       if movement.direction == 'arrival'
-        eligibility[movement.day] = true if ELIGIBLE_VISA_TYPES.include?(movement.visa_type)
+        eligibility[movement.day] = true if VisaType.INDEFINITE_VISA_TYPES.include?(movement.visa_type)
       elsif movement.direction == 'departure'
         eligibility[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
       end

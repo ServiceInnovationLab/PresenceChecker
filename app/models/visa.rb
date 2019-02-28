@@ -10,7 +10,7 @@ class Visa < ApplicationRecord
   # Adds a validation error if the expiry date is not set, unless the visa type
   # is indefinite.
   def has_expiry_or_is_indefinite?
-    if expiry_date.nil? && !visa_type.indefinite
+    if expiry_date.nil? && !visa_type.indefinite?
       errors.add(:expiry_date, 'must be present unless the visa is indefinite')
     end
   end

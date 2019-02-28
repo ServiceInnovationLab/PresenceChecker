@@ -10,7 +10,7 @@ RSpec.describe Visa, type: :model do
   end
 
   context 'when the VisaType is not indefinite' do
-    let(:visa_type) { FactoryBot.build(:visa_type, indefinite: false) }
+    let(:visa_type) { FactoryBot.build(:visa_type) }
 
     context 'and the expiry date is set' do
       let(:expiry_date) { Time.zone.today + 2.years }
