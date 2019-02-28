@@ -3,5 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Movement, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { FactoryBot.build(:movement) }
+
+  it 'has a factory which produces valid models by default' do
+    expect(subject).to be_valid
+  end
 end
