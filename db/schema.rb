@@ -97,13 +97,16 @@ ActiveRecord::Schema.define(version: 2019_02_21_015329) do
   end
 
   create_table "visa_types", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "visa_type", null: false
+    t.string "description", null: false
     t.boolean "indefinite", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "visas", force: :cascade do |t|
+    t.string "visa_or_permit", null: false
+    t.string "single_or_multiple", null: false
     t.date "start_date", null: false
     t.date "expiry_date"
     t.bigint "visa_type_id", null: false
