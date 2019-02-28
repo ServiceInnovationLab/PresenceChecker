@@ -249,7 +249,7 @@ RSpec.describe ClientsController, type: :controller do
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
-          
+
           expect(res['meetsMinimumPresence']).to eq(true)
           expect(res['eachYearPresence']).to eq(true)
           expect(res['meetsFiveYearPresence']).to eq(true)
@@ -279,6 +279,28 @@ RSpec.describe ClientsController, type: :controller do
             valid_date.prev_year.to_s => false,
             valid_date.prev_year(2).to_s => true,
             valid_date.prev_year(3).to_s => true,
+            valid_date.prev_year(4).to_s => true
+          )
+        }
+      end
+
+      ###### Test scenario #14 #######
+      context 'Customer has three passports, same Client ID, enough presence days but non-indefinite visas' do
+        it {
+          valid_date = Date.new(2017, 10, 2)
+          client = Client.find_by(im_client_id: '00002')
+
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
+          res = JSON.parse(response.body)[valid_date.to_s]
+
+          expect(res['meetsMinimumPresence']).to eq(false)
+          expect(res['eachYearPresence']).to eq(false)
+          expect(res['meetsFiveYearPresence']).to eq(false)
+          expect(res['last5Years']).to eq(
+            valid_date.to_s => true,
+            valid_date.prev_year.to_s => false,
+            valid_date.prev_year(2).to_s => false,
+            valid_date.prev_year(3).to_s => false,
             valid_date.prev_year(4).to_s => true
           )
         }
