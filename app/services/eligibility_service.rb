@@ -44,7 +44,7 @@ class EligibilityService
         # our input, the presence in NZ
         'present_in_new_zealand' => presence_values,
         # our input, the periods when they had an eligible visa
-        'citizenship__TODO' => eligibility_values,
+        'immigration__entitled_to_indefinite_stay' => eligibility_values,
       }
     end
 
