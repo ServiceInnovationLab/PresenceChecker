@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :visa_type do
-    name { Faker::Job.title }
+    visa_type { ['P', 'A', 'R'].sample }
+    description { Faker::Job.title }
     indefinite { [true, false].sample }
   end
 end
