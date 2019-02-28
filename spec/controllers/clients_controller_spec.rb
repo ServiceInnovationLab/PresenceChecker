@@ -62,7 +62,7 @@ RSpec.describe ClientsController, type: :controller do
 
       context 'person with a one year absence' do
         before do
-          FactoryBot.create :departure, identity: identity, carrier_date_time: '2013-12-31'
+          FactoryBot.create :departure, identity: identity, carrier_date_time: '2014-01-01'
           FactoryBot.create :arrival, identity: identity, carrier_date_time: '2014-12-31'
           get :eligibility, format: :json, params: { client_id: client.to_param, day: '2019-01-01' }
         end
@@ -142,7 +142,6 @@ RSpec.describe ClientsController, type: :controller do
           )
         }
         it {
-          pending 'waiting for open-fisca pr'
           invalid_date = Date.new(2017, 10, 1)
           client = Client.find_by(im_client_id: '12345')
 
@@ -250,7 +249,7 @@ RSpec.describe ClientsController, type: :controller do
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
-          
+
           expect(res['meetsMinimumPresence']).to eq(true)
           expect(res['eachYearPresence']).to eq(true)
           expect(res['meetsFiveYearPresence']).to eq(true)
@@ -280,6 +279,28 @@ RSpec.describe ClientsController, type: :controller do
             valid_date.prev_year.to_s => false,
             valid_date.prev_year(2).to_s => true,
             valid_date.prev_year(3).to_s => true,
+            valid_date.prev_year(4).to_s => true
+          )
+        }
+      end
+
+      ###### Test scenario #14 #######
+      context 'Customer has three passports, same Client ID, enough presence days but non-indefinite visas' do
+        it {
+          valid_date = Date.new(2017, 10, 2)
+          client = Client.find_by(im_client_id: '00002')
+
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
+          res = JSON.parse(response.body)[valid_date.to_s]
+
+          expect(res['meetsMinimumPresence']).to eq(false)
+          expect(res['eachYearPresence']).to eq(false)
+          expect(res['meetsFiveYearPresence']).to eq(false)
+          expect(res['last5Years']).to eq(
+            valid_date.to_s => true,
+            valid_date.prev_year.to_s => false,
+            valid_date.prev_year(2).to_s => false,
+            valid_date.prev_year(3).to_s => false,
             valid_date.prev_year(4).to_s => true
           )
         }
