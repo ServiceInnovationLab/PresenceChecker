@@ -103,7 +103,7 @@ class EligibilityService
         eligibility[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
       end
     end
-byebug
+
     eligibility
   end
 
