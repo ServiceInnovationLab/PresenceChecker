@@ -8,7 +8,7 @@
 ####### Test scenario #1 #######
 # Customer travels in and out of NZ as a Flight Attendant.
 # There are cases when an attendant doesn’t register as coming in or out of the country.
-# For example records can show that they depart, then depart again, without arriving in between. 
+# For example records can show that they depart, then depart again, without arriving in between.
 # This would also be at the discretion of the minister.
 # However lets run the data through the system and see if we can break it
 
@@ -42,7 +42,7 @@
 ####### Expected results #######
 # There is a flag raised in the system to show that this country has been involved in the movements.
 
-# identity = FactoryBot.create :identity, family_name: 'Islands', first_name: 'Cook', second_name: '', third_name: '' 
+# identity = FactoryBot.create :identity, family_name: 'Islands', first_name: 'Cook', second_name: '', third_name: ''
 # FactoryBot.create :arrival, carrier_date_time: '20 Jan 2013', identity: identity
 
 # FactoryBot.create :departure, carrier_date_time: '5 Jan 2015', identity: identity
@@ -81,22 +81,22 @@ country_3 = FactoryBot.create :country, name: 'United States of America'
 client_1 = FactoryBot.create :client, im_client_id: '12345', file_number: '1'
 
 identity_1 = FactoryBot.create :identity, client_id: client_1.id, identity_number: 'CANA001', family_name: 'Jones', first_name: 'Mary', second_name: 'J', third_name: '', gender: 'Female', country_of_birth_id: country_1.id, nationality: country_1.name, issuing_state_id: country_1.id
-identity_2 = FactoryBot.create :identity, client_id: client_1.id, identity_number: 'ISRAEL001', family_name: 'Wailing', first_name: 'Mary', second_name: 'Jane', third_name: '', gender: 'Femaile', country_of_birth_id: country_1.id, nationality: country_2.name, issuing_state_id: country_2.id
+identity_2 = FactoryBot.create :identity, client_id: client_1.id, identity_number: 'ISRAEL001', family_name: 'Wailing', first_name: 'Mary', second_name: 'Jane', third_name: '', gender: 'Female', country_of_birth_id: country_1.id, nationality: country_2.name, issuing_state_id: country_2.id
 identity_3 = FactoryBot.create :identity, client_id: client_1.id, identity_number: 'USOFA001', family_name: 'Cowbowys', first_name: 'MARY JANE', second_name: 'J', third_name: 'Jones', gender: 'Female', country_of_birth_id: country_1.id, nationality: country_3.name, issuing_state_id: country_3.id
 
-FactoryBot.create :arrival, carrier_date_time: '4 Feb 2013', identity: identity_3
-FactoryBot.create :departure, carrier_date_time: '9 Mar 2014', identity: identity_1
-FactoryBot.create :arrival, carrier_date_time: '15 Mar 2014', identity: identity_2
-FactoryBot.create :departure, carrier_date_time: '9 Mar 2016', identity: identity_1
-FactoryBot.create :arrival, carrier_date_time: '15 Mar 2016', identity: identity_2
-FactoryBot.create :departure, carrier_date_time: '26 Aug 2016', identity: identity_1
-FactoryBot.create :arrival, carrier_date_time: '30 Aug 2015', identity: identity_3
-FactoryBot.create :departure, carrier_date_time: '1 Nov 2016', identity: identity_3
-FactoryBot.create :arrival, carrier_date_time: '16 Nov 2016', identity: identity_3
-FactoryBot.create :departure, carrier_date_time: '26 May 2017', identity: identity_2
-FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity_3
-FactoryBot.create :departure, carrier_date_time: '20 Jan 2018', identity: identity_1
-FactoryBot.create :arrival, carrier_date_time: '12 Feb 2018', identity: identity_1
+FactoryBot.create :arrival, carrier_date_time: '4 Feb 2013', identity: identity_3, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '9 Mar 2014', identity: identity_1, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '15 Mar 2014', identity: identity_2, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '9 Mar 2016', identity: identity_1, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '15 Mar 2016', identity: identity_2, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '26 Aug 2016', identity: identity_1, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '30 Aug 2015', identity: identity_3, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '1 Nov 2016', identity: identity_3, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '16 Nov 2016', identity: identity_3, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '26 May 2017', identity: identity_2, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity_3, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '20 Jan 2018', identity: identity_1, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '12 Feb 2018', identity: identity_1, visa_type: 'R'
 
 ####### Test scenario #5 #######
 # Customer has two passports and exits NZ on one, and returns to NZ on another.
@@ -131,7 +131,7 @@ FactoryBot.create :departure, carrier_date_time: '20 Jun 2018', identity: identi
 FactoryBot.create :arrival, carrier_date_time: '12 Aug 2018', identity: identity_2
 
 ####### Test scenario #6  ######
-# Customers are away for periods of time while working for the Crown / Military / Govt. 
+# Customers are away for periods of time while working for the Crown / Military / Govt.
 
 ####### Expected results ######
 # # There is a flag raised in the system to show that this person is traveling for Crown / Military / Govt reasons (need to discuss further, may be out of scope for this piece of work)
@@ -267,3 +267,27 @@ holiday_end = 75.weeks.ago
 
 FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
 FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
+
+####### Test scenario #14 #######
+# one client with three identities and a non-indefinite visa which makes one of
+# their presences invalid for citizenship
+
+client_2 = FactoryBot.create :client, im_client_id: '00002', file_number: '2'
+
+identity_4 = FactoryBot.create :identity, client_id: client_2.id, identity_number: 'CANA002', family_name: 'Jones', first_name: 'Mary', second_name: 'J', third_name: '', gender: 'Female', country_of_birth_id: country_1.id, nationality: country_1.name, issuing_state_id: country_1.id
+identity_5 = FactoryBot.create :identity, client_id: client_2.id, identity_number: 'ISRAEL002', family_name: 'Wailing', first_name: 'Mary', second_name: 'Jane', third_name: '', gender: 'Female', country_of_birth_id: country_1.id, nationality: country_2.name, issuing_state_id: country_2.id
+identity_6 = FactoryBot.create :identity, client_id: client_2.id, identity_number: 'USOFA002', family_name: 'Cowbowys', first_name: 'MARY JANE', second_name: 'J', third_name: 'Jones', gender: 'Female', country_of_birth_id: country_1.id, nationality: country_3.name, issuing_state_id: country_3.id
+
+FactoryBot.create :arrival, carrier_date_time: '4 Feb 2013', identity: identity_6, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '9 Mar 2014', identity: identity_4, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '15 Mar 2014', identity: identity_5, visa_type: 'X'
+FactoryBot.create :departure, carrier_date_time: '9 Mar 2016', identity: identity_4, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '15 Mar 2016', identity: identity_5, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '26 Aug 2016', identity: identity_4, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '30 Aug 2016', identity: identity_6, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '1 Nov 2016', identity: identity_6, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '16 Nov 2016', identity: identity_6, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '26 May 2017', identity: identity_5, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity_6, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '20 Jan 2018', identity: identity_4, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '12 Feb 2018', identity: identity_4, visa_type: 'R'

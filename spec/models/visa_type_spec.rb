@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Movement, type: :model do
-  subject { FactoryBot.build(:movement) }
+RSpec.describe VisaType, type: :model do
+  subject { FactoryBot.build(:visa_type) }
 
   it 'has a factory which produces valid models by default' do
     expect(subject).to be_valid

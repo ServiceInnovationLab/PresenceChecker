@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_000738) do
+ActiveRecord::Schema.define(version: 2019_02_28_021132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_000738) do
     t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "country_code"
   end
 
   create_table "eligibilities", force: :cascade do |t|
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_000738) do
     t.datetime "carrier_date_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "visa_type"
     t.index ["identity_id"], name: "index_movements_on_identity_id"
   end
 
@@ -96,7 +98,29 @@ ActiveRecord::Schema.define(version: 2018_12_13_000738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "visa_types", force: :cascade do |t|
+    t.string "visa_type", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "visas", force: :cascade do |t|
+    t.string "visa_or_permit", null: false
+    t.string "single_or_multiple", null: false
+    t.date "start_date", null: false
+    t.date "expiry_date"
+    t.bigint "visa_type_id", null: false
+    t.bigint "identity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_visas_on_identity_id"
+    t.index ["visa_type_id"], name: "index_visas_on_visa_type_id"
+  end
+
   add_foreign_key "eligibilities", "clients"
   add_foreign_key "identities", "countries", column: "country_of_birth_id"
   add_foreign_key "identities", "countries", column: "issuing_state_id"
+  add_foreign_key "visas", "identities"
+  add_foreign_key "visas", "visa_types"
 end

@@ -129,6 +129,19 @@ header.main {
     span {
       padding-right: 10px;
     }
+
+    &__details {
+      background: #777;
+      color: #fff;
+      font-weight: bold;
+      font-size: inherit;
+      margin-left: 5rem;
+      padding: 0.75rem;
+
+      + span {
+        color: #fff;
+      }
+    }
   }
 
   h2 {
