@@ -15,7 +15,7 @@
     "react-on-rails": "11.2.2"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
