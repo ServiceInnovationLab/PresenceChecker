@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
-gem 'devise_invitable', '~> 1.7.0'
+gem 'devise_invitable', '~> 2.0.0'
 
 gem 'react_on_rails'
 gem 'webpacker'
