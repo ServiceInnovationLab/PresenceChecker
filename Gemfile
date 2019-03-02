@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
-gem 'devise_invitable', '~> 1.7.0'
+gem 'devise_invitable', '~> 2.0.0'
 
 gem 'react_on_rails'
 gem 'webpacker'
@@ -61,7 +61,7 @@ group :development, :test do
   # freeze times in tests
   gem 'timecop'
 
-  gem 'rubocop', '0.64.0'
+  gem 'rubocop', '0.65.0'
 end
 
 group :development do
