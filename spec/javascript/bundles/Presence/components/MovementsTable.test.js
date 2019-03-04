@@ -22,6 +22,15 @@ describe('<MovementsTable />', () => {
       {
         carrier_date_time: '2018-01-20T00:00:00.000Z',
         created_at: '2019-03-03T22:55:25.177Z',
+        direction: 'arrival',
+        id: 91,
+        identity_id: 13,
+        updated_at: '2019-03-03T22:55:25.177Z',
+        visa_type: 'X'
+      },
+      {
+        carrier_date_time: '2018-01-20T00:00:00.000Z',
+        created_at: '2019-03-03T22:55:25.177Z',
         direction: 'departure',
         id: 92,
         identity_id: 13,
@@ -42,19 +51,21 @@ describe('<MovementsTable />', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should have a visa type table', () => {
+  /* The table doesn't have any headers so we're testing that there are 3 columns and the
+     third column should be the visa type column */
+  it('should have a visa type column', () => {
     const wrapper = mount(<MovementsTable {...props} />);
-    expect(wrapper.find('.movements-table').children().children().length).toEqual(3);
+    expect(wrapper.find('.movements-table tr').length).toEqual(3);
   });
 
   it('should highlight the table if it has an indefinite visa', () => {
     const wrapper = mount(<MovementsTable {...props} />);
-    expect(wrapper.find('.movements-table-highlight--positive').childAt(2).text()).toBe('R');
+    expect(wrapper.find('.movements-table .movements-table-highlight--positive td').last().text()).toBe('R');
   });
 
   it('should not highlight the table if it does not have an indefinite visa', () => {
     const wrapper = mount(<MovementsTable {...props} />);
-    expect(wrapper.find('.movements-table-highlight--negative').childAt(2).text()).toBe('');
+    expect(wrapper.find('.movements-table .movements-table-highlight--negative td').last().text()).toBe('');
   });
 
   it('should not highlight a row at all if the visa type is nil', () => {

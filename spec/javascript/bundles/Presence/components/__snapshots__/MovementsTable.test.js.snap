@@ -50,6 +50,29 @@ exports[`<MovementsTable /> renders correctly without failing 1`] = `
             <h3
               className="is-dark"
             >
+              Arrival
+            </h3>
+          </td>
+          <td
+            className="has-bottom-border has-right-border"
+          >
+            20 Jan 2018
+          </td>
+          <td
+            className="has-bottom-border"
+          >
+            X
+          </td>
+        </tr>
+        <tr
+          className="movements-table-highlight--negative"
+        >
+          <td
+            className="header-container has-bottom-border has-right-border"
+          >
+            <h3
+              className="is-dark"
+            >
               Departure
             </h3>
           </td>
