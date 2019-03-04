@@ -42,14 +42,25 @@ describe('<MovementsTable />', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should show indefinite visa type if positive class name exists', () => {
+  it('should have a visa type table', () => {
+    const wrapper = mount(<MovementsTable {...props} />);
+    expect(wrapper.find('.movements-table').children().children().length).toEqual(3);
+  });
+
+  it('should highlight the table if it has an indefinite visa', () => {
     const wrapper = mount(<MovementsTable {...props} />);
     expect(wrapper.find('.movements-table-highlight--positive').childAt(2).text()).toBe('R');
   });
 
-  it('should show no visa type if negative class name exists', () => {
+  it('should not highlight the table if it does not have an indefinite visa', () => {
     const wrapper = mount(<MovementsTable {...props} />);
     expect(wrapper.find('.movements-table-highlight--negative').childAt(2).text()).toBe('');
   });
+
+  // WIP
+  // it('should not highlight a row at all if the visa type is nil', () => {
+  //   const wrapper = mount(<MovementsTable {...props} />);
+  //   expect(wrapper.find('.movements-table').children().children().length).toEqual(3);
+  // });
 
 });
