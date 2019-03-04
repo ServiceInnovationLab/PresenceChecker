@@ -30,7 +30,7 @@ export default class MovementsTable extends React.Component {
         <div className="movements-table-wrapper">
           <Table className="presence-table movements-table">
             {movements.map((item, index) => (
-              <tr key={`movement_${index}`} className={`${this.isIndefiniteVisa(item.visa_type)}`}>
+              <tr key={`movement_${index}`} className={this.isIndefiniteVisa(item.visa_type)}>
                 <td className="header-container has-bottom-border has-right-border">
                   <h3 className="is-dark">{firstCharCap(item.direction)}</h3>
                 </td>
