@@ -59,7 +59,6 @@ describe('<MovementsTable />', () => {
 
   it('should not highlight a row at all if the visa type is nil', () => {
     const wrapper = shallow(<MovementsTable {...props} />);
-    expect(wrapper.find('.movements-table').children().length).toEqual(2);
     expect(wrapper.find('.movements-table').children().last().contains(<td
       className="has-bottom-border"
     />)).toEqual(true);
