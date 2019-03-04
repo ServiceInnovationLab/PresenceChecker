@@ -42,7 +42,6 @@ describe('<MovementsTable />', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  // test or nil
   it('should show indefinite visa type if positive class name exists', () => {
     const wrapper = mount(<MovementsTable {...props} />);
     expect(wrapper.find('.movements-table-highlight--positive').childAt(2).text()).toBe('R');
