@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, mount } from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 
@@ -57,10 +57,12 @@ describe('<MovementsTable />', () => {
     expect(wrapper.find('.movements-table-highlight--negative').childAt(2).text()).toBe('');
   });
 
-  // WIP
-  // it('should not highlight a row at all if the visa type is nil', () => {
-  //   const wrapper = mount(<MovementsTable {...props} />);
-  //   expect(wrapper.find('.movements-table').children().children().length).toEqual(3);
-  // });
+  it('should not highlight a row at all if the visa type is nil', () => {
+    const wrapper = shallow(<MovementsTable {...props} />);
+    expect(wrapper.find('.movements-table').children().last().contains(<td
+      className="has-bottom-border"
+    />)).toEqual(true);
+    expect(wrapper.find('.movements-table').children().last().hasClass('movements-table-highlight--negative')).toEqual(true);
+  });
 
 });
