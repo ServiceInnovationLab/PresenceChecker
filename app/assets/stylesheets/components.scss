@@ -408,11 +408,11 @@ table {
   }
 
   .has-bottom-border {
-    border-bottom: 3px solid lightgray;
+    border-bottom: 3px solid $grey;
   }
 
   .has-right-border {
-    border-right: 3px solid lightgray;
+    border-right: 3px solid $grey;
   }
 
   .has-border--light {
@@ -502,8 +502,20 @@ table {
   overflow: hidden;
   overflow-y: auto;
   margin-bottom: 20px;
-  border: 2px solid $light-grey;
+  border: 2px solid $grey;
   border-top: 0;
+}
+
+.movements-table-highlight {
+  color: $dark-grey;
+
+  &--positive {
+    background-color: $light-green;
+  }
+
+  &--negative {
+    background-color: $yellow-negative;
+  }
 }
 
 .fa-spinner {

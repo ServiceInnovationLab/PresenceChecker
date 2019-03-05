@@ -11,6 +11,13 @@ export default class MovementsTable extends React.Component {
     movements: PropTypes.array,
   };
 
+  isIndefiniteVisa = movement => {
+    if(movement !== 'null') {
+      let indefinite_visas = ['P', 'A', 'R'];
+      return indefinite_visas.indexOf(movement) === -1 ? 'movements-table-highlight--negative' : 'movements-table-highlight--positive';
+    }
+  }
+
   render() {
     const { movements } = this.props;
 
@@ -23,12 +30,15 @@ export default class MovementsTable extends React.Component {
         <div className="movements-table-wrapper">
           <Table className="presence-table movements-table">
             {movements.map((item, index) => (
-              <tr key={`movement_${index}`}>
+              <tr key={`movement_${index}`} className={this.isIndefiniteVisa(item.visa_type)}>
                 <td className="header-container has-bottom-border has-right-border">
                   <h3 className="is-dark">{firstCharCap(item.direction)}</h3>
                 </td>
-                <td className="has-bottom-border">
+                <td className="has-bottom-border has-right-border">
                   {format(item.carrier_date_time, 'DD MMM YYYY')}
+                </td>
+                <td className="has-bottom-border">
+                  {item.visa_type}
                 </td>
               </tr>
             ))}
