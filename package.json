@@ -2,7 +2,7 @@
   "name": "PresenceChecker",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "4.0",
     "babel-preset-react": "^6.24.1",
     "date-fns": "^1.29.0",
     "es6-promise": "^4.2.6",
