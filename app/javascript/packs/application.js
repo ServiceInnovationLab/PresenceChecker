@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
-import { format, eachDay, addDays } from 'date-fns';
+import { format, eachDay, addDays, subDays } from 'date-fns';
 import 'isomorphic-fetch';
 
 import { getCSRF, databaseURL } from '../utilities/utilities';
@@ -14,7 +14,7 @@ export default class ShowClient extends React.Component {
   state = {
     loading: false,
     backgroundLoading: false,
-    selectedDate: new Date(),
+    endOfRollingYear: subDays(new Date(), 1),
     meetsMinimumPresence: false,
     meetsFiveYearPresence: false,
     daysInNZ: {},
@@ -23,12 +23,12 @@ export default class ShowClient extends React.Component {
   };
 
   componentDidMount = () => {
-    this.checkSelectedDate(this.state.selectedDate);
+    this.checkEndOfRollingYear(this.state.endOfRollingYear);
   };
 
-  checkSelectedDate = selectedDate => {
+  checkEndOfRollingYear = endOfRollingYear => {
     const { databaseId } = this.props;
-    const formattedDate = format(selectedDate, 'YYYY-MM-DD');
+    const formattedDate = format(endOfRollingYear, 'YYYY-MM-DD');
     const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
     this.setState({
@@ -48,7 +48,7 @@ export default class ShowClient extends React.Component {
         return result.json();
       })
       .then(response =>
-        this.onDataResponse(response[format(selectedDate, 'YYYY-MM-DD')])
+        this.onDataResponse(response[format(endOfRollingYear, 'YYYY-MM-DD')])
       )
       .catch(error => {
         console.error('Server error:', error);
@@ -59,14 +59,14 @@ export default class ShowClient extends React.Component {
   };
 
   onDateChange = date => {
-    let newDate = new Date(date);
+    let endOfRollingYear = subDays(new Date(date), 1)
 
     this.setState({
-      selectedDate: newDate,
+      endOfRollingYear,
       meetsMinimumPresence: false,
     });
 
-    this.checkSelectedDate(newDate);
+    this.checkEndOfRollingYear(endOfRollingYear);
   };
 
   onDataResponse = response => {
@@ -83,10 +83,10 @@ export default class ShowClient extends React.Component {
 
   checkNextWeek = () => {
     const { databaseId } = this.props;
-    const { selectedDate } = this.state;
+    const { endOfRollingYear } = this.state;
     const nextWeek = eachDay(
-      addDays(selectedDate, 1),
-      addDays(selectedDate, 8)
+      addDays(endOfRollingYear, 1),
+      addDays(endOfRollingYear, 8)
     );
     let loadingNumber = nextWeek.length;
 
@@ -151,13 +151,14 @@ export default class ShowClient extends React.Component {
 
   render() {
     const {
-      selectedDate,
+      endOfRollingYear,
       meetsMinimumPresence,
       meetsFiveYearPresence,
       daysInNZ,
       last5Years,
       loading,
     } = this.state;
+
     const { clientId, identities, movements } = this.props;
 
     return (
@@ -170,7 +171,7 @@ export default class ShowClient extends React.Component {
           <div className="results dates-wrapper-left">
             <PresenceDates
               onDateChange={this.onDateChange}
-              selectedDate={selectedDate}
+              endOfRollingYear={endOfRollingYear}
               isEligible={meetsMinimumPresence}
               highlightDates={this.highlightDates()}
               loading={loading}
@@ -181,7 +182,7 @@ export default class ShowClient extends React.Component {
               isEligible={meetsFiveYearPresence}
               totalDays={daysInNZ}
               years={last5Years}
-              selectedDate={selectedDate}
+              endOfRollingYear={endOfRollingYear}
               // rollingYearData={rollingYearData}
               loading={loading}
             />
