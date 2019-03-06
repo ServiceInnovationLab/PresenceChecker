@@ -3,6 +3,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import ShowClient from '../../../app/javascript/packs/application';
+import { subDays } from 'date-fns';
 
 configure({ adapter: new Adapter() });
 
@@ -23,7 +24,7 @@ describe('<ShowClient />', () => {
       const component = shallow(<ShowClient {...props} />);
 
       it('mounts properly', () => {
-        const spy = jest.spyOn(component.instance(), 'checkSelectedDate');
+        const spy = jest.spyOn(component.instance(), 'checkEndOfRollingYear');
 
         expect(spy).not.toHaveBeenCalled();
         expect(() => {
@@ -33,7 +34,7 @@ describe('<ShowClient />', () => {
       });
     });
 
-    describe('checkSelectedDate', () => {
+    describe('checkEndOfRollingYear', () => {
       const component = shallow(<ShowClient {...props} />);
       const date = new Date();
 
@@ -60,19 +61,19 @@ describe('<ShowClient />', () => {
           component.instance().onDateChange(date);
         }).not.toThrow();
         expect(spy).toHaveBeenCalledWith({
-          selectedDate: date,
+          endOfRollingYear: subDays(date, 1),
           meetsMinimumPresence: false,
         });
       });
 
-      it('calls on "checkSelectedDate"', () => {
-        const spy = jest.spyOn(component.instance(), 'checkSelectedDate');
+      it('calls on "checkEndOfRollingYear"', () => {
+        const spy = jest.spyOn(component.instance(), 'checkEndOfRollingYear');
 
         expect(spy).not.toHaveBeenCalled();
         expect(() => {
           component.instance().onDateChange(date);
         }).not.toThrow();
-        expect(spy).toHaveBeenCalledWith(date);
+        expect(spy).toHaveBeenCalledWith(subDays(date, 1));
       });
     });
 

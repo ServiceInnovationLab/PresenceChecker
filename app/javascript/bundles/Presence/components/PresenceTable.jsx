@@ -38,13 +38,13 @@ export default class PresenceTable extends React.Component {
   };
 
   startDate = yearNum => {
-    const { selectedDate } = this.props;
-    return format(addDays(subYears(selectedDate, yearNum), 1), 'DD MMM YYYY');
+    const { endOfRollingYear } = this.props;
+    return format(addDays(subYears(endOfRollingYear, yearNum), 1), 'DD MMM YYYY');
   };
 
   endingDate = yearNum => {
-    const { selectedDate } = this.props;
-    return format(subYears(selectedDate, yearNum - 1), 'DD MMM YYYY');
+    const { endOfRollingYear } = this.props;
+    return format(subYears(endOfRollingYear, yearNum - 1), 'DD MMM YYYY');
   };
 
   render() {
