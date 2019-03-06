@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import DatePicker from 'react-datepicker';
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 
 export default class PresenceDates extends React.Component {
   static propTypes = {
@@ -38,12 +38,14 @@ export default class PresenceDates extends React.Component {
   render() {
     const {
       isEligible,
-      selectedDate,
+      endOfRollingYear,
       onDateChange,
       highlightDates,
       loading,
     } = this.props;
-    const date = format(selectedDate, 'D MMMM YYYY');
+    const selected = addDays(endOfRollingYear, 1)
+    const date = format(selected, 'D MMMM YYYY');
+
     let stateClass = '';
 
     if (loading) {
@@ -59,7 +61,7 @@ export default class PresenceDates extends React.Component {
         <DatePicker
           inline
           highlightDates={highlightDates}
-          selected={selectedDate}
+          selected={selected}
           onChange={onDateChange}
         />
       </div>

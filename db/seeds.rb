@@ -291,3 +291,30 @@ FactoryBot.create :departure, carrier_date_time: '26 May 2017', identity: identi
 FactoryBot.create :arrival, carrier_date_time: '20 Jun 2017', identity: identity_6, visa_type: 'R'
 FactoryBot.create :departure, carrier_date_time: '20 Jan 2018', identity: identity_4, visa_type: nil
 FactoryBot.create :arrival, carrier_date_time: '12 Feb 2018', identity: identity_4, visa_type: 'R'
+
+
+####### Test scenario #15 #######
+# Departed, Arrived, then Departed on same day
+
+##### Expected results #####
+# Not Eligible
+client_1 = FactoryBot.create :client, im_client_id: '54354352', file_number: '2'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'departed', first_name: 'arrived', second_name: 'departed', third_name: ''
+
+FactoryBot.create :arrival, carrier_date_time: '03 Jun 2014', identity: identity
+FactoryBot.create :departure, carrier_date_time: '25 Mar 2017', identity: identity
+FactoryBot.create :arrival, carrier_date_time: '25 Mar 2017', identity: identity
+FactoryBot.create :departure, carrier_date_time: '25 Mar 2017', identity: identity
+
+####### Test scenario #16 #######
+# Had arrival on temporary and indefinite visas on same day
+
+##### Expected results #####
+# Eligible
+client_1 = FactoryBot.create :client, im_client_id: '13231123', file_number: '2'
+identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'temporary', first_name: 'and', second_name: 'indefinite', third_name: ''
+
+FactoryBot.create :arrival, carrier_date_time: '03 Jun 2014', identity: identity, visa_type: 'R'
+FactoryBot.create :departure, carrier_date_time: '20 Feb 2017', identity: identity, visa_type: nil
+FactoryBot.create :arrival, carrier_date_time: '20 Mar 2017', identity: identity, visa_type: 'R'
+FactoryBot.create :arrival, carrier_date_time: '20 Mar 2017', identity: identity, visa_type: 'V'
