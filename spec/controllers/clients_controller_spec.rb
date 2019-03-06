@@ -305,6 +305,51 @@ RSpec.describe ClientsController, type: :controller do
           )
         }
       end
+      ###### Test scenario #15 #######
+      context 'Departed, Arrived, then Departed on same day' do
+        it {
+          pending('Multiple arrivals and depatures on same day need to be handled in open fisca')
+
+          valid_date = Date.new(2019, 03, 02)
+          client = Client.find_by(im_client_id: '54354352')
+
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
+          res = JSON.parse(response.body)[valid_date.to_s]
+
+          expect(res['meetsMinimumPresence']).to eq(false)
+          expect(res['eachYearPresence']).to eq(false)
+          expect(res['meetsFiveYearPresence']).to eq(false)
+          expect(res['last5Years']).to eq(
+            valid_date.to_s => false,
+            valid_date.prev_year.to_s => false,
+            valid_date.prev_year(2).to_s => true,
+            valid_date.prev_year(3).to_s => true,
+            valid_date.prev_year(4).to_s => true
+          )
+        }
+      end
+      ###### Test scenario #16 #######
+
+      context 'Had arrival on temporary and indefinite visas on same day' do
+        it {
+          valid_date = Date.new(2019, 03, 02)
+          client = Client.find_by(im_client_id: '13231123')
+
+          get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
+          res = JSON.parse(response.body)[valid_date.to_s]
+
+          expect(res['meetsMinimumPresence']).to eq(true)
+          expect(res['eachYearPresence']).to eq(true)
+          expect(res['meetsFiveYearPresence']).to eq(true)
+          expect(res['last5Years']).to eq(
+            valid_date.to_s => true,
+            valid_date.prev_year.to_s => true,
+            valid_date.prev_year(2).to_s => true,
+            valid_date.prev_year(3).to_s => true,
+            valid_date.prev_year(4).to_s => true
+          )
+        }
+      end
     end
   end
 end
