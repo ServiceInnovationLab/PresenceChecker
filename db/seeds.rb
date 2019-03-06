@@ -297,7 +297,7 @@ FactoryBot.create :arrival, carrier_date_time: '12 Feb 2018', identity: identity
 # Departed, Arrived, then Departed on same day
 
 ##### Expected results #####
-# Eligible
+# Not Eligible
 client_1 = FactoryBot.create :client, im_client_id: '54354352', file_number: '2'
 identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'departed', first_name: 'arrived', second_name: 'departed', third_name: ''
 
@@ -310,7 +310,7 @@ FactoryBot.create :departure, carrier_date_time: '25 Mar 2017', identity: identi
 # Had arrival on temporary and indefinite visas on same day
 
 ##### Expected results #####
-# Not Eligible
+# Eligible
 client_1 = FactoryBot.create :client, im_client_id: '13231123', file_number: '2'
 identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'temporary', first_name: 'and', second_name: 'indefinite', third_name: ''
 
