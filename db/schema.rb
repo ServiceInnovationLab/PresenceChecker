@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2019_03_10_234822) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_identities_on_client_id"
     t.index ["country_of_birth_id"], name: "index_identities_on_country_of_birth_id"
-    t.index ["issuing_state_id", "serial_number"], name: "index_identities_on_issuing_state_id_and_serial_number", unique: true
+    t.index ["issuing_state_id", "serial_number"], name: "index_identities_on_issuing_state_id_and_serial_number"
     t.index ["issuing_state_id"], name: "index_identities_on_issuing_state_id"
   end
 
