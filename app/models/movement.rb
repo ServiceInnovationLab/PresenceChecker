@@ -6,11 +6,11 @@ class Movement < ApplicationRecord
   scope :departure, -> { where(direction: ['departure', 'D']) }
   validates_inclusion_of :direction, in: %w( arrival A departure D ), message: "%{value} is not a valid direction"
 
-  def arrival?(direction)
+  def arrival?
     ['arrival', 'A'].include? direction
   end
 
-  def departure?(direction)
+  def departure?
     ['departure', 'D'].include? direction
   end
 
