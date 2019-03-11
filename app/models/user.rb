@@ -6,6 +6,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable,
          :recoverable, :rememberable, :validatable
   validate :password_complexity
+  has_many :visits, class_name: "Ahoy::Visit"
 
   def password_complexity
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
