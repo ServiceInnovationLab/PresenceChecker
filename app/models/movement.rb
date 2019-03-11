@@ -4,6 +4,15 @@ class Movement < ApplicationRecord
   belongs_to :identity
   scope :arrivals, -> { where(direction: 'arrival') }
   scope :departure, -> { where(direction: 'departure') }
+  validates_inclusion_of :direction, in: %w( arrival A departure D ), message: "%{value} is not a valid direction"
+
+  def arrival?(direction)
+    ['arrival', 'A'].include? direction
+  end
+
+  def departure?(direction)
+    ['departure', 'D'].include? direction
+  end
 
   def day
     carrier_date_time.to_date.strftime(EligibilityService.date_format)
