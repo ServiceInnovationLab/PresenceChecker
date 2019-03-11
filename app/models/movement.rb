@@ -2,8 +2,8 @@
 
 class Movement < ApplicationRecord
   belongs_to :identity
-  scope :arrivals, -> { where(direction: 'arrival') }
-  scope :departure, -> { where(direction: 'departure') }
+  scope :arrivals, -> { where(direction: ['arrival', 'A']) }
+  scope :departure, -> { where(direction: ['departure', 'D']) }
   validates_inclusion_of :direction, in: %w( arrival A departure D ), message: "%{value} is not a valid direction"
 
   def arrival?(direction)
