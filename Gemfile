@@ -91,3 +91,6 @@ end
 
 # Audit log
 gem 'ahoy_matey'
+
+# Pagination
+gem 'kaminari'
