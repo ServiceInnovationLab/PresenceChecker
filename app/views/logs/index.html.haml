@@ -1,0 +1,23 @@
+%h2 Logs
+
+%table{cellpadding:10}
+  %thead
+    %tr
+      %th User
+      %th Page
+      %th Controller
+      %th Browser
+      %th IP Address
+      %th Device Type
+      %th Started At
+
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td=event.user.email
+        %td=event.properties['action']
+        %td=event.properties['controller']
+        %td=event.visit.browser
+        %td=event.visit.ip
+        %td=event.visit.device_type
+        %td=event.visit.started_at.strftime("%d/%m/%Y %l:%M%P")

@@ -89,4 +89,5 @@ group :test do
   gem 'rspec-rails'
 end
 
+# Audit log
 gem 'ahoy_matey'
