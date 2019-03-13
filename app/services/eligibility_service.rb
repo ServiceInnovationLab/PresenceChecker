@@ -81,9 +81,9 @@ class EligibilityService
     presence = {}
 
     @client.movements.order(:carrier_date_time).each do |movement|
-      if movement.direction == 'arrival'
+      if movement.arrival?
         presence[movement.day] = true
-      elsif movement.direction == 'departure'
+      elsif movement.departure?
         presence[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
       end
     end
@@ -95,9 +95,9 @@ class EligibilityService
     eligibility = {}
 
     @client.movements.order(:carrier_date_time).each do |movement|
-      if movement.direction == 'arrival'
+      if movement.arrival?
         eligibility[movement.day] = true if VisaType::INDEFINITE_VISA_TYPES.include?(movement.visa_type)
-      elsif movement.direction == 'departure'
+      elsif movement.departure?
         eligibility[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
       end
     end

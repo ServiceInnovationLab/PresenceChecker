@@ -2,8 +2,17 @@
 
 class Movement < ApplicationRecord
   belongs_to :identity
-  scope :arrivals, -> { where(direction: 'arrival') }
-  scope :departure, -> { where(direction: 'departure') }
+  scope :arrivals, -> { where(direction: ['arrival', 'A']) }
+  scope :departure, -> { where(direction: ['departure', 'D']) }
+  validates_inclusion_of :direction, in: %w( arrival A departure D ), message: "%{value} is not a valid direction"
+
+  def arrival?
+    ['arrival', 'A'].include? direction
+  end
+
+  def departure?
+    ['departure', 'D'].include? direction
+  end
 
   def day
     carrier_date_time.to_date.strftime(EligibilityService.date_format)
