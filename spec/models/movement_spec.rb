@@ -14,6 +14,11 @@ RSpec.describe Movement, type: :model do
   it 'recognises when movement direction is A or D' do
     expect(arrival).to be_valid
     expect(departure).to be_valid
-    expect(arrival.arrival?).to be true
+
+    expect(arrival.arrival?).to eq true
+    expect(arrival.departure?).to eq false
+
+    expect(departure.arrival?).to eq false
+    expect(departure.departure?).to eq true
   end
 end
