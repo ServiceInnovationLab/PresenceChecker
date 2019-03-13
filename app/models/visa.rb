@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Visa < ApplicationRecord
+  scope :indefinite, -> { where(VisaType::INDEFINITE_VISA_TYPES.include?(visa_type.visa_type)) }
+  scope :finite, -> { !indefinite }
+
   belongs_to :visa_type
   belongs_to :identity
 
