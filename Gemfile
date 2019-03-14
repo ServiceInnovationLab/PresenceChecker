@@ -74,6 +74,8 @@ group :development do
 
   # opens emails for us
   gem 'letter_opener'
+
+  gem 'rails-erd'
 end
 
 group :test do
