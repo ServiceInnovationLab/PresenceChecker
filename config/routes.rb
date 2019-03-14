@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:index, :destroy]
   root to: 'identities#index'
+  get '/logs', to: 'logs#index'
 end
