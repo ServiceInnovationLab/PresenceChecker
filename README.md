@@ -80,6 +80,13 @@ Rubocop
 bundle exec rubocop
 ```
 
+## Database structure
+
+Generate a PDF diagram of the database structure (`rails-erd` gem) in the root folder of the application:
+```
+rake erd
+```
+
 ## Related Projects
 
 [OpenFisca Aotearoa](https://github.com/ServiceInnovationLab/openfisca-aotearoa)
