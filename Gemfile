@@ -75,6 +75,7 @@ group :development do
   # opens emails for us
   gem 'letter_opener'
 
+  # genereates an Entity Relationship Diagram (/erd.pdf) of the database
   gem 'rails-erd'
 end
 

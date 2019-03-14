@@ -84,7 +84,7 @@ bundle exec rubocop
 
 Generate a PDF diagram of the database structure (`rails-erd` gem) in the root folder of the application:
 ```
-rake erd
+bundle exec rake erd
 ```
 
 ## Related Projects
