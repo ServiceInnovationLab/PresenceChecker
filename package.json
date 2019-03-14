@@ -19,7 +19,7 @@
     "babel-jest": "^23.6.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
-    "jest-enzyme": "^7.0.1",
+    "jest-enzyme": "^7.0.2",
     "regenerator-runtime": "^0.13.1",
     "webpack-dev-server": "3.2.1"
   },
