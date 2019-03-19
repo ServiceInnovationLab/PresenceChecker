@@ -8,6 +8,6 @@ FactoryBot.define do
     visa_or_permit { ['Visa', 'Permit'].sample }
     single_or_multiple { ['S', 'M'].sample }
     identity
-    visa_type { VisaType.all.sample }
+    visa_type { VisaType.all.sample || FactoryBot.create(:visa_type) }
   end
 end
