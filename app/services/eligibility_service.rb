@@ -25,6 +25,7 @@ class EligibilityService
   private
 
   def query
+    variables = OpenFisca::ClientVariablesService.new(@client)
     all_persons = {}
     all_names = []
     (0..@number_of_days).each do |n|
@@ -40,9 +41,9 @@ class EligibilityService
         'days_present_in_new_zealand_in_preceeding_year' => five_past_years_of_nulls(day),
         'citizenship__meets_preceeding_single_year_minimum_presence_requirement' => five_past_years_of_nulls(day),
         # our input, the presence in NZ
-        'present_in_new_zealand' => presence_values,
+        'present_in_new_zealand' => variables.present_in_new_zealand,
         # our input, the periods when they had an eligible visa
-        'immigration__entitled_to_indefinite_stay' => eligibility_values,
+        'immigration__entitled_to_indefinite_stay' => variables.immigration__entitled_to_indefinite_stay,
       }
     end
 
@@ -75,34 +76,6 @@ class EligibilityService
 
   def future_days_of_nulls(day)
     { day => nil }
-  end
-
-  def presence_values
-    presence = {}
-
-    @client.movements.order(:carrier_date_time).each do |movement|
-      if movement.arrival?
-        presence[movement.day] = true
-      elsif movement.departure?
-        presence[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
-      end
-    end
-
-    presence
-  end
-
-  def eligibility_values
-    eligibility = {}
-
-    @client.movements.order(:carrier_date_time).each do |movement|
-      if movement.arrival?
-        eligibility[movement.day] = true if VisaType::INDEFINITE_VISA_TYPES.include?(movement.visa_type)
-      elsif movement.departure?
-        eligibility[movement.next_day] = false unless movement.only_absent_for_same_day_or_next?
-      end
-    end
-
-    eligibility
   end
 
   def years_before(day, num_years)
