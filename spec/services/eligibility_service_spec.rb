@@ -6,6 +6,8 @@ RSpec.describe EligibilityService, type: :model do
   let(:service) { EligibilityService.new(client, day, 1) }
   let(:client) { FactoryBot.create :client }
   let(:identity) { FactoryBot.create :identity, client: client }
+  # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+  let!(:visa) { FactoryBot.create :visa, start_date: '2001-01-01', identity: identity }
   let(:day) { '2019-06-01' }
 
   it { expect(service.send(:of_url)).to eq 'https://api.rules.nz/calculate' }

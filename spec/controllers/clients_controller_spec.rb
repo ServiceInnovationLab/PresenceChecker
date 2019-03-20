@@ -30,7 +30,11 @@ RSpec.describe ClientsController, type: :controller do
 
       let(:identity) { FactoryBot.create :identity, client: client }
 
-      before { FactoryBot.create :arrival, identity: identity, carrier_date_time: '2011-12-31' }
+      before do
+        FactoryBot.create :arrival, identity: identity, carrier_date_time: '2011-12-31' 
+        # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+        FactoryBot.create :visa, start_date: '2001-01-01', identity: identity
+      end
 
       subject { JSON.parse(response.body)[day] }
 
@@ -126,6 +130,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           valid_date = Date.new(2017, 10, 2)
           client = Client.find_by(im_client_id: '12345')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -144,6 +150,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           invalid_date = Date.new(2017, 10, 1)
           client = Client.find_by(im_client_id: '12345')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: invalid_date.to_s }
           res = JSON.parse(response.body)[invalid_date.to_s]
@@ -166,6 +174,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           valid_date = Date.new(2018, 11, 5)
           client = Client.find_by(im_client_id: '54321')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -187,6 +197,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           invalid_date = Date.new(2018, 11, 5)
           client = Client.find_by(im_client_id: '56789')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: invalid_date.to_s }
           res = JSON.parse(response.body)[invalid_date.to_s]
@@ -206,8 +218,11 @@ RSpec.describe ClientsController, type: :controller do
       ###### Test scenario #10 #######
       context 'Multiple 20 week vacations, Only eligible between June 8th and September 27' do
         it {
-          valid_date = Date.new(2018, 7, 8)
+          # 8 July 2018
+          valid_date = Date.new(2018, 8, 8)
           client = Client.find_by(im_client_id: '581119')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -224,8 +239,11 @@ RSpec.describe ClientsController, type: :controller do
           )
         }
         it {
+          # 5 March 2018
           invalid_date = Date.new(2018, 3, 5)
           client = Client.find_by(im_client_id: '581119')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: invalid_date.to_s }
           res = JSON.parse(response.body)[invalid_date.to_s]
@@ -246,6 +264,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           valid_date = Date.new(2020, 6, 3)
           client = Client.find_by(im_client_id: '821313')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -267,6 +287,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           valid_date = Date.new(2018, 7, 8)
           client = Client.find_by(im_client_id: '723123')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -289,6 +311,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           valid_date = Date.new(2017, 10, 2)
           client = Client.find_by(im_client_id: '00002')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -312,6 +336,8 @@ RSpec.describe ClientsController, type: :controller do
 
           valid_date = Date.new(2019, 03, 02)
           client = Client.find_by(im_client_id: '54354352')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]
@@ -334,6 +360,8 @@ RSpec.describe ClientsController, type: :controller do
         it {
           valid_date = Date.new(2019, 03, 02)
           client = Client.find_by(im_client_id: '13231123')
+          # Create an indefinite visa which covers the period in question. Visa status is not considered in these tests.
+          FactoryBot.create :visa, start_date: '2001-01-01', identity: client.identities.first
 
           get :eligibility, format: :json, params: { client_id: client.to_param, day: valid_date.to_s }
           res = JSON.parse(response.body)[valid_date.to_s]

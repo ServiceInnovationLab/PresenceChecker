@@ -23,7 +23,7 @@ module OpenFisca
 
     def immigration__entitled_to_indefinite_stay
       # default to calculating visa eligibility from the movements table
-      entitled_to_indefinite_stay_by_movements
+      entitled_to_indefinite_stay_by_visas
     end
 
     private
@@ -54,7 +54,7 @@ module OpenFisca
       eligibility = {}
 
       @client.visas.indefinite.each do |visa|
-        eligibility[visa.start_day] = true
+        eligibility[visa.start_date] = true
         eligibility[visa.expiry_date + 1.day] = false
       end
 
