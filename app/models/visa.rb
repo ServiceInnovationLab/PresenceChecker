@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class Visa < ApplicationRecord
-  scope :indefinite, -> { where(VisaType::INDEFINITE_VISA_TYPES.include?(visa_type.visa_type)) }
-  scope :finite, -> { !indefinite }
+  scope :indefinite, -> { joins(:visa_type).merge(VisaType.indefinite) }
+  scope :finite, -> { joins(:visa_type).merge(VisaType.finite) }
 
   belongs_to :visa_type
   belongs_to :identity
+
+  delegate :indefinite?, to: :visa_type
+  delegate :finite?, to: :visa_type
 
   validates :start_date, presence: true
   validate :has_expiry_or_is_indefinite?

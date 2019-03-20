@@ -7,9 +7,15 @@ class VisaType < ApplicationRecord
   # from a lookup table in the database.
   INDEFINITE_VISA_TYPES = ['P', 'A', 'R']
 
+  scope :indefinite, -> { where(visa_type: INDEFINITE_VISA_TYPES) }
+  scope :finite, -> { where.not(visa_type: INDEFINITE_VISA_TYPES) }
   validates :description, presence: true, uniqueness: true
 
   def indefinite? 
     INDEFINITE_VISA_TYPES.include?(visa_type)
+  end
+
+  def finite?
+    !indefinite?
   end
 end
