@@ -5,6 +5,21 @@
 #   User.invite!(email: email) unless User.find_by(email: email)
 # end
 
+# Example data in this file was originally generated relative to whatever date 
+# the seeds were run, for example:
+#
+# carrier_date_time: 312.weeks.ago
+#
+# This led to slightly different seed data based on the date of the test run, 
+# which could cause tests to fail unexpectedly on some days.
+#
+# We have changed the date arithmetic to be relative to 10 March 2019, a day 
+# where all tests had the expected results. The tests should continue to pass 
+# predictably in future. The updated date values look like this:
+#
+# carrier_date_time: test_date - 312.weeks
+test_date = Date.new(2019, 3, 10)
+
 ####### Test scenario #1 #######
 # Customer travels in and out of NZ as a Flight Attendant.
 # There are cases when an attendant doesn’t register as coming in or out of the country.
@@ -210,7 +225,6 @@ FactoryBot.create :arrival, carrier_date_time: '24 Aug 2018', identity: identity
 ##### Expected results #####
 #Only eligible between June 8th and September 27
 
-test_date = Date.new(2019, 3, 10)
 client_1 = FactoryBot.create :client, im_client_id: '581119', file_number: '2'
 identity_3 = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Jones', first_name: 'James', second_name: '', third_name: '', gender: 'Male'
 identity_4 = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Jones', first_name: 'Jaymie', second_name: '', third_name: '', gender: 'Female'
@@ -231,7 +245,7 @@ FactoryBot.create :arrival, identity: identity_4, carrier_date_time: test_date -
 # Eligible
 client_1 = FactoryBot.create :client, im_client_id: '93251', file_number: '2'
 identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Okay', first_name: 'Simply', second_name: '', third_name: ''
-FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+FactoryBot.create :arrival, carrier_date_time: test_date - 6.years, identity: identity
 
 ####### Test scenario #12 #######
 # Arrived more than five years ago
@@ -252,8 +266,8 @@ FactoryBot.create :arrival, carrier_date_time: '01 Oct 2018', identity: identity
 # holiday_length =  Random.rand(10...42)
 # holiday_start = Random.rand(50...100)
 # holiday_end = holiday_start - holiday_length
-# FactoryBot.create :departure, carrier_date_time: holiday_start.weeks.ago, identity: identity
-# FactoryBot.create :arrival, carrier_date_time: holiday_end.weeks.ago, identity: identity
+# FactoryBot.create :departure, carrier_date_time: test_date - holiday_start.weeks, identity: identity
+# FactoryBot.create :arrival, carrier_date_time: test_date - holiday_end.weeks, identity: identity
 
 ####### Test scenario #13 #######
 # Was overseas for more than 1 year during preceeding 5 years
@@ -262,10 +276,10 @@ FactoryBot.create :arrival, carrier_date_time: '01 Oct 2018', identity: identity
 # Not Eligible
 client_1 = FactoryBot.create :client, im_client_id: '723123', file_number: '2'
 identity = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Holiday', first_name: 'Too', second_name: 'Long', third_name: ''
-FactoryBot.create :arrival, carrier_date_time: 6.years.ago, identity: identity
+FactoryBot.create :arrival, carrier_date_time: test_date - 6.years, identity: identity
 
-holiday_start = 140.weeks.ago
-holiday_end = 75.weeks.ago
+holiday_start = test_date - 140.weeks
+holiday_end = test_date - 75.weeks
 
 FactoryBot.create :departure, carrier_date_time: holiday_start, identity: identity
 FactoryBot.create :arrival, carrier_date_time: holiday_end, identity: identity
