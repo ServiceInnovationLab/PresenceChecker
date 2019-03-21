@@ -20,7 +20,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.10.0",
     "jest-enzyme": "^7.0.1",
-    "regenerator-runtime": "^0.13.1",
+    "regenerator-runtime": "^0.13.2",
     "webpack-dev-server": "3.2.1"
   },
   "engines": {
