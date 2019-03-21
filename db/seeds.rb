@@ -210,17 +210,19 @@ FactoryBot.create :arrival, carrier_date_time: '24 Aug 2018', identity: identity
 ##### Expected results #####
 #Only eligible between June 8th and September 27
 
+test_date = Date.new(2019, 3, 10)
 client_1 = FactoryBot.create :client, im_client_id: '581119', file_number: '2'
 identity_3 = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Jones', first_name: 'James', second_name: '', third_name: '', gender: 'Male'
 identity_4 = FactoryBot.create :identity, client_id: client_1.id, family_name: 'Jones', first_name: 'Jaymie', second_name: '', third_name: '', gender: 'Female'
-FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 312.weeks.ago
-FactoryBot.create :departure, identity: identity_3, carrier_date_time: 300.weeks.ago
-FactoryBot.create :arrival, identity: identity_3, carrier_date_time: 280.weeks.ago
 
-FactoryBot.create :departure, identity: identity_4, carrier_date_time: 156.weeks.ago
-FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 148.weeks.ago
-FactoryBot.create :departure, identity: identity_4, carrier_date_time: 90.weeks.ago
-FactoryBot.create :arrival, identity: identity_4, carrier_date_time: 70.weeks.ago
+FactoryBot.create :arrival, identity: identity_3, carrier_date_time: test_date - 312.weeks
+FactoryBot.create :departure, identity: identity_3, carrier_date_time: test_date - 300.weeks
+FactoryBot.create :arrival, identity: identity_3, carrier_date_time: test_date - 280.weeks
+
+FactoryBot.create :departure, identity: identity_4, carrier_date_time: test_date - 156.weeks
+FactoryBot.create :arrival, identity: identity_4, carrier_date_time: test_date - 148.weeks
+FactoryBot.create :departure, identity: identity_4, carrier_date_time: test_date - 90.weeks
+FactoryBot.create :arrival, identity: identity_4, carrier_date_time: test_date - 70.weeks
 
 ####### Test scenario #11 #######
 # Arrived more than five years ago and never left
