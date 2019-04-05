@@ -61,7 +61,7 @@ group :development, :test do
   # freeze times in tests
   gem 'timecop'
 
-  gem 'rubocop', '0.65.0'
+  gem 'rubocop', '0.67.1'
 end
 
 group :development do
