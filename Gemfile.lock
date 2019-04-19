@@ -54,7 +54,7 @@ GEM
       request_store
       safely_block (>= 0.2.1)
       user_agent_parser
-    archive-zip (0.11.0)
+    archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
     ast (2.4.0)
@@ -75,7 +75,7 @@ GEM
       xpath (~> 3.2)
     childprocess (1.0.1)
       rake (< 13.0)
-    chromedriver-helper (2.1.0)
+    chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
     coffee-rails (4.2.2)
