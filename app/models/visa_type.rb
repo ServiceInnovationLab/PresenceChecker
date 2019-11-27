@@ -9,7 +9,7 @@ class VisaType < ApplicationRecord
 
   validates :description, presence: true, uniqueness: true
 
-  def indefinite? 
+  def indefinite?
     INDEFINITE_VISA_TYPES.include?(visa_type)
   end
 end
