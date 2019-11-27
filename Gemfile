@@ -75,7 +75,7 @@ group :development do
   # opens emails for us
   gem 'letter_opener'
 
-  # genereates an Entity Relationship Diagram (/erd.pdf) of the database
+  # generates an Entity Relationship Diagram (/erd.pdf) of the database
   # Requires graphviz (https://www.graphviz.org/)
   gem 'rails-erd'
 end
