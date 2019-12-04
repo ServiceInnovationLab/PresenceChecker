@@ -1,6 +1,5 @@
 # README
 
-[![Waffle.io - Issues in progress](https://badge.waffle.io/ServiceInnovationLab/PresenceChecker.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ServiceInnovationLab/PresenceChecker)
 [![Build Status](https://travis-ci.org/ServiceInnovationLab/PresenceChecker.svg?branch=master)](https://travis-ci.org/ServiceInnovationLab/PresenceChecker)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/ServiceInnovationLab/PresenceChecker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ServiceInnovationLab/PresenceChecker/alerts/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/33f8f206d6c46ef84d9d/maintainability)](https://codeclimate.com/github/ServiceInnovationLab/PresenceChecker/maintainability)
