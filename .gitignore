@@ -40,3 +40,6 @@ coverage
 
 # Ignore local environment variables
 /.env
+
+# Ignore generated Entity Relationship Diagrams of the database
+/erd.pdf
