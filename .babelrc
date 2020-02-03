@@ -19,7 +19,7 @@
   ],
   "env": {
     "test": {
-      "presets": [ [ "env" ], "react", "@babel/preset-react" ],
+      "presets": [ [ "env" ], "react", "@babel/preset-env", "@babel/preset-react" ],
       "plugins": [
         "syntax-dynamic-import",
         [ "transform-class-properties", { "spec": true } ]
