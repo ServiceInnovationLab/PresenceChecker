@@ -12,8 +12,8 @@ before_install:
 install:
   - nvm install
   - npm i -g yarn
-  - bundle install
   - yarn install
+  - bundle install
 script:
   - yarn test
   - RAILS_ENV=test bundle exec rake db:create db:migrate
