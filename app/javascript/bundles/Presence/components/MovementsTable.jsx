@@ -35,7 +35,7 @@ export default class MovementsTable extends React.Component {
                   <h3 className="is-dark">{firstCharCap(item.direction)}</h3>
                 </td>
                 <td className="has-bottom-border has-right-border">
-                  {format(item.carrier_date_time, 'DD MMM YYYY')}
+                  {format(item.carrier_date_time, 'dd mm yyyy')}
                 </td>
                 <td className="has-bottom-border">
                   {item.visa_type}

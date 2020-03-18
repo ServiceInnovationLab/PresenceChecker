@@ -2,9 +2,11 @@
   "name": "PresenceChecker",
   "private": true,
   "dependencies": {
+    "@babel/preset-react": "^7.8.3",
     "@rails/webpacker": "^4.2.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "date-fns": "^2.11.0",
+    "date-fns": "^2.0.0-beta.5",
     "es6-promise": "^4.2.8",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.15",

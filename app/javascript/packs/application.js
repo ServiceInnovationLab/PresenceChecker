@@ -28,7 +28,7 @@ export default class ShowClient extends React.Component {
 
   checkEndOfRollingYear = endOfRollingYear => {
     const { databaseId } = this.props;
-    const formattedDate = format(endOfRollingYear, 'YYYY-MM-DD');
+    const formattedDate = format(endOfRollingYear, 'yyyy-mm-dd');
     const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
     this.setState({
@@ -48,7 +48,7 @@ export default class ShowClient extends React.Component {
         return result.json();
       })
       .then(response =>
-        this.onDataResponse(response[format(endOfRollingYear, 'YYYY-MM-DD')])
+        this.onDataResponse(response[format(endOfRollingYear, 'yyyy-mm-dd')])
       )
       .catch(error => {
         console.error('Server error:', error);
@@ -95,7 +95,7 @@ export default class ShowClient extends React.Component {
     });
 
     for (let day = 0, l = loadingNumber; day < l; day++) {
-      const formattedDate = format(nextWeek[day], 'YYYY-MM-DD');
+      const formattedDate = format(nextWeek[day], 'yyyy-mm-dd');
       const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
       fetch(url, {
