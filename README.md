@@ -27,6 +27,9 @@ rbenv install < .ruby-version
 ```
 brew install postgresql
 ```
+* Install Graphviz
+Graphviz is a requirement of Rails ERD.
+Follow the instructions here  <https://voormedia.github.io/rails-erd/install.html>
 * Start PostgreSQL on startup
 ```
 brew services start postgresql
@@ -59,6 +62,41 @@ bundle exec rake db:seed
 * Run the app
 ```
 bundle exec rails server
+```
+
+## Docker
+
+* Replace the development section in `config/database.yml` with
+
+```yaml
+development:
+  <<: *default
+  database: PresenceChecker_development
+  host: db
+  username: postgres
+  password:
+```
+
+Note: password is deliberately blank.
+
+* Build the containers
+
+```bash
+docker-compose build
+```
+
+* Initialize the database
+
+```bash
+docker-compose run web bundle exec rake db:create
+docker-compose run web bundle exec rake db:migrate
+docker-compose run web bundle exec rake db:seed
+```
+
+* Start the app
+
+```bash
+docker-compose up
 ```
 
 ## Deployment

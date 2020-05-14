@@ -2,29 +2,29 @@
   "name": "PresenceChecker",
   "private": true,
   "dependencies": {
-    "@babel/preset-react": "^7.8.3",
-    "@rails/webpacker": "^4.2.2",
+    "@babel/preset-react": "^7.9.4",
+    "@rails/webpacker": "^5.1.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "date-fns": "^2.0.0-beta.5",
+    "date-fns": "^2.13.0",
     "es6-promise": "^4.2.8",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.15",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-datepicker": "^2.14.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-datepicker": "^2.15.0",
+    "react-dom": "^16.13.1",
     "react-on-rails": "^11.3.0"
   },
   "devDependencies": {
-    "babel-jest": "^25.1.0",
+    "babel-jest": "^26.0.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "jest": "^25.1.0",
+    "jest": "^26.0.1",
     "jest-enzyme": "^7.1.2",
     "regenerator-runtime": "^0.13.5",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.0"
   },
   "engines": {
     "yarn": ">= 0.25.2"
