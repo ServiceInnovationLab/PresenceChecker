@@ -1,2 +1,3 @@
-OPENFISCA_URL: https://api.rules.nz
-OPENFISCA_TIMEOUT: 10
+OPENFISCA_URL:https://api.rules.nz
+OPENFISCA_TIMEOUT:10
+NODE_ENV=development

@@ -66,7 +66,7 @@ bundle exec rails server
 
 ## Docker
 
-* Replace the development section in `config/database.yml` with
+* Replace the development section in `config/database.yml` with:
 
 ```yaml
 development:

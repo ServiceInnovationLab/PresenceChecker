@@ -17,3 +17,6 @@ RUN yarn install
 RUN bundle install
 
 COPY . .
+COPY ./config/database.docker-compose.yml ./config/database.yml
+
+# CMD ["bundle", "exec", "rails", "server"]
