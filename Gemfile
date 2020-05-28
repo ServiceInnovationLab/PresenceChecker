@@ -61,7 +61,9 @@ group :development, :test do
   # freeze times in tests
   gem 'timecop'
 
-  gem 'rubocop', '0.68.1'
+  # Performance Cops will be removed from RuboCop 0.68. Use rubocop-performance gem instead.
+  # gem 'rubocop', '0.68.1'
+  gem 'rubocop-performance'
 end
 
 group :development do
@@ -84,8 +86,9 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # DEPRECIATED - Easy installation and use of chromedriver to run system tests with Chrome
+  # gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 4.0'
   # Coverage
   gem 'simplecov'
   # test framework
