@@ -15,10 +15,10 @@
     "react-on-rails": "11.2.2"
   },
   "devDependencies": {
-    "jest": "^23.6.0",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
+    "jest": "^23.6.0",
     "jest-enzyme": "^7.0.2",
     "regenerator-runtime": "^0.13.1",
     "webpack-dev-server": "3.3.1"
