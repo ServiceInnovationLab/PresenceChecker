@@ -4,6 +4,8 @@ import { sum, map } from 'lodash';
 import Year from './Year';
 import { format, subYears, addDays } from 'date-fns';
 
+import { legacyParse, convertTokens } from "@date-fns/upgrade/v2";
+
 export default class PresenceTable extends React.Component {
   static propTypes = {
     isEligible: PropTypes.bool,
@@ -39,12 +41,18 @@ export default class PresenceTable extends React.Component {
 
   startDate = yearNum => {
     const { endOfRollingYear } = this.props;
-    return format(addDays(subYears(endOfRollingYear, yearNum), 1), 'dd mm yyyy');
+    return format(
+      legacyParse(addDays(legacyParse(subYears(legacyParse(endOfRollingYear), yearNum)), 1)),
+      convertTokens('dd mm yyyy')
+    );
   };
 
   endingDate = yearNum => {
     const { endOfRollingYear } = this.props;
-    return format(subYears(endOfRollingYear, yearNum - 1), 'dd mm yyyy');
+    return format(
+      legacyParse(subYears(legacyParse(endOfRollingYear), yearNum - 1)),
+      convertTokens('dd mm yyyy')
+    );
   };
 
   render() {

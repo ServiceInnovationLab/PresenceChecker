@@ -10,11 +10,13 @@ import PresenceDates from '../bundles/Presence/components/PresenceDates';
 import PresenceTable from '../bundles/Presence/components/PresenceTable';
 import MovementsTable from '../bundles/Presence/components/MovementsTable';
 
+import { legacyParse, convertTokens } from "@date-fns/upgrade/v2";
+
 export default class ShowClient extends React.Component {
   state = {
     loading: false,
     backgroundLoading: false,
-    endOfRollingYear: subDays(new Date(), 1),
+    endOfRollingYear: subDays(legacyParse(new Date()), 1),
     meetsMinimumPresence: false,
     meetsFiveYearPresence: false,
     daysInNZ: {},
@@ -28,7 +30,7 @@ export default class ShowClient extends React.Component {
 
   checkEndOfRollingYear = endOfRollingYear => {
     const { databaseId } = this.props;
-    const formattedDate = format(endOfRollingYear, 'yyyy-mm-dd');
+    const formattedDate = format(legacyParse(endOfRollingYear), convertTokens('yyyy-mm-dd'));
     const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
     this.setState({
@@ -48,7 +50,7 @@ export default class ShowClient extends React.Component {
         return result.json();
       })
       .then(response =>
-        this.onDataResponse(response[format(endOfRollingYear, 'yyyy-mm-dd')])
+        this.onDataResponse(response[format(legacyParse(endOfRollingYear), convertTokens('yyyy-mm-dd'))])
       )
       .catch(error => {
         console.error('Server error:', error);
@@ -59,7 +61,7 @@ export default class ShowClient extends React.Component {
   };
 
   onDateChange = date => {
-    let endOfRollingYear = subDays(new Date(date), 1)
+    let endOfRollingYear = subDays(legacyParse(new Date(date)), 1)
 
     this.setState({
       endOfRollingYear,
@@ -85,8 +87,8 @@ export default class ShowClient extends React.Component {
     const { databaseId } = this.props;
     const { endOfRollingYear } = this.state;
     const nextWeek = eachDayOfInterval(
-      addDays(endOfRollingYear, 1),
-      addDays(endOfRollingYear, 8)
+      addDays(legacyParse(endOfRollingYear), 1),
+      addDays(legacyParse(endOfRollingYear), 8)
     );
     let loadingNumber = nextWeek.length;
 
@@ -95,7 +97,7 @@ export default class ShowClient extends React.Component {
     });
 
     for (let day = 0, l = loadingNumber; day < l; day++) {
-      const formattedDate = format(nextWeek[day], 'yyyy-mm-dd');
+      const formattedDate = format(legacyParse(nextWeek[day]), convertTokens('yyyy-mm-dd'));
       const url = `${databaseURL()}/clients/${databaseId}/eligibility/${formattedDate}`;
 
       fetch(url, {

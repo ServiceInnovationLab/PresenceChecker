@@ -4,6 +4,8 @@ import { format } from 'date-fns';
 
 import TimePeriod from './TimePeriod';
 
+import { legacyParse, convertTokens } from "@date-fns/upgrade/v2";
+
 export default class DaysPresent extends React.Component {
   static propTypes = { days_present: PropTypes.object };
   // "days_present": {
@@ -37,7 +39,7 @@ export default class DaysPresent extends React.Component {
           return (
             <TimePeriod
               key={key}
-              periodName={format(key, 'MMMM YYYY')}
+              periodName={format(legacyParse(key), convertTokens('MMMM YYYY'))}
               days={days}
             />
           );

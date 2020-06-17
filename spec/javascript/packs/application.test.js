@@ -5,6 +5,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import ShowClient from '../../../app/javascript/packs/application';
 import { subDays } from 'date-fns';
 
+import { legacyParse } from "@date-fns/upgrade/v2";
+
 configure({ adapter: new Adapter() });
 
 describe('<ShowClient />', () => {
@@ -61,7 +63,7 @@ describe('<ShowClient />', () => {
           component.instance().onDateChange(date);
         }).not.toThrow();
         expect(spy).toHaveBeenCalledWith({
-          endOfRollingYear: subDays(date, 1),
+          endOfRollingYear: subDays(legacyParse(date), 1),
           meetsMinimumPresence: false,
         });
       });
@@ -73,7 +75,7 @@ describe('<ShowClient />', () => {
         expect(() => {
           component.instance().onDateChange(date);
         }).not.toThrow();
-        expect(spy).toHaveBeenCalledWith(subDays(date, 1));
+        expect(spy).toHaveBeenCalledWith(subDays(legacyParse(date), 1));
       });
     });
 

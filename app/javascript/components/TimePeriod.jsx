@@ -5,6 +5,8 @@ import React from 'react';
 
 import Table from './Table';
 
+import { legacyParse, convertTokens } from "@date-fns/upgrade/v2";
+
 export default class TimePeriod extends React.Component {
   static propTypes = {
     periodName: PropTypes.string,
@@ -23,7 +25,7 @@ export default class TimePeriod extends React.Component {
           {days.map(({ fullDate, inNZ }) => {
             return (
               <td key={fullDate} className={inNZ ? 'is-in-country' : ''}>
-                {format(fullDate, 'DD')}
+                {format(legacyParse(fullDate), convertTokens('DD'))}
               </td>
             );
           })}
