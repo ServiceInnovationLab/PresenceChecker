@@ -6,6 +6,8 @@ import { firstCharCap } from '../../../utilities/utilities';
 
 import Table from '../../../components/Table';
 
+import { legacyParse, convertTokens } from "@date-fns/upgrade/v2";
+
 export default class MovementsTable extends React.Component {
   static propTypes = {
     movements: PropTypes.array,
@@ -35,7 +37,7 @@ export default class MovementsTable extends React.Component {
                   <h3 className="is-dark">{firstCharCap(item.direction)}</h3>
                 </td>
                 <td className="has-bottom-border has-right-border">
-                  {format(item.carrier_date_time, 'DD MMM YYYY')}
+                  {format(legacyParse(item.carrier_date_time), convertTokens('DD MMM YYYY'))}
                 </td>
                 <td className="has-bottom-border">
                   {item.visa_type}

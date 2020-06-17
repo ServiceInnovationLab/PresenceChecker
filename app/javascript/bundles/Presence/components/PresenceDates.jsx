@@ -3,6 +3,8 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import { format, addDays } from 'date-fns';
 
+import { legacyParse, convertTokens } from "@date-fns/upgrade/v2";
+
 export default class PresenceDates extends React.Component {
   static propTypes = {
     isEligible: PropTypes.bool,
@@ -43,9 +45,12 @@ export default class PresenceDates extends React.Component {
       highlightDates,
       loading,
     } = this.props;
-    const selected = addDays(endOfRollingYear, 1)
-    const date = format(selected, 'D MMMM YYYY');
-
+    let selected;
+    let date;
+    if (endOfRollingYear) {
+      selected = addDays(legacyParse(endOfRollingYear), 1)
+      date = format(legacyParse(selected), convertTokens('D MMMM YYYY'));
+    }
     let stateClass = '';
 
     if (loading) {

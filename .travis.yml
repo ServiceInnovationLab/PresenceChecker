@@ -10,8 +10,10 @@ before_install:
   - chmod +x ./cc-test-reporter
   - cp env-example .env
 install:
-  - bundle install
+  - nvm install
+  - npm i -g yarn
   - yarn install
+  - bundle install
 script:
   - yarn test
   - RAILS_ENV=test bundle exec rake db:create db:migrate
