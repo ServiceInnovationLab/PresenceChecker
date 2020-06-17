@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactOnRails from 'react-on-rails';
-import { format, eachDay, addDays, subDays } from 'date-fns';
+import { format, eachDayOfInterval, addDays, subDays } from 'date-fns';
 import 'isomorphic-fetch';
 
 import { getCSRF, databaseURL } from '../utilities/utilities';
@@ -84,7 +84,7 @@ export default class ShowClient extends React.Component {
   checkNextWeek = () => {
     const { databaseId } = this.props;
     const { endOfRollingYear } = this.state;
-    const nextWeek = eachDay(
+    const nextWeek = eachDayOfInterval(
       addDays(endOfRollingYear, 1),
       addDays(endOfRollingYear, 8)
     );
