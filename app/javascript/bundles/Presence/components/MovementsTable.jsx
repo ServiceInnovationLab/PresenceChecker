@@ -37,7 +37,7 @@ export default class MovementsTable extends React.Component {
                   <h3 className="is-dark">{firstCharCap(item.direction)}</h3>
                 </td>
                 <td className="has-bottom-border has-right-border">
-                  {format(legacyParse(item.carrier_date_time), convertTokens('dd mm yyyy'))}
+                  {format(legacyParse(item.carrier_date_time), convertTokens('DD MMM YYYY'))}
                 </td>
                 <td className="has-bottom-border">
                   {item.visa_type}

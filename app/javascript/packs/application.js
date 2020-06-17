@@ -86,10 +86,10 @@ export default class ShowClient extends React.Component {
   checkNextWeek = () => {
     const { databaseId } = this.props;
     const { endOfRollingYear } = this.state;
-    const nextWeek = eachDayOfInterval(
-      addDays(legacyParse(endOfRollingYear), 1),
-      addDays(legacyParse(endOfRollingYear), 8)
-    );
+    const nextWeek = eachDayOfInterval({
+      start: addDays(legacyParse(endOfRollingYear), 1),
+      end: addDays(legacyParse(endOfRollingYear), 8)
+    });
     let loadingNumber = nextWeek.length;
 
     this.setState({

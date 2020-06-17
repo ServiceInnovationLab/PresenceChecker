@@ -45,9 +45,12 @@ export default class PresenceDates extends React.Component {
       highlightDates,
       loading,
     } = this.props;
-    const selected = addDays(legacyParse(endOfRollingYear), 1)
-    const date = format(legacyParse(selected), convertTokens('D MMMM YYYY'));
-
+    let selected;
+    let date;
+    if (endOfRollingYear) {
+      selected = addDays(legacyParse(endOfRollingYear), 1)
+      date = format(legacyParse(selected), convertTokens('D MMMM YYYY'));
+    }
     let stateClass = '';
 
     if (loading) {
